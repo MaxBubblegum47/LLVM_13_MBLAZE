@@ -219,7 +219,7 @@ void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
     
     	// MBLAZE
 	#if 1 // Disable reconginized processor message. For Cpu0
-	if (TargetTriple.getArch() == llvm::Triple::mblaze || TargetTriple.getArch() == llvm::Triple::mblazeel)
+	if (TargetTriple.getArch() == llvm::Triple::mblaze)
 		MBLAZEDisableUnreconginizedMessage = true;
 	#endif
 }
@@ -334,8 +334,7 @@ const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
   return *CPUEntry->SchedModel;
   
   #if 1 // Disable reconginized processor message. For MBLAZE
-	if (TargetTriple.getArch() != llvm::Triple::mblaze &&
-	TargetTriple.getArch() != llvm::Triple::mblazeel)
+	if (TargetTriple.getArch() != llvm::Triple::mblaze)
    #endif
   
 }
