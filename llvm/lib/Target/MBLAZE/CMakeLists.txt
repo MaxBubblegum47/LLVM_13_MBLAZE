@@ -32,5 +32,5 @@ ADD_TO_COMPONENT
 MBLAZE
 )
 # Should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
-#add_subdirectory(TargetInfo)
-#add_subdirectory(MCTargetDesc)
+add_subdirectory(TargetInfo)
+add_subdirectory(MCTargetDesc)
