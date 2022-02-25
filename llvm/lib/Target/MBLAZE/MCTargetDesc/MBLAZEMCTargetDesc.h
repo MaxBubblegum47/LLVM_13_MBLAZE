@@ -15,7 +15,7 @@ The LLVM Compiler Infrastructure
 #define LLVM_LIB_TARGET_MBLAZE_MCTARGETDESC_MBLAZEMCTARGETDESC_H
 
 
-#include "MBLAZEConfig.h"
+//#include "MBLAZEConfig.h"
 #include "llvm/Support/DataTypes.h"
 #include <memory>
 namespace llvm {
