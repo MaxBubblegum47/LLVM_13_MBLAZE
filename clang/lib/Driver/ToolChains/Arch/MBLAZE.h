@@ -9,7 +9,10 @@
 #ifndef LLVM_CLANG_LIB_DRIVER_TOOLCHAINS_MBLAZE_H
 #define LLVM_CLANG_LIB_DRIVER_TOOLCHAINS_MBLAZE_H
 
-#include "Gnu.h"
+// #include "Gnu.h" Legacy code not working anymore on LLVM 13
+#include "llvm/ADT/StringRef.h"
+#include "llvm/ADT/Triple.h"
+#include "llvm/Option/Option.h"
 #include "clang/Driver/ToolChain.h"
 
 namespace clang {
