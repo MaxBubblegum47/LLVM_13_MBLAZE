@@ -205,7 +205,7 @@ static FeatureBitset getFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS,
   return Bits;
 }
 
-bool MBLAZEDisableUnreconginizedMessage = false;
+
 
 void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
                                           StringRef FS) {
@@ -217,11 +217,6 @@ void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
   else
     CPUSchedModel = &MCSchedModel::GetDefaultSchedModel();
     
-    	// MBLAZE
-	#if 1 // Disable reconginized processor message. For Cpu0
-	if (TargetTriple.getArch() == llvm::Triple::mblaze)
-		MBLAZEDisableUnreconginizedMessage = true;
-	#endif
 }
 
 void MCSubtargetInfo::setDefaultFeatures(StringRef CPU, StringRef TuneCPU,
