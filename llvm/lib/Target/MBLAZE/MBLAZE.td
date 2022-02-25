@@ -6,24 +6,24 @@ include "llvm/Target/Target.td"
 //===----------------------------------------------------------------------===//
 // Register File, Calling Conv, Instruction Descriptions
 //===----------------------------------------------------------------------===//
-include "MBlazeRegisterInfo.td"
-//include "MBlazeCallingConv.td"
-//include "MBlazeSchedule.td"
-//include "MBlazeInstrFormats.td"
+include "MBLAZERegisterInfo.td"
+//include "MBLAZECallingConv.td"
+//include "MBLAZESchedule.td"
+//include "MBLAZEInstrFormats.td"
 
-//def MBlazeInstrInfo : InstrInfo;
+//def MBLAZEInstrInfo : InstrInfo;
 
 //===----------------------------------------------------------------------===//
-// MBlaze processors supported.
+// MBLAZE processors supported.
 //===----------------------------------------------------------------------===//
 def : Processor<"mblaze",  NoItineraries, []>;
 
-def MBlazeAsmParser : AsmParser; // Right now there isn't any sort of parser variant
-def MBlazeAsmWriter : AsmWriter;
+def MBLAZEAsmParser : AsmParser; // Right now there isn't any sort of parser variant
+def MBLAZEAsmWriter : AsmWriter;
 
-def MBlaze : Target  {
-    //let InstructionSet = MBlazeInstrInfo;
-    let AssemblyParsers = [MBlazeAsmParser];
-    let AssemblyWriters = [MBlazeAsmWriter];
+def MBLAZE : Target  {
+    //let InstructionSet = MBLAZEInstrInfo;
+    let AssemblyParsers = [MBLAZEAsmParser];
+    let AssemblyWriters = [MBLAZEAsmWriter];
     let AllowRegisterRenaming = 1; // I need to investigate on this function
 }

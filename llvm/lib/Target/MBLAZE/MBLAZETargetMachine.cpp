@@ -1,4 +1,4 @@
-//===-- MBlazeTargetMachine.cpp - Define TargetMachine for MBlaze -------------===//
+//===-- MBLAZETargetMachine.cpp - Define TargetMachine for MBLAZE -------------===//
 //
 //
 //                  The LLVM Compiler Infrastructure
@@ -6,11 +6,11 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// Implements the info about MBlaze target spec.
+// Implements the info about MBLAZE target spec.
 //
 //===----------------------------------------------------------------------===//
-#include "MBlazeTargetMachine.h"
-#include "MBlaze.h"
+#include "MBLAZETargetMachine.h"
+#include "MBLAZE.h"
 #include "llvm/IR/Attributes.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/CodeGen.h"
@@ -20,6 +20,6 @@
 #include "llvm/Target/TargetOptions.h"
 
 using namespace llvm;
-#define DEBUG_TYPE "MBlaze"
-    extern "C" void LLVMInitializeMBlazeTarget() {
+#define DEBUG_TYPE "MBLAZE"
+    extern "C" void LLVMInitializeMBLAZETarget() {
 }
