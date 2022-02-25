@@ -332,11 +332,7 @@ const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
   }
   assert(CPUEntry->SchedModel && "Missing processor SchedModel value");
   return *CPUEntry->SchedModel;
-  
-  #if 1 // Disable reconginized processor message. For MBLAZE
-	if (TargetTriple.getArch() != llvm::Triple::mblaze)
-   #endif
-  
+ 
 }
 
 InstrItineraryData
