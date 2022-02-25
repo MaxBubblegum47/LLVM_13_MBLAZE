@@ -31,7 +31,7 @@ static const T *Find(StringRef S, ArrayRef<T> A) {
   return F;
 }
 
-
+//MBLAZE BEGIN
 bool MBLAZEDisableUnreconginizedMessage = false;
 void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef FS) {
 #if 1 // Disable reconginized processor message. For Cpu0
@@ -47,7 +47,7 @@ if (TargetTriple.getArch() != llvm::Triple::mblaze &&
 TargetTriple.getArch() != llvm::Triple::mblaze)
 #endif
 }
-
+//MBLAZE END
 
 
 

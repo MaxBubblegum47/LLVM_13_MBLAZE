@@ -29,24 +29,23 @@
 
 using namespace llvm;
 
+//MBLAZE BEGIN
+extern bool MBLAZEDisableUnreconginizedMessage = false; // For MBLAZE
 
-extern bool MBLAZEDisableUnreconginizedMessage; // For MBLAZE
+//FeatureBitset
+//SubtargetFeatures::ToggleFeature(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+//	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+//}
 
-FeatureBitset
-SubtargetFeatures::ToggleFeature(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
-	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
-}
-
-FeatureBitset
-SubtargetFeatures::ApplyFeatureFlag(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
-	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
-}
-FeatureBitset
-SubtargetFeatures::getFeatureBits(StringRef CPU, ArrayRef<SubtargetFeatureKV> CPUTable, ArrayRef<SubtargetFeatureKV> FeatureTable) {
-	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
-}
-
-
+//FeatureBitset
+//SubtargetFeatures::ApplyFeatureFlag(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+//	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+//}
+//FeatureBitset
+//SubtargetFeatures::getFeatureBits(StringRef CPU, ArrayRef<SubtargetFeatureKV> CPUTable, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+//	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+//}
+//MBLAZE END
 
 /// Splits a string of comma separated items in to a vector of strings.
 void SubtargetFeatures::Split(std::vector<std::string> &V, StringRef S) {
