@@ -23,7 +23,7 @@
 #include "Targets/Lanai.h"
 #include "Targets/Le64.h"
 #include "Targets/M68k.h"
-#include "Targets/MBlaze.h"
+#include "Targets/MBLAZE.h"
 #include "Targets/MSP430.h"
 #include "Targets/Mips.h"
 #include "Targets/NVPTX.h"
