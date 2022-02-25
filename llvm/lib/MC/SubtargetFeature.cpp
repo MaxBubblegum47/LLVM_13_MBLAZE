@@ -33,16 +33,16 @@ using namespace llvm;
 extern bool MBLAZEDisableUnreconginizedMessage; // For MBLAZE
 
 FeatureBitset
-SubtargetFeatures::ToggleFeature(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+SubtargetFeatures::ToggleFeature(FeatureBitset Bits, StringRef Feature) {
 	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
 }
 
 FeatureBitset
-SubtargetFeatures::ApplyFeatureFlag(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+SubtargetFeatures::ApplyFeatureFlag(FeatureBitset Bits, StringRef Feature) {
 	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
 }
 FeatureBitset
-SubtargetFeatures::getFeatureBits(StringRef CPU, ArrayRef<SubtargetFeatureKV> CPUTable, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+SubtargetFeatures::getFeatureBits(StringRef CPU) {
 	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
 }
 //MBLAZE END
