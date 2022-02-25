@@ -31,26 +31,6 @@ static const T *Find(StringRef S, ArrayRef<T> A) {
   return F;
 }
 
-//MBLAZE BEGIN
-bool MBLAZEDisableUnreconginizedMessage = false;
-void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef FS) {
-#if 1 // Disable reconginized processor message. For Cpu0
-if (TargetTriple.getArch() == llvm::Triple::mblaze ||
-TargetTriple.getArch() == llvm::Triple::mblazeel)
-MBLAZEDisableUnreconginizedMessage = true;
-#endif
-}
-
-const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
-#if 1 // Disable reconginized processor message. For Cpu0
-if (TargetTriple.getArch() != llvm::Triple::mblaze &&
-TargetTriple.getArch() != llvm::Triple::mblaze)
-#endif
-}
-//MBLAZE END
-
-
-
 /// For each feature that is (transitively) implied by this feature, set it.
 static
 void SetImpliedBits(FeatureBitset &Bits, const FeatureBitset &Implies,
@@ -225,6 +205,8 @@ static FeatureBitset getFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS,
   return Bits;
 }
 
+bool MBLAZEDisableUnreconginizedMessage = false;
+
 void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
                                           StringRef FS) {
   FeatureBits = getFeatures(CPU, TuneCPU, FS, ProcDesc, ProcFeatures);
@@ -234,6 +216,12 @@ void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
     CPUSchedModel = &getSchedModelForCPU(TuneCPU);
   else
     CPUSchedModel = &MCSchedModel::GetDefaultSchedModel();
+    
+    	// MBLAZE
+	#if 1 // Disable reconginized processor message. For Cpu0
+	if (TargetTriple.getArch() == llvm::Triple::mblaze || TargetTriple.getArch() == llvm::Triple::mblazeel)
+		MBLAZEDisableUnreconginizedMessage = true;
+	#endif
 }
 
 void MCSubtargetInfo::setDefaultFeatures(StringRef CPU, StringRef TuneCPU,
@@ -327,6 +315,8 @@ bool MCSubtargetInfo::checkFeatures(StringRef FS) const {
 }
 
 const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
+
+  
   assert(llvm::is_sorted(ProcDesc) &&
          "Processor machine model table is not sorted");
 
@@ -342,6 +332,12 @@ const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
   }
   assert(CPUEntry->SchedModel && "Missing processor SchedModel value");
   return *CPUEntry->SchedModel;
+  
+  #if 1 // Disable reconginized processor message. For MBLAZE
+	if (TargetTriple.getArch() != llvm::Triple::mblaze &&
+	TargetTriple.getArch() != llvm::Triple::mblazeel)
+   #endif
+  
 }
 
 InstrItineraryData
