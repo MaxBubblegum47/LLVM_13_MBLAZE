@@ -14,7 +14,7 @@ using namespace llvm;
 Target llvm::TheMBLAZETarget, llvm::TheMBLAZEelTarget;
 extern "C" void LLVMInitializeMBLAZETargetInfo() {
 RegisterTarget<Triple::MBLAZE,
-/*HasJIT=*/true> X(TheMBLAZETarget, "MBLAZE", "MBLAZE (32-bit big endian)", "MBLAZE");
-RegisterTarget<Triple::MBLAZEel,
-/*HasJIT=*/true> Y(TheMBLAZEelTarget, "MBLAZEel", "MBLAZE (32-bit little endian)","MBLAZE");
+/*HasJIT=*/true> X(TheMBLAZETarget, "mblaze", "mblaze (32-bit big endian)", "MBLAZE");
+//RegisterTarget<Triple::MBLAZEel,
+//*HasJIT=*/true> Y(TheMBLAZEelTarget, "MBLAZEel", "MBLAZE (32-bit little endian)","MBLAZE");
 }
