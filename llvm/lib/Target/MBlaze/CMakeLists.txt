@@ -1,35 +1,35 @@
-add_llvm_component_group(MBlaze)
+add_llvm_component_group(MBLAZE)
 
-set(LLVM_TARGET_DEFINITIONS MBlaze.td)
+set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 
-# Generate MBlazeGenRegisterInfo.inc and MBlazeGenInstrInfo.inc which included by
+# Generate MBLAZEGenRegisterInfo.inc and MBLAZEGenInstrInfo.inc which included by
 # your hand code C++ files.
-# MBlazeGenRegisterInfo.inc came from MBlazeRegisterInfo.td, MBlazeGenInstrInfo.inc
-# came from MBlazeInstrInfo.td.
-tablegen(LLVM MBlazeGenRegisterInfo.inc -gen-register-info)
-#tablegen(LLVM MBlazeGenInstrInfo.inc -gen-instr-info)
-#tablegen(LLVM MBlazeGenSubtargetInfo.inc -gen-subtarget)
-#tablegen(LLVM MBlazeGenMCPseudoLowering.inc -gen-pseudo-lowering)
+# MBLAZEGenRegisterInfo.inc came from MBLAZERegisterInfo.td, MBLAZEGenInstrInfo.inc
+# came from MBLAZEInstrInfo.td.
+tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
+#tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
+#tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
+#tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
-# MBlazeCommonTableGen must be defined
-add_public_tablegen_target(MBlazeCommonTableGen)
-# MBlazeCodeGen should match with LLVMBuild.txt MBlazeCodeGen
-add_llvm_target(MBlazeCodeGen
-MBlazeTargetMachine.cpp
+# MBLAZECommonTableGen must be defined
+add_public_tablegen_target(MBLAZECommonTableGen)
+# MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
+add_llvm_target(MBLAZECodeGen
+MBLAZETargetMachine.cpp
 LINK_COMPONENTS
 Analysis
 AsmPrinter
 CodeGen
 Core
 MC
-MBlazeDesc
-MBlazeInfo
+MBLAZEDesc
+MBLAZEInfo
 SelectionDAG
 Support
 Target
 GlobalISel
 ADD_TO_COMPONENT
-MBlaze
+MBLAZE
 )
 # Should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
 #add_subdirectory(TargetInfo)
