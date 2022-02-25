@@ -1,140 +1,140 @@
 Determining if the include file malloc/malloc.h exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_a2ddc/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a2ddc.dir/build.make CMakeFiles/cmTC_a2ddc.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_c1756/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c1756.dir/build.make CMakeFiles/cmTC_c1756.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_a2ddc.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_a2ddc.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Building C object CMakeFiles/cmTC_c1756.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_c1756.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: malloc/malloc.h: No such file or directory
     1 | #include <malloc/malloc.h>
       |          ^~~~~~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_a2ddc.dir/build.make:85: CMakeFiles/cmTC_a2ddc.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_c1756.dir/build.make:85: CMakeFiles/cmTC_c1756.dir/CheckIncludeFile.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_a2ddc/fast] Error 2
+gmake: *** [Makefile:140: cmTC_c1756/fast] Error 2
 
 
 
 Determining if the include file valgrind/valgrind.h exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_04c13/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_04c13.dir/build.make CMakeFiles/cmTC_04c13.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_ac486/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ac486.dir/build.make CMakeFiles/cmTC_ac486.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_04c13.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_04c13.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Building C object CMakeFiles/cmTC_ac486.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_ac486.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: valgrind/valgrind.h: No such file or directory
     1 | #include <valgrind/valgrind.h>
       |          ^~~~~~~~~~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_04c13.dir/build.make:85: CMakeFiles/cmTC_04c13.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_ac486.dir/build.make:85: CMakeFiles/cmTC_ac486.dir/CheckIncludeFile.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_04c13/fast] Error 2
+gmake: *** [Makefile:140: cmTC_ac486/fast] Error 2
 
 
 
 Determining if the include file mach/mach.h exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_65b37/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_65b37.dir/build.make CMakeFiles/cmTC_65b37.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_e52e6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e52e6.dir/build.make CMakeFiles/cmTC_e52e6.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_65b37.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_65b37.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Building C object CMakeFiles/cmTC_e52e6.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_e52e6.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: mach/mach.h: No such file or directory
     1 | #include <mach/mach.h>
       |          ^~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_65b37.dir/build.make:85: CMakeFiles/cmTC_65b37.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_e52e6.dir/build.make:85: CMakeFiles/cmTC_e52e6.dir/CheckIncludeFile.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_65b37/fast] Error 2
+gmake: *** [Makefile:140: cmTC_e52e6/fast] Error 2
 
 
 
 Determining if the include file histedit.h exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_bfd28/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bfd28.dir/build.make CMakeFiles/cmTC_bfd28.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_8ebd6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8ebd6.dir/build.make CMakeFiles/cmTC_8ebd6.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_bfd28.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_bfd28.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Building C object CMakeFiles/cmTC_8ebd6.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_8ebd6.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: histedit.h: No such file or directory
     1 | #include <histedit.h>
       |          ^~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_bfd28.dir/build.make:85: CMakeFiles/cmTC_bfd28.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_8ebd6.dir/build.make:85: CMakeFiles/cmTC_8ebd6.dir/CheckIncludeFile.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_bfd28/fast] Error 2
+gmake: *** [Makefile:140: cmTC_8ebd6/fast] Error 2
 
 
 
 Determining if the include file CrashReporterClient.h exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_d1007/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d1007.dir/build.make CMakeFiles/cmTC_d1007.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_b5646/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b5646.dir/build.make CMakeFiles/cmTC_b5646.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_d1007.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_d1007.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Building C object CMakeFiles/cmTC_b5646.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_b5646.dir/CheckIncludeFile.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: CrashReporterClient.h: No such file or directory
     1 | #include <CrashReporterClient.h>
       |          ^~~~~~~~~~~~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_d1007.dir/build.make:85: CMakeFiles/cmTC_d1007.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_b5646.dir/build.make:85: CMakeFiles/cmTC_b5646.dir/CheckIncludeFile.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_d1007/fast] Error 2
+gmake: *** [Makefile:140: cmTC_b5646/fast] Error 2
 
 
 
 Determining if the function pfm_initialize exists in the pfm failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_905d8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_905d8.dir/build.make CMakeFiles/cmTC_905d8.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_6a11c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6a11c.dir/build.make CMakeFiles/cmTC_6a11c.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_905d8.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pfm_initialize -o CMakeFiles/cmTC_905d8.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
-Linking C executable cmTC_905d8
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_905d8.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pfm_initialize CMakeFiles/cmTC_905d8.dir/CheckFunctionExists.c.o -o cmTC_905d8  -lpfm -lm 
+Building C object CMakeFiles/cmTC_6a11c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pfm_initialize -o CMakeFiles/cmTC_6a11c.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_6a11c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6a11c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pfm_initialize CMakeFiles/cmTC_6a11c.dir/CheckFunctionExists.c.o -o cmTC_6a11c  -lpfm -lm 
 /usr/bin/ld: cannot find -lpfm
 collect2: error: ld returned 1 exit status
-gmake[1]: *** [CMakeFiles/cmTC_905d8.dir/build.make:106: cmTC_905d8] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_6a11c.dir/build.make:106: cmTC_6a11c] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_905d8/fast] Error 2
+gmake: *** [Makefile:140: cmTC_6a11c/fast] Error 2
 
 
 
 Determining if the function xar_open exists in the xar failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_6e77f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6e77f.dir/build.make CMakeFiles/cmTC_6e77f.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_b40dc/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b40dc.dir/build.make CMakeFiles/cmTC_b40dc.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6e77f.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=xar_open -o CMakeFiles/cmTC_6e77f.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
-Linking C executable cmTC_6e77f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e77f.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=xar_open CMakeFiles/cmTC_6e77f.dir/CheckFunctionExists.c.o -o cmTC_6e77f  -lxar -lm 
+Building C object CMakeFiles/cmTC_b40dc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=xar_open -o CMakeFiles/cmTC_b40dc.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b40dc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b40dc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=xar_open CMakeFiles/cmTC_b40dc.dir/CheckFunctionExists.c.o -o cmTC_b40dc  -lxar -lm 
 /usr/bin/ld: cannot find -lxar
 collect2: error: ld returned 1 exit status
-gmake[1]: *** [CMakeFiles/cmTC_6e77f.dir/build.make:106: cmTC_6e77f] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_b40dc.dir/build.make:106: cmTC_b40dc] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_6e77f/fast] Error 2
+gmake: *** [Makefile:140: cmTC_b40dc/fast] Error 2
 
 
 
 Determining if the arc4random exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_ab20b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ab20b.dir/build.make CMakeFiles/cmTC_ab20b.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_9bab3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9bab3.dir/build.make CMakeFiles/cmTC_9bab3.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_ab20b.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_ab20b.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_9bab3.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_9bab3.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘arc4random’ undeclared (first use in this function); did you mean ‘srandom’?
     8 |   return ((int*)(&arc4random))[argc];
       |                   ^~~~~~~~~~
       |                   srandom
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
-gmake[1]: *** [CMakeFiles/cmTC_ab20b.dir/build.make:85: CMakeFiles/cmTC_ab20b.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_9bab3.dir/build.make:85: CMakeFiles/cmTC_9bab3.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_ab20b/fast] Error 2
+gmake: *** [Makefile:140: cmTC_9bab3/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -154,14 +154,14 @@ int main(int argc, char** argv)
 Performing C SOURCE FILE Test C_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_24dbb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_24dbb.dir/build.make CMakeFiles/cmTC_24dbb.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_d0355/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d0355.dir/build.make CMakeFiles/cmTC_d0355.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_24dbb.dir/src.c.o
-/usr/bin/cc   -DC_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW   -Werror=unguarded-availability-new -o CMakeFiles/cmTC_24dbb.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_d0355.dir/src.c.o
+/usr/bin/cc   -DC_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW   -Werror=unguarded-availability-new -o CMakeFiles/cmTC_d0355.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc1: error: '-Werror=unguarded-availability-new': no option '-Wunguarded-availability-new'
-gmake[1]: *** [CMakeFiles/cmTC_24dbb.dir/build.make:85: CMakeFiles/cmTC_24dbb.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_d0355.dir/build.make:85: CMakeFiles/cmTC_d0355.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_24dbb/fast] Error 2
+gmake: *** [Makefile:140: cmTC_d0355/fast] Error 2
 
 
 Source file was:
@@ -169,17 +169,17 @@ int main(void) { return 0; }
 Determining if the mallctl exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_9a2d0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9a2d0.dir/build.make CMakeFiles/cmTC_9a2d0.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_f3832/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f3832.dir/build.make CMakeFiles/cmTC_f3832.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_9a2d0.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_9a2d0.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_f3832.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f3832.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: malloc_np.h: No such file or directory
     2 | #include <malloc_np.h>
       |          ^~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_9a2d0.dir/build.make:85: CMakeFiles/cmTC_9a2d0.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_f3832.dir/build.make:85: CMakeFiles/cmTC_f3832.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_9a2d0/fast] Error 2
+gmake: *** [Makefile:140: cmTC_f3832/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -199,17 +199,17 @@ int main(int argc, char** argv)
 Determining if the malloc_zone_statistics exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_a0b63/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a0b63.dir/build.make CMakeFiles/cmTC_a0b63.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_52eac/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_52eac.dir/build.make CMakeFiles/cmTC_52eac.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_a0b63.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_a0b63.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_52eac.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_52eac.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: malloc/malloc.h: No such file or directory
     2 | #include <malloc/malloc.h>
       |          ^~~~~~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_a0b63.dir/build.make:85: CMakeFiles/cmTC_a0b63.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_52eac.dir/build.make:85: CMakeFiles/cmTC_52eac.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_a0b63/fast] Error 2
+gmake: *** [Makefile:140: cmTC_52eac/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -229,19 +229,19 @@ int main(int argc, char** argv)
 Determining if the strerror_s exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_22944/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_22944.dir/build.make CMakeFiles/cmTC_22944.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_7f60b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7f60b.dir/build.make CMakeFiles/cmTC_7f60b.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_22944.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_22944.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_7f60b.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_7f60b.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘strerror_s’ undeclared (first use in this function); did you mean ‘strerror_l’?
     8 |   return ((int*)(&strerror_s))[argc];
       |                   ^~~~~~~~~~
       |                   strerror_l
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
-gmake[1]: *** [CMakeFiles/cmTC_22944.dir/build.make:85: CMakeFiles/cmTC_22944.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_7f60b.dir/build.make:85: CMakeFiles/cmTC_7f60b.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_22944/fast] Error 2
+gmake: *** [Makefile:140: cmTC_7f60b/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -261,18 +261,18 @@ int main(int argc, char** argv)
 Determining if the dladdr exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_a9b20/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a9b20.dir/build.make CMakeFiles/cmTC_a9b20.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_a474b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a474b.dir/build.make CMakeFiles/cmTC_a474b.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_a9b20.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_a9b20.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_a474b.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_a474b.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘dladdr’ undeclared (first use in this function)
     8 |   return ((int*)(&dladdr))[argc];
       |                   ^~~~~~
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
-gmake[1]: *** [CMakeFiles/cmTC_a9b20.dir/build.make:85: CMakeFiles/cmTC_a9b20.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_a474b.dir/build.make:85: CMakeFiles/cmTC_a474b.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_a9b20/fast] Error 2
+gmake: *** [Makefile:140: cmTC_a474b/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -292,17 +292,17 @@ int main(int argc, char** argv)
 Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_MTIMESPEC_TV_NSEC failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_5a8e4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5a8e4.dir/build.make CMakeFiles/cmTC_5a8e4.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_7afc0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7afc0.dir/build.make CMakeFiles/cmTC_7afc0.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_5a8e4.dir/src.c.o
-/usr/bin/cc   -DHAVE_STRUCT_STAT_ST_MTIMESPEC_TV_NSEC -o CMakeFiles/cmTC_5a8e4.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_7afc0.dir/src.c.o
+/usr/bin/cc   -DHAVE_STRUCT_STAT_ST_MTIMESPEC_TV_NSEC -o CMakeFiles/cmTC_7afc0.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_mtimespec’
     7 |   (void)sizeof(((struct stat *)0)->st_mtimespec.tv_nsec);
       |                                  ^~
-gmake[1]: *** [CMakeFiles/cmTC_5a8e4.dir/build.make:85: CMakeFiles/cmTC_5a8e4.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_7afc0.dir/build.make:85: CMakeFiles/cmTC_7afc0.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_5a8e4/fast] Error 2
+gmake: *** [Makefile:140: cmTC_7afc0/fast] Error 2
 
 
 Source file was:
@@ -319,17 +319,17 @@ int main()
 Determining if the proc_pid_rusage exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_90c3f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_90c3f.dir/build.make CMakeFiles/cmTC_90c3f.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_24833/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_24833.dir/build.make CMakeFiles/cmTC_24833.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_90c3f.dir/CheckSymbolExists.c.o
-/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_90c3f.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_24833.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_24833.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: libproc.h: No such file or directory
     2 | #include <libproc.h>
       |          ^~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_90c3f.dir/build.make:85: CMakeFiles/cmTC_90c3f.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_24833.dir/build.make:85: CMakeFiles/cmTC_24833.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_90c3f/fast] Error 2
+gmake: *** [Makefile:140: cmTC_24833/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -349,14 +349,14 @@ int main(int argc, char** argv)
 Performing C++ SOURCE FILE Test SUPPORTS_GNU_ZERO_VARIADIC_MACRO_ARGUMENTS_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_65a29/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_65a29.dir/build.make CMakeFiles/cmTC_65a29.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_6da77/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6da77.dir/build.make CMakeFiles/cmTC_6da77.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_65a29.dir/src.cxx.o
-/usr/bin/c++   -DSUPPORTS_GNU_ZERO_VARIADIC_MACRO_ARGUMENTS_FLAG   -Wgnu-zero-variadic-macro-arguments -std=c++14 -o CMakeFiles/cmTC_65a29.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_6da77.dir/src.cxx.o
+/usr/bin/c++   -DSUPPORTS_GNU_ZERO_VARIADIC_MACRO_ARGUMENTS_FLAG   -Wgnu-zero-variadic-macro-arguments -std=c++14 -o CMakeFiles/cmTC_6da77.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wgnu-zero-variadic-macro-arguments'
-gmake[1]: *** [CMakeFiles/cmTC_65a29.dir/build.make:85: CMakeFiles/cmTC_65a29.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_6da77.dir/build.make:85: CMakeFiles/cmTC_6da77.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_65a29/fast] Error 2
+gmake: *** [Makefile:140: cmTC_6da77/fast] Error 2
 
 
 Source file was:
@@ -364,14 +364,14 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test CXX_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_9057e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9057e.dir/build.make CMakeFiles/cmTC_9057e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_2ba2c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2ba2c.dir/build.make CMakeFiles/cmTC_2ba2c.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_9057e.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -DCXX_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW   -Werror -Werror=unguarded-availability-new -std=c++14 -o CMakeFiles/cmTC_9057e.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_2ba2c.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -DCXX_SUPPORTS_WERROR_UNGUARDED_AVAILABILITY_NEW   -Werror -Werror=unguarded-availability-new -std=c++14 -o CMakeFiles/cmTC_2ba2c.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 cc1plus: error: '-Werror=unguarded-availability-new': no option '-Wunguarded-availability-new'
-gmake[1]: *** [CMakeFiles/cmTC_9057e.dir/build.make:85: CMakeFiles/cmTC_9057e.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_2ba2c.dir/build.make:85: CMakeFiles/cmTC_2ba2c.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_9057e/fast] Error 2
+gmake: *** [Makefile:140: cmTC_2ba2c/fast] Error 2
 
 
 Source file was:
@@ -379,14 +379,14 @@ int main() { return 0; }
 Performing C SOURCE FILE Test C_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_3190d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3190d.dir/build.make CMakeFiles/cmTC_3190d.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_7788a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7788a.dir/build.make CMakeFiles/cmTC_7788a.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_3190d.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -DC_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG   -Werror -Wc++98-compat-extra-semi -o CMakeFiles/cmTC_3190d.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_7788a.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -DC_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG   -Werror -Wc++98-compat-extra-semi -o CMakeFiles/cmTC_7788a.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc: error: unrecognized command-line option '-Wc++98-compat-extra-semi'
-gmake[1]: *** [CMakeFiles/cmTC_3190d.dir/build.make:85: CMakeFiles/cmTC_3190d.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_7788a.dir/build.make:85: CMakeFiles/cmTC_7788a.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_3190d/fast] Error 2
+gmake: *** [Makefile:140: cmTC_7788a/fast] Error 2
 
 
 Source file was:
@@ -394,14 +394,14 @@ int main(void) { return 0; }
 Performing C++ SOURCE FILE Test CXX_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_5e39e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5e39e.dir/build.make CMakeFiles/cmTC_5e39e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_9def4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9def4.dir/build.make CMakeFiles/cmTC_9def4.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_5e39e.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -DCXX_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG   -Werror -Wc++98-compat-extra-semi -std=c++14 -o CMakeFiles/cmTC_5e39e.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_9def4.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -DCXX_SUPPORTS_CXX98_COMPAT_EXTRA_SEMI_FLAG   -Werror -Wc++98-compat-extra-semi -std=c++14 -o CMakeFiles/cmTC_9def4.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wc++98-compat-extra-semi'
-gmake[1]: *** [CMakeFiles/cmTC_5e39e.dir/build.make:85: CMakeFiles/cmTC_5e39e.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_9def4.dir/build.make:85: CMakeFiles/cmTC_9def4.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_5e39e/fast] Error 2
+gmake: *** [Makefile:140: cmTC_9def4/fast] Error 2
 
 
 Source file was:
@@ -409,14 +409,14 @@ int main() { return 0; }
 Performing C SOURCE FILE Test C_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_1142e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1142e.dir/build.make CMakeFiles/cmTC_1142e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_83fdc/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_83fdc.dir/build.make CMakeFiles/cmTC_83fdc.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1142e.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG   -Werror -Wcovered-switch-default -o CMakeFiles/cmTC_1142e.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_83fdc.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG   -Werror -Wcovered-switch-default -o CMakeFiles/cmTC_83fdc.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc: error: unrecognized command-line option '-Wcovered-switch-default'; did you mean '-Wno-switch-default'?
-gmake[1]: *** [CMakeFiles/cmTC_1142e.dir/build.make:85: CMakeFiles/cmTC_1142e.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_83fdc.dir/build.make:85: CMakeFiles/cmTC_83fdc.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_1142e/fast] Error 2
+gmake: *** [Makefile:140: cmTC_83fdc/fast] Error 2
 
 
 Source file was:
@@ -424,14 +424,14 @@ int main(void) { return 0; }
 Performing C++ SOURCE FILE Test CXX_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_f26e5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f26e5.dir/build.make CMakeFiles/cmTC_f26e5.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_a6b5e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a6b5e.dir/build.make CMakeFiles/cmTC_a6b5e.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_f26e5.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DCXX_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG   -Werror -Wcovered-switch-default -std=c++14 -o CMakeFiles/cmTC_f26e5.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_a6b5e.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DCXX_SUPPORTS_COVERED_SWITCH_DEFAULT_FLAG   -Werror -Wcovered-switch-default -std=c++14 -o CMakeFiles/cmTC_a6b5e.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wcovered-switch-default'; did you mean '-Wno-switch-default'?
-gmake[1]: *** [CMakeFiles/cmTC_f26e5.dir/build.make:85: CMakeFiles/cmTC_f26e5.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_a6b5e.dir/build.make:85: CMakeFiles/cmTC_a6b5e.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_f26e5/fast] Error 2
+gmake: *** [Makefile:140: cmTC_a6b5e/fast] Error 2
 
 
 Source file was:
@@ -439,15 +439,15 @@ int main() { return 0; }
 Performing C SOURCE FILE Test C_SUPPORTS_DELETE_NON_VIRTUAL_DTOR_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_af9ee/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_af9ee.dir/build.make CMakeFiles/cmTC_af9ee.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_ded60/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ded60.dir/build.make CMakeFiles/cmTC_ded60.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_af9ee.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_SUPPORTS_DELETE_NON_VIRTUAL_DTOR_FLAG   -Werror -Wdelete-non-virtual-dtor -o CMakeFiles/cmTC_af9ee.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_ded60.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_SUPPORTS_DELETE_NON_VIRTUAL_DTOR_FLAG   -Werror -Wdelete-non-virtual-dtor -o CMakeFiles/cmTC_ded60.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc1: error: command-line option '-Wdelete-non-virtual-dtor' is valid for C++/ObjC++ but not for C [-Werror]
 cc1: all warnings being treated as errors
-gmake[1]: *** [CMakeFiles/cmTC_af9ee.dir/build.make:85: CMakeFiles/cmTC_af9ee.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_ded60.dir/build.make:85: CMakeFiles/cmTC_ded60.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_af9ee/fast] Error 2
+gmake: *** [Makefile:140: cmTC_ded60/fast] Error 2
 
 
 Source file was:
@@ -455,17 +455,17 @@ int main(void) { return 0; }
 Performing C SOURCE FILE Test C_WCOMMENT_ALLOWS_LINE_WRAP failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_847a7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_847a7.dir/build.make CMakeFiles/cmTC_847a7.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_e1b00/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e1b00.dir/build.make CMakeFiles/cmTC_e1b00.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_847a7.dir/src.c.o
-/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_WCOMMENT_ALLOWS_LINE_WRAP  -Werror -Wcomment -o CMakeFiles/cmTC_847a7.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_e1b00.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -DC_WCOMMENT_ALLOWS_LINE_WRAP  -Werror -Wcomment -o CMakeFiles/cmTC_e1b00.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c:1:1: error: multi-line comment [-Werror=comment]
     1 | // \
       | ^
 cc1: all warnings being treated as errors
-gmake[1]: *** [CMakeFiles/cmTC_847a7.dir/build.make:85: CMakeFiles/cmTC_847a7.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_e1b00.dir/build.make:85: CMakeFiles/cmTC_e1b00.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_847a7/fast] Error 2
+gmake: *** [Makefile:140: cmTC_e1b00/fast] Error 2
 
 
 Source file was:
@@ -475,14 +475,14 @@ int main() {return 0;}
 Performing C SOURCE FILE Test C_SUPPORTS_STRING_CONVERSION_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_4ecae/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4ecae.dir/build.make CMakeFiles/cmTC_4ecae.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_14b1d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_14b1d.dir/build.make CMakeFiles/cmTC_14b1d.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_4ecae.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -DC_SUPPORTS_STRING_CONVERSION_FLAG   -Werror -Wstring-conversion -o CMakeFiles/cmTC_4ecae.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_14b1d.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -DC_SUPPORTS_STRING_CONVERSION_FLAG   -Werror -Wstring-conversion -o CMakeFiles/cmTC_14b1d.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc: error: unrecognized command-line option '-Wstring-conversion'; did you mean '-Wsign-conversion'?
-gmake[1]: *** [CMakeFiles/cmTC_4ecae.dir/build.make:85: CMakeFiles/cmTC_4ecae.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_14b1d.dir/build.make:85: CMakeFiles/cmTC_14b1d.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_4ecae/fast] Error 2
+gmake: *** [Makefile:140: cmTC_14b1d/fast] Error 2
 
 
 Source file was:
@@ -490,14 +490,14 @@ int main(void) { return 0; }
 Performing C++ SOURCE FILE Test CXX_SUPPORTS_STRING_CONVERSION_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_3f3e6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3f3e6.dir/build.make CMakeFiles/cmTC_3f3e6.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_484f5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_484f5.dir/build.make CMakeFiles/cmTC_484f5.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_3f3e6.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -DCXX_SUPPORTS_STRING_CONVERSION_FLAG   -Werror -Wstring-conversion -std=c++14 -o CMakeFiles/cmTC_3f3e6.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_484f5.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -DCXX_SUPPORTS_STRING_CONVERSION_FLAG   -Werror -Wstring-conversion -std=c++14 -o CMakeFiles/cmTC_484f5.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wstring-conversion'; did you mean '-Wsign-conversion'?
-gmake[1]: *** [CMakeFiles/cmTC_3f3e6.dir/build.make:85: CMakeFiles/cmTC_3f3e6.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_484f5.dir/build.make:85: CMakeFiles/cmTC_484f5.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_3f3e6/fast] Error 2
+gmake: *** [Makefile:140: cmTC_484f5/fast] Error 2
 
 
 Source file was:
@@ -505,17 +505,17 @@ int main() { return 0; }
 Determining if the os_signpost_interval_begin exist failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_390e1/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_390e1.dir/build.make CMakeFiles/cmTC_390e1.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_a4c18/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a4c18.dir/build.make CMakeFiles/cmTC_a4c18.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_390e1.dir/CheckSymbolExists.c.o
-/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation  -o CMakeFiles/cmTC_390e1.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Building C object CMakeFiles/cmTC_a4c18.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation  -o CMakeFiles/cmTC_a4c18.dir/CheckSymbolExists.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: os/signpost.h: No such file or directory
     2 | #include <os/signpost.h>
       |          ^~~~~~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_390e1.dir/build.make:85: CMakeFiles/cmTC_390e1.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_a4c18.dir/build.make:85: CMakeFiles/cmTC_a4c18.dir/CheckSymbolExists.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_390e1/fast] Error 2
+gmake: *** [Makefile:140: cmTC_a4c18/fast] Error 2
 
 
 File /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
@@ -535,14 +535,14 @@ int main(int argc, char** argv)
 Performing C++ SOURCE FILE Test HAS_WERROR_GLOBAL_CTORS failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_6cc5a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6cc5a.dir/build.make CMakeFiles/cmTC_6cc5a.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_be323/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_be323.dir/build.make CMakeFiles/cmTC_be323.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_6cc5a.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -DHAS_WERROR_GLOBAL_CTORS   -Werror=global-constructors -std=c++14 -o CMakeFiles/cmTC_6cc5a.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_be323.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -DHAS_WERROR_GLOBAL_CTORS   -Werror=global-constructors -std=c++14 -o CMakeFiles/cmTC_be323.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 cc1plus: error: '-Werror=global-constructors': no option '-Wglobal-constructors'; did you mean '-felide-constructors'?
-gmake[1]: *** [CMakeFiles/cmTC_6cc5a.dir/build.make:85: CMakeFiles/cmTC_6cc5a.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_be323.dir/build.make:85: CMakeFiles/cmTC_be323.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_6cc5a/fast] Error 2
+gmake: *** [Makefile:140: cmTC_be323/fast] Error 2
 
 
 Source file was:
@@ -550,14 +550,14 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test OPENMP_HAVE_WFORMAT_PEDANTIC_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_caf5e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_caf5e.dir/build.make CMakeFiles/cmTC_caf5e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_58fe9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_58fe9.dir/build.make CMakeFiles/cmTC_58fe9.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_caf5e.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -DOPENMP_HAVE_WFORMAT_PEDANTIC_FLAG   -Wformat-pedantic -std=c++14 -o CMakeFiles/cmTC_caf5e.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_58fe9.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -DOPENMP_HAVE_WFORMAT_PEDANTIC_FLAG   -Wformat-pedantic -std=c++14 -o CMakeFiles/cmTC_58fe9.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wformat-pedantic'; did you mean '-Wno-pedantic'?
-gmake[1]: *** [CMakeFiles/cmTC_caf5e.dir/build.make:85: CMakeFiles/cmTC_caf5e.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_58fe9.dir/build.make:85: CMakeFiles/cmTC_58fe9.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_caf5e/fast] Error 2
+gmake: *** [Makefile:140: cmTC_58fe9/fast] Error 2
 
 
 Source file was:
@@ -565,15 +565,15 @@ int main() { return 0; }
 Performing C SOURCE FILE Test LIBOMP_HAVE_MMIC_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_0de3c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0de3c.dir/build.make CMakeFiles/cmTC_0de3c.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_ef9fe/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ef9fe.dir/build.make CMakeFiles/cmTC_ef9fe.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0de3c.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_MMIC_FLAG -mmic   -mmic -o CMakeFiles/cmTC_0de3c.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_ef9fe.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_MMIC_FLAG -mmic   -mmic -o CMakeFiles/cmTC_ef9fe.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 cc: error: unrecognized command-line option '-mmic'
 cc: error: unrecognized command-line option '-mmic'
-gmake[1]: *** [CMakeFiles/cmTC_0de3c.dir/build.make:85: CMakeFiles/cmTC_0de3c.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_ef9fe.dir/build.make:85: CMakeFiles/cmTC_ef9fe.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_0de3c/fast] Error 2
+gmake: *** [Makefile:140: cmTC_ef9fe/fast] Error 2
 
 
 Source file was:
@@ -581,13 +581,13 @@ int main(void) { return 0; }
 Performing C SOURCE FILE Test LIBOMP_HAVE_M32_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_c5f66/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c5f66.dir/build.make CMakeFiles/cmTC_c5f66.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_8c28c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8c28c.dir/build.make CMakeFiles/cmTC_8c28c.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c5f66.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_M32_FLAG -m32   -m32 -o CMakeFiles/cmTC_c5f66.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_c5f66
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c5f66.dir/link.txt --verbose=1
-/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_M32_FLAG -m32 CMakeFiles/cmTC_c5f66.dir/src.c.o -o cmTC_c5f66  -lm 
+Building C object CMakeFiles/cmTC_8c28c.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_M32_FLAG -m32   -m32 -o CMakeFiles/cmTC_8c28c.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_8c28c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8c28c.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_M32_FLAG -m32 CMakeFiles/cmTC_8c28c.dir/src.c.o -o cmTC_8c28c  -lm 
 /usr/bin/ld: cannot find Scrt1.o: No such file or directory
 /usr/bin/ld: cannot find crti.o: No such file or directory
 /usr/bin/ld: skipping incompatible /usr/lib/x86_64-linux-gnu/libm.so when searching for -lm
@@ -599,9 +599,9 @@ Linking C executable cmTC_c5f66
 /usr/bin/ld: skipping incompatible /usr/lib/gcc/x86_64-linux-gnu/11/libgcc.a when searching for -lgcc
 /usr/bin/ld: cannot find -lgcc
 collect2: error: ld returned 1 exit status
-gmake[1]: *** [CMakeFiles/cmTC_c5f66.dir/build.make:106: cmTC_c5f66] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_8c28c.dir/build.make:106: cmTC_8c28c] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_c5f66/fast] Error 2
+gmake: *** [Makefile:140: cmTC_8c28c/fast] Error 2
 
 
 Source file was:
@@ -609,17 +609,17 @@ int main(void) { return 0; }
 Performing C SOURCE FILE Test LIBOMP_HAVE_PSAPI failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_e4c44/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e4c44.dir/build.make CMakeFiles/cmTC_e4c44.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_dd778/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_dd778.dir/build.make CMakeFiles/cmTC_dd778.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e4c44.dir/src.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_PSAPI -o CMakeFiles/cmTC_e4c44.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
+Building C object CMakeFiles/cmTC_dd778.dir/src.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DLIBOMP_HAVE_PSAPI -o CMakeFiles/cmTC_dd778.dir/src.c.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c
 /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.c:1:10: fatal error: windows.h: No such file or directory
     1 | #include <windows.h>
       |          ^~~~~~~~~~~
 compilation terminated.
-gmake[1]: *** [CMakeFiles/cmTC_e4c44.dir/build.make:85: CMakeFiles/cmTC_e4c44.dir/src.c.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_dd778.dir/build.make:85: CMakeFiles/cmTC_dd778.dir/src.c.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_e4c44/fast] Error 2
+gmake: *** [Makefile:140: cmTC_dd778/fast] Error 2
 
 
 Source file was:
@@ -631,56 +631,56 @@ Source file was:
 Determining if the function __atomic_load_1 exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_b0099/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b0099.dir/build.make CMakeFiles/cmTC_b0099.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_f994a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f994a.dir/build.make CMakeFiles/cmTC_f994a.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_b0099.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 -o CMakeFiles/cmTC_b0099.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
+Building C object CMakeFiles/cmTC_f994a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 -o CMakeFiles/cmTC_f994a.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
 <command-line>: warning: conflicting types for built-in function ‘__atomic_load_1’; expected ‘unsigned char(const volatile void *, int)’ [-Wbuiltin-declaration-mismatch]
 <command-line>: note: in definition of macro ‘CHECK_FUNCTION_EXISTS’
-Linking C executable cmTC_b0099
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0099.dir/link.txt --verbose=1
-/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 CMakeFiles/cmTC_b0099.dir/CheckFunctionExists.c.o -o cmTC_b0099 
-/usr/bin/ld: CMakeFiles/cmTC_b0099.dir/CheckFunctionExists.c.o: in function `main':
+Linking C executable cmTC_f994a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f994a.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 CMakeFiles/cmTC_f994a.dir/CheckFunctionExists.c.o -o cmTC_f994a 
+/usr/bin/ld: CMakeFiles/cmTC_f994a.dir/CheckFunctionExists.c.o: in function `main':
 CheckFunctionExists.c:(.text+0x14): undefined reference to `__atomic_load_1'
 collect2: error: ld returned 1 exit status
-gmake[1]: *** [CMakeFiles/cmTC_b0099.dir/build.make:106: cmTC_b0099] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_f994a.dir/build.make:106: cmTC_f994a] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_b0099/fast] Error 2
+gmake: *** [Makefile:140: cmTC_f994a/fast] Error 2
 
 
 
 Determining if the function __atomic_load_1 exists failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_c77fe/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c77fe.dir/build.make CMakeFiles/cmTC_c77fe.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_11b0c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_11b0c.dir/build.make CMakeFiles/cmTC_11b0c.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c77fe.dir/CheckFunctionExists.c.o
-/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 -o CMakeFiles/cmTC_c77fe.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
+Building C object CMakeFiles/cmTC_11b0c.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 -o CMakeFiles/cmTC_11b0c.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.18/Modules/CheckFunctionExists.c
 <command-line>: warning: conflicting types for built-in function ‘__atomic_load_1’; expected ‘unsigned char(const volatile void *, int)’ [-Wbuiltin-declaration-mismatch]
 <command-line>: note: in definition of macro ‘CHECK_FUNCTION_EXISTS’
-Linking C executable cmTC_c77fe
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c77fe.dir/link.txt --verbose=1
-/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 CMakeFiles/cmTC_c77fe.dir/CheckFunctionExists.c.o -o cmTC_c77fe  -lm 
-/usr/bin/ld: CMakeFiles/cmTC_c77fe.dir/CheckFunctionExists.c.o: in function `main':
+Linking C executable cmTC_11b0c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_11b0c.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-comment -Wmisleading-indentation -Wall -Wcast-qual -Wimplicit-fallthrough -Wsign-compare -Wno-extra -Wno-pedantic -Wno-maybe-uninitialized -DCHECK_FUNCTION_EXISTS=__atomic_load_1 CMakeFiles/cmTC_11b0c.dir/CheckFunctionExists.c.o -o cmTC_11b0c  -lm 
+/usr/bin/ld: CMakeFiles/cmTC_11b0c.dir/CheckFunctionExists.c.o: in function `main':
 CheckFunctionExists.c:(.text+0x14): undefined reference to `__atomic_load_1'
 collect2: error: ld returned 1 exit status
-gmake[1]: *** [CMakeFiles/cmTC_c77fe.dir/build.make:106: cmTC_c77fe] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_11b0c.dir/build.make:106: cmTC_11b0c] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_c77fe/fast] Error 2
+gmake: *** [Makefile:140: cmTC_11b0c/fast] Error 2
 
 
 
 Performing C++ SOURCE FILE Test CXX_SUPPORTS_NO_NESTED_ANON_TYPES_FLAG failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_98bac/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_98bac.dir/build.make CMakeFiles/cmTC_98bac.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_aadf9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_aadf9.dir/build.make CMakeFiles/cmTC_aadf9.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_98bac.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -fno-common -Woverloaded-virtual -fno-strict-aliasing -DCXX_SUPPORTS_NO_NESTED_ANON_TYPES_FLAG   -Werror -Wnested-anon-types -std=c++14 -o CMakeFiles/cmTC_98bac.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_aadf9.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation -fno-common -Woverloaded-virtual -fno-strict-aliasing -DCXX_SUPPORTS_NO_NESTED_ANON_TYPES_FLAG   -Werror -Wnested-anon-types -std=c++14 -o CMakeFiles/cmTC_aadf9.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wnested-anon-types'
-gmake[1]: *** [CMakeFiles/cmTC_98bac.dir/build.make:85: CMakeFiles/cmTC_98bac.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_aadf9.dir/build.make:85: CMakeFiles/cmTC_aadf9.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_98bac/fast] Error 2
+gmake: *** [Makefile:140: cmTC_aadf9/fast] Error 2
 
 
 Source file was:
@@ -688,15 +688,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test HAVE_CXX_FLAG_WSHORTEN_64_TO_32 failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_0f028/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0f028.dir/build.make CMakeFiles/cmTC_0f028.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_abcd2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_abcd2.dir/build.make CMakeFiles/cmTC_abcd2.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0f028.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors -DHAVE_CXX_FLAG_WSHORTEN_64_TO_32  -Wshorten-64-to-32   -Wshorten-64-to-32 -std=c++14 -o CMakeFiles/cmTC_0f028.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_abcd2.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors -DHAVE_CXX_FLAG_WSHORTEN_64_TO_32  -Wshorten-64-to-32   -Wshorten-64-to-32 -std=c++14 -o CMakeFiles/cmTC_abcd2.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wshorten-64-to-32'
 c++: error: unrecognized command-line option '-Wshorten-64-to-32'
-gmake[1]: *** [CMakeFiles/cmTC_0f028.dir/build.make:85: CMakeFiles/cmTC_0f028.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_abcd2.dir/build.make:85: CMakeFiles/cmTC_abcd2.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_0f028/fast] Error 2
+gmake: *** [Makefile:140: cmTC_abcd2/fast] Error 2
 
 
 Source file was:
@@ -704,15 +704,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test HAVE_CXX_FLAG_WD654 failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_55c75/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_55c75.dir/build.make CMakeFiles/cmTC_55c75.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_7e643/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7e643.dir/build.make CMakeFiles/cmTC_7e643.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_55c75.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors  -Wfloat-equal  -fstrict-aliasing  -fno-exceptions  -Wno-suggest-override  -Wstrict-aliasing -DHAVE_CXX_FLAG_WD654  -wd654   -wd654 -std=c++14 -o CMakeFiles/cmTC_55c75.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_7e643.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors  -Wfloat-equal  -fstrict-aliasing  -fno-exceptions  -Wno-suggest-override  -Wstrict-aliasing -DHAVE_CXX_FLAG_WD654  -wd654   -wd654 -std=c++14 -o CMakeFiles/cmTC_7e643.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-wd654'
 c++: error: unrecognized command-line option '-wd654'
-gmake[1]: *** [CMakeFiles/cmTC_55c75.dir/build.make:85: CMakeFiles/cmTC_55c75.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_7e643.dir/build.make:85: CMakeFiles/cmTC_7e643.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_55c75/fast] Error 2
+gmake: *** [Makefile:140: cmTC_7e643/fast] Error 2
 
 
 Source file was:
@@ -720,15 +720,15 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test HAVE_CXX_FLAG_WTHREAD_SAFETY failed with the following output:
 Change Dir: /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_a7c85/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a7c85.dir/build.make CMakeFiles/cmTC_a7c85.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_d6695/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d6695.dir/build.make CMakeFiles/cmTC_d6695.dir/build
 gmake[1]: Entering directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_a7c85.dir/src.cxx.o
-/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors  -Wfloat-equal  -fstrict-aliasing  -fno-exceptions  -Wno-suggest-override  -Wstrict-aliasing -DHAVE_CXX_FLAG_WTHREAD_SAFETY  -Wthread-safety   -Wthread-safety -std=c++14 -o CMakeFiles/cmTC_a7c85.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
+Building CXX object CMakeFiles/cmTC_d6695.dir/src.cxx.o
+/usr/bin/c++   -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-maybe-uninitialized -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wmisleading-indentation  -std=c++11  -Wall  -Wextra  -Wshadow  -pedantic  -pedantic-errors  -Wfloat-equal  -fstrict-aliasing  -fno-exceptions  -Wno-suggest-override  -Wstrict-aliasing -DHAVE_CXX_FLAG_WTHREAD_SAFETY  -Wthread-safety   -Wthread-safety -std=c++14 -o CMakeFiles/cmTC_d6695.dir/src.cxx.o -c /home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp/src.cxx
 c++: error: unrecognized command-line option '-Wthread-safety'
 c++: error: unrecognized command-line option '-Wthread-safety'
-gmake[1]: *** [CMakeFiles/cmTC_a7c85.dir/build.make:85: CMakeFiles/cmTC_a7c85.dir/src.cxx.o] Error 1
+gmake[1]: *** [CMakeFiles/cmTC_d6695.dir/build.make:85: CMakeFiles/cmTC_d6695.dir/src.cxx.o] Error 1
 gmake[1]: Leaving directory '/home/maxbubblegum/Desktop/LLVM_13_MBLAZE/build/CMakeFiles/CMakeTmp'
-gmake: *** [Makefile:140: cmTC_a7c85/fast] Error 2
+gmake: *** [Makefile:140: cmTC_d6695/fast] Error 2
 
 
 Source file was:

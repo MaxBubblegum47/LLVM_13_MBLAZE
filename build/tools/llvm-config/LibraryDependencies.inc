@@ -10,11 +10,11 @@
     bool IsInstalled;
 
     /// The list of libraries required when linking this component.
-    const char *RequiredLibraries[79];
-  } AvailableComponents[79] = {
+    const char *RequiredLibraries[75];
+  } AvailableComponents[75] = {
   { "aggressiveinstcombine", "LLVMAggressiveInstCombine", true, {"analysis", "core", "support", "transformutils"} },
-{ "all", nullptr, true, {"demangle", "support", "tablegen", "core", "fuzzmutate", "filecheck", "interfacestub", "irreader", "codegen", "selectiondag", "asmprinter", "mirparser", "globalisel", "binaryformat", "bitreader", "bitwriter", "bitstreamreader", "dwarflinker", "extensions", "frontendopenacc", "frontendopenmp", "transformutils", "instrumentation", "aggressiveinstcombine", "instcombine", "scalaropts", "ipo", "vectorize", "objcarcopts", "coroutines", "cfguard", "linker", "analysis", "lto", "mc", "mcparser", "mcdisassembler", "mca", "object", "objectyaml", "option", "remarks", "debuginfodwarf", "debuginfogsym", "debuginfomsf", "debuginfocodeview", "debuginfopdb", "symbolize", "dwp", "executionengine", "interpreter", "jitlink", "mcjit", "orcjit", "orcshared", "orctargetprocess", "runtimedyld", "target", "riscvcodegen", "riscvasmparser", "riscvdisassembler", "riscvdesc", "riscvinfo", "asmparser", "lineeditor", "profiledata", "coverage", "passes", "textapi", "dlltooldriver", "libdriver", "xray", "windowsmanifest", "all-targets", "engine", "native", "nativecodegen", "riscv"} },
-{ "all-targets", nullptr, true, {"riscv"} },
+{ "all", nullptr, true, {"demangle", "support", "tablegen", "core", "fuzzmutate", "filecheck", "interfacestub", "irreader", "codegen", "selectiondag", "asmprinter", "mirparser", "globalisel", "binaryformat", "bitreader", "bitwriter", "bitstreamreader", "dwarflinker", "extensions", "frontendopenacc", "frontendopenmp", "transformutils", "instrumentation", "aggressiveinstcombine", "instcombine", "scalaropts", "ipo", "vectorize", "objcarcopts", "coroutines", "cfguard", "linker", "analysis", "lto", "mc", "mcparser", "mcdisassembler", "mca", "object", "objectyaml", "option", "remarks", "debuginfodwarf", "debuginfogsym", "debuginfomsf", "debuginfocodeview", "debuginfopdb", "symbolize", "dwp", "executionengine", "interpreter", "jitlink", "mcjit", "orcjit", "orcshared", "orctargetprocess", "runtimedyld", "target", "mblazecodegen", "asmparser", "lineeditor", "profiledata", "coverage", "passes", "textapi", "dlltooldriver", "libdriver", "xray", "windowsmanifest", "all-targets", "engine", "native", "nativecodegen", "mblaze"} },
+{ "all-targets", nullptr, true, {"mblaze"} },
 { "analysis", "LLVMAnalysis", true, {"binaryformat", "core", "object", "profiledata", "support"} },
 { "asmparser", "LLVMAsmParser", true, {"binaryformat", "core", "support"} },
 { "asmprinter", "LLVMAsmPrinter", true, {"analysis", "binaryformat", "codegen", "core", "debuginfocodeview", "debuginfodwarf", "debuginfomsf", "mc", "mcparser", "remarks", "support", "target"} },
@@ -55,6 +55,8 @@
 { "lineeditor", "LLVMLineEditor", true, {"support"} },
 { "linker", "LLVMLinker", true, {"core", "object", "support", "transformutils"} },
 { "lto", "LLVMLTO", true, {"aggressiveinstcombine", "analysis", "binaryformat", "bitreader", "bitwriter", "codegen", "core", "extensions", "ipo", "instcombine", "linker", "mc", "objcarcopts", "object", "passes", "remarks", "scalaropts", "support", "target", "transformutils"} },
+{ "mblaze", nullptr, true, {"mblazecodegen"} },
+{ "mblazecodegen", "LLVMMBLAZECodeGen", true, {"analysis", "asmprinter", "codegen", "core", "mc", "mblazedesc", "mblazeinfo", "selectiondag", "support", "target", "globalisel"} },
 { "mc", "LLVMMC", true, {"support", "binaryformat", "debuginfocodeview"} },
 { "mca", "LLVMMCA", true, {"mc", "support"} },
 { "mcdisassembler", "LLVMMCDisassembler", true, {"mc", "support"} },
@@ -73,12 +75,6 @@
 { "passes", "LLVMPasses", true, {"aggressiveinstcombine", "analysis", "core", "coroutines", "ipo", "instcombine", "objcarcopts", "scalaropts", "support", "target", "transformutils", "vectorize", "instrumentation"} },
 { "profiledata", "LLVMProfileData", true, {"core", "support", "demangle"} },
 { "remarks", "LLVMRemarks", true, {"bitstreamreader", "support"} },
-{ "riscv", nullptr, true, {"riscvcodegen", "riscvasmparser", "riscvdisassembler", "riscvdesc", "riscvinfo"} },
-{ "riscvasmparser", "LLVMRISCVAsmParser", true, {"mc", "mcparser", "riscvdesc", "riscvinfo", "support"} },
-{ "riscvcodegen", "LLVMRISCVCodeGen", true, {"analysis", "asmprinter", "core", "codegen", "mc", "riscvdesc", "riscvinfo", "selectiondag", "support", "target", "globalisel"} },
-{ "riscvdesc", "LLVMRISCVDesc", true, {"mc", "riscvinfo", "support"} },
-{ "riscvdisassembler", "LLVMRISCVDisassembler", true, {"mc", "mcdisassembler", "riscvdesc", "riscvinfo", "support"} },
-{ "riscvinfo", "LLVMRISCVInfo", true, {"support"} },
 { "runtimedyld", "LLVMRuntimeDyld", true, {"core", "mc", "object", "support"} },
 { "scalaropts", "LLVMScalarOpts", true, {"aggressiveinstcombine", "analysis", "core", "instcombine", "support", "transformutils"} },
 { "selectiondag", "LLVMSelectionDAG", true, {"analysis", "codegen", "core", "mc", "support", "target", "transformutils"} },

@@ -24,7 +24,6 @@
 #  error Please define the macro LLVM_DISASSEMBLER(TargetName)
 #endif
 
-LLVM_DISASSEMBLER(RISCV)
 
 
 #undef LLVM_DISASSEMBLER

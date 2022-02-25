@@ -23,7 +23,7 @@
 #  error Please define the macro LLVM_TARGET(TargetName)
 #endif
 
-LLVM_TARGET(RISCV)
+LLVM_TARGET(MBLAZE)
 
 
 #undef LLVM_TARGET

@@ -23,7 +23,7 @@
 #define LLVM_CXXFLAGS "-std=c++14   -fno-exceptions -fno-rtti -D_GNU_SOURCE -D_DEBUG -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"
 #define LLVM_BUILDMODE "Debug"
 #define LLVM_LIBDIR_SUFFIX ""
-#define LLVM_TARGETS_BUILT "RISCV"
+#define LLVM_TARGETS_BUILT "MBLAZE"
 #define LLVM_SYSTEM_LIBS "-lrt -ldl -lm -lz -lxml2"
 #define LLVM_BUILD_SYSTEM "cmake"
 #define LLVM_HAS_RTTI 0
