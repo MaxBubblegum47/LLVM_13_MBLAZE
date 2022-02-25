@@ -566,7 +566,7 @@ enum : unsigned {
 
 // ELF Relocation types for MBLAZE
 enum {
-  #include "ELFRelocs/MBLAZE.def"
+#include "ELFRelocs/MBLAZE.def"
 };
 
 // ELF Relocation types for Mips
