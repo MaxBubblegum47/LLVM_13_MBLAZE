@@ -9,7 +9,7 @@
 // Implements the info about MBLAZE target spec.
 //
 //===----------------------------------------------------------------------===//
-#include "MBLAZETargetMachine.h"
+//#include "MBLAZETargetMachine.h"
 #include "MBLAZE.h"
 #include "llvm/IR/Attributes.h"
 #include "llvm/IR/Function.h"
