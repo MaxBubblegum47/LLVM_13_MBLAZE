@@ -320,6 +320,7 @@ enum {
   EM_BPF = 247,           // Linux kernel bpf virtual machine
   EM_VE = 251,            // NEC SX-Aurora VE
   EM_CSKY = 252,          // C-SKY 32-bit processor
+  EM_MBLAZE = 999,        // MBLAZE
 };
 
 // Object file classes.
@@ -561,6 +562,11 @@ enum : unsigned {
   EF_MIPS_ARCH_32R6 = 0x90000000, // mips32r6
   EF_MIPS_ARCH_64R6 = 0xa0000000, // mips64r6
   EF_MIPS_ARCH = 0xf0000000       // Mask for applying EF_MIPS_ARCH_ variant
+};
+
+// ELF Relocation types for MBLAZE
+enum {
+  #include "ELFRelocs/MBLAZE.def"
 };
 
 // ELF Relocation types for Mips

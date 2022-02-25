@@ -23,6 +23,7 @@
 #include "Targets/Lanai.h"
 #include "Targets/Le64.h"
 #include "Targets/M68k.h"
+#include "Targets/MBlaze.h"
 #include "Targets/MSP430.h"
 #include "Targets/Mips.h"
 #include "Targets/NVPTX.h"
@@ -232,6 +233,9 @@ TargetInfo *AllocateTarget(const llvm::Triple &Triple,
     default:
       return new ARMbeTargetInfo(Triple, Opts);
     }
+
+  case llvm::Triple::mblaze:
+    return new MBLAZETargetInfo(Triple, Opts);
 
   case llvm::Triple::avr:
     return new AVRTargetInfo(Triple, Opts);
