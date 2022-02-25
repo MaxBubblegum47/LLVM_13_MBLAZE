@@ -29,6 +29,25 @@
 
 using namespace llvm;
 
+
+extern bool MBLAZEDisableUnreconginizedMessage; // For MBLAZE
+
+FeatureBitset
+SubtargetFeatures::ToggleFeature(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+}
+
+FeatureBitset
+SubtargetFeatures::ApplyFeatureFlag(FeatureBitset Bits, StringRef Feature, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+}
+FeatureBitset
+SubtargetFeatures::getFeatureBits(StringRef CPU, ArrayRef<SubtargetFeatureKV> CPUTable, ArrayRef<SubtargetFeatureKV> FeatureTable) {
+	if (!MBLAZEDisableUnreconginizedMessage) // For MBLAZE
+}
+
+
+
 /// Splits a string of comma separated items in to a vector of strings.
 void SubtargetFeatures::Split(std::vector<std::string> &V, StringRef S) {
   SmallVector<StringRef, 3> Tmp;

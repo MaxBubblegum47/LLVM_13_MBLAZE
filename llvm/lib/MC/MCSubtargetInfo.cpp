@@ -31,6 +31,26 @@ static const T *Find(StringRef S, ArrayRef<T> A) {
   return F;
 }
 
+
+bool MBLAZEDisableUnreconginizedMessage = false;
+void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef FS) {
+#if 1 // Disable reconginized processor message. For Cpu0
+if (TargetTriple.getArch() == llvm::Triple::mblaze ||
+TargetTriple.getArch() == llvm::Triple::mblazeel)
+MBLAZEDisableUnreconginizedMessage = true;
+#endif
+}
+
+const MCSchedModel &MCSubtargetInfo::getSchedModelForCPU(StringRef CPU) const {
+#if 1 // Disable reconginized processor message. For Cpu0
+if (TargetTriple.getArch() != llvm::Triple::mblaze &&
+TargetTriple.getArch() != llvm::Triple::mblaze)
+#endif
+}
+
+
+
+
 /// For each feature that is (transitively) implied by this feature, set it.
 static
 void SetImpliedBits(FeatureBitset &Bits, const FeatureBitset &Implies,
