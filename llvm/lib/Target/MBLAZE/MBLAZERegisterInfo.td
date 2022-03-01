@@ -117,7 +117,7 @@ let Namespace = "MBLAZE" in {
 // R0,
 // R1)>;
 
-def GPR : RegisterClass<"MBlaze", [i32,f32], 32, (sequence "R%u", 0, 31)>;
+def GPR : RegisterClass<"MBLAZE", [i32,f32], 32, (sequence "R%u", 0, 31)>;
 
 def SPR : RegisterClass<"MBLAZE", [i32], 32, (add
   // Reserved
