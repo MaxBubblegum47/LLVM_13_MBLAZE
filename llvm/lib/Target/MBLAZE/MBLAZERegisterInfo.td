@@ -1,7 +1,7 @@
 //===-- MBLAZERegisterInfo.td - MBLAZE Register defs -----------*- tablegen -*-===//
 //
 //
-//          The LLVM Compiler Infrastructure
+//                       The LLVM Compiler Infrastructure
 //
 // This file is distributed under the University of Illinois Open Source
 // License. See LICENSE.TXT for details.
@@ -10,17 +10,28 @@
 //===----------------------------------------------------------------------===//
 // Declarations that describe the MBLAZE register file
 //===----------------------------------------------------------------------===//
-// We have banks of 16 registers each.
-class MBLAZEReg<bits<16> Enc, string n> : Register<n> {
+
+// We have banks of 32 registers each.
+class MBLAZEReg<bits<5> Enc, string n> : Register<n> {
 // For tablegen(... -gen-emitter) in CMakeLists.txt
 let HWEncoding = Enc;
 let Namespace = "MBLAZE";
 }
-// MBLAZE CPU Registers
-class MBLAZEGPRReg<bits<16> Enc, string n> : MBLAZEReg<Enc, n>;
 
-// Co-processor 0 Registers
-//class MBLAZEC0Reg<bits<16> Enc, string n> : MBLAZEReg<Enc, n>;
+// MBLAZE CPU Registers
+class MBLAZEGPRReg<bits<5> Enc, string n> : MBLAZEReg<Enc, n>;
+
+// Special purpose registers have 15-bit values
+class MBLAZESReg<bits<15> Enc, string n> : Register<n> {
+  let HWEncoding = Enc;
+  let Namespace = "MBLAZE";
+}
+
+// MBlaze special purpose registers
+class MBLAZESPRReg<bits<15> Enc, string n> : Register<n> {
+  let HWEncoding = Enc;
+  let Namespace = "MBLAZE";
+}
 
 //===----------------------------------------------------------------------===//
 //@Registers
@@ -62,47 +73,77 @@ let Namespace = "MBLAZE" in {
   def R31 : MBLAZEGPRReg< 31, "r31">,  DwarfRegNum<[31]>;
 
   // Special Purpose Registers
-  // def RPC    : MBLAZESPRReg<0x0000, "rpc">,    DwarfRegNum<[32]>;
-  // def RMSR   : MBLAZESPRReg<0x0001, "rmsr">,   DwarfRegNum<[33]>;
-  // def REAR   : MBLAZESPRReg<0x0003, "rear">,   DwarfRegNum<[34]>;
-  // def RESR   : MBLAZESPRReg<0x0005, "resr">,   DwarfRegNum<[35]>;
-  // def RFSR   : MBLAZESPRReg<0x0007, "rfsr">,   DwarfRegNum<[36]>;
-  // def RBTR   : MBLAZESPRReg<0x000B, "rbtr">,   DwarfRegNum<[37]>;
-  // def REDR   : MBLAZESPRReg<0x000D, "redr">,   DwarfRegNum<[38]>;
-  // def RPID   : MBLAZESPRReg<0x1000, "rpid">,   DwarfRegNum<[39]>;
-  // def RZPR   : MBLAZESPRReg<0x1001, "rzpr">,   DwarfRegNum<[40]>;
-  // def RTLBX  : MBLAZESPRReg<0x1002, "rtlbx">,  DwarfRegNum<[41]>;
-  // def RTLBLO : MBLAZESPRReg<0x1003, "rtlblo">, DwarfRegNum<[42]>;
-  // def RTLBHI : MBLAZESPRReg<0x1004, "rtlbhi">, DwarfRegNum<[43]>;
-  // def RTLBSX : MBLAZESPRReg<0x1004, "rtlbsx">, DwarfRegNum<[44]>;
-  // def RPVR0  : MBLAZESPRReg<0x2000, "rpvr0">,  DwarfRegNum<[45]>;
-  // def RPVR1  : MBLAZESPRReg<0x2001, "rpvr1">,  DwarfRegNum<[46]>;
-  // def RPVR2  : MBLAZESPRReg<0x2002, "rpvr2">,  DwarfRegNum<[47]>;
-  // def RPVR3  : MBLAZESPRReg<0x2003, "rpvr3">,  DwarfRegNum<[48]>;
-  // def RPVR4  : MBLAZESPRReg<0x2004, "rpvr4">,  DwarfRegNum<[49]>;
-  // def RPVR5  : MBLAZESPRReg<0x2005, "rpvr5">,  DwarfRegNum<[50]>;
-  // def RPVR6  : MBLAZESPRReg<0x2006, "rpvr6">,  DwarfRegNum<[51]>;
-  // def RPVR7  : MBLAZESPRReg<0x2007, "rpvr7">,  DwarfRegNum<[52]>;
-  // def RPVR8  : MBLAZESPRReg<0x2008, "rpvr8">,  DwarfRegNum<[53]>;
-  // def RPVR9  : MBLAZESPRReg<0x2009, "rpvr9">,  DwarfRegNum<[54]>;
-  // def RPVR10 : MBLAZESPRReg<0x200A, "rpvr10">, DwarfRegNum<[55]>;
-  // def RPVR11 : MBLAZESPRReg<0x200B, "rpvr11">, DwarfRegNum<[56]>;
+  def RPC    : MBLAZESPRReg<0x0000, "rpc">,    DwarfRegNum<[32]>;
+  def RMSR   : MBLAZESPRReg<0x0001, "rmsr">,   DwarfRegNum<[33]>;
+  def REAR   : MBLAZESPRReg<0x0003, "rear">,   DwarfRegNum<[34]>;
+  def RESR   : MBLAZESPRReg<0x0005, "resr">,   DwarfRegNum<[35]>;
+  def RFSR   : MBLAZESPRReg<0x0007, "rfsr">,   DwarfRegNum<[36]>;
+  def RBTR   : MBLAZESPRReg<0x000B, "rbtr">,   DwarfRegNum<[37]>;
+  def REDR   : MBLAZESPRReg<0x000D, "redr">,   DwarfRegNum<[38]>;
+  def RPID   : MBLAZESPRReg<0x1000, "rpid">,   DwarfRegNum<[39]>;
+  def RZPR   : MBLAZESPRReg<0x1001, "rzpr">,   DwarfRegNum<[40]>;
+  def RTLBX  : MBLAZESPRReg<0x1002, "rtlbx">,  DwarfRegNum<[41]>;
+  def RTLBLO : MBLAZESPRReg<0x1003, "rtlblo">, DwarfRegNum<[42]>;
+  def RTLBHI : MBLAZESPRReg<0x1004, "rtlbhi">, DwarfRegNum<[43]>;
+  def RTLBSX : MBLAZESPRReg<0x1004, "rtlbsx">, DwarfRegNum<[44]>;
+  def RPVR0  : MBLAZESPRReg<0x2000, "rpvr0">,  DwarfRegNum<[45]>;
+  def RPVR1  : MBLAZESPRReg<0x2001, "rpvr1">,  DwarfRegNum<[46]>;
+  def RPVR2  : MBLAZESPRReg<0x2002, "rpvr2">,  DwarfRegNum<[47]>;
+  def RPVR3  : MBLAZESPRReg<0x2003, "rpvr3">,  DwarfRegNum<[48]>;
+  def RPVR4  : MBLAZESPRReg<0x2004, "rpvr4">,  DwarfRegNum<[49]>;
+  def RPVR5  : MBLAZESPRReg<0x2005, "rpvr5">,  DwarfRegNum<[50]>;
+  def RPVR6  : MBLAZESPRReg<0x2006, "rpvr6">,  DwarfRegNum<[51]>;
+  def RPVR7  : MBLAZESPRReg<0x2007, "rpvr7">,  DwarfRegNum<[52]>;
+  def RPVR8  : MBLAZESPRReg<0x2008, "rpvr8">,  DwarfRegNum<[53]>;
+  def RPVR9  : MBLAZESPRReg<0x2009, "rpvr9">,  DwarfRegNum<[54]>;
+  def RPVR10 : MBLAZESPRReg<0x200A, "rpvr10">, DwarfRegNum<[55]>;
+  def RPVR11 : MBLAZESPRReg<0x200B, "rpvr11">, DwarfRegNum<[56]>;
 
   // The carry bit. In the Microblaze this is really bit 29 of the
   // MSR register but this is the only bit of that register that we
   // are interested in modeling.
-  // def CARRY  : MBLAZESPRReg<0x0000, "rmsr[c]">;
+  def CARRY  : MBLAZESPRReg<0x0000, "rmsr[c]">;
 }
 //===----------------------------------------------------------------------===//
 //@Register Classes
 //===----------------------------------------------------------------------===//
-def CPURegs : RegisterClass<"MBLAZE", [i32], 32, (add
-// Reserved
-R0,
-R1)>;
+// def CPURegs : RegisterClass<"MBLAZE", [i32], 32, (add
+// // Reserved
+// R0,
+// R1)>;
 
-//@Status Registers class
-// def SR
-// : RegisterClass<"MBLAZE", [i32], 32, (add SW)>;
-// //@Co-processor 0 Registers class
-// def C0Regs : RegisterClass<"MBLAZE", [i32], 32, (add PC, EPC)>;
+def SPR : RegisterClass<"MBlaze", [i32], 32, (add
+  // Reserved
+  RPC,
+  RMSR,
+  REAR,
+  RESR,
+  RFSR,
+  RBTR,
+  REDR,
+  RPID,
+  RZPR,
+  RTLBX,
+  RTLBLO,
+  RTLBHI,
+  RPVR0,
+  RPVR1,
+  RPVR2,
+  RPVR3,
+  RPVR4,
+  RPVR5,
+  RPVR6,
+  RPVR7,
+  RPVR8,
+  RPVR9,
+  RPVR10,
+  RPVR11
+  )>
+
+{
+  let isAllocatable = 0;
+}
+
+def CRC : RegisterClass<"MBlaze", [i32], 32, (add CARRY)> {
+  let CopyCost = -1;
+}
