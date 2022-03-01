@@ -19,7 +19,7 @@ let Namespace = "MBLAZE";
 }
 
 // MBLAZE CPU Registers
-class MBLAZEGPRReg<bits<5> Enc, string n> : MBLAZEReg<Enc, n>;
+class MBLAZEGPRReg<bits<16> Enc, string n> : MBLAZEReg<Enc, n>;
 
 // Special purpose registers have 15-bit values
 class MBLAZESReg<bits<15> Enc, string n> : Register<n> {
