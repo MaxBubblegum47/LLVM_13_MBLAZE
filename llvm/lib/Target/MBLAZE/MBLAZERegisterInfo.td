@@ -114,7 +114,7 @@ let Namespace = "MBLAZE" in {
 // R0,
 // R1)>;
 
-def SPR : RegisterClass<"MBlaze", [i32], 32, (add
+def SPR : RegisterClass<"MBLAZE", [i32], 32, (add
   // Reserved
   RPC,
   RMSR,
@@ -146,6 +146,6 @@ def SPR : RegisterClass<"MBlaze", [i32], 32, (add
   let isAllocatable = 0;
 }
 
-def CRC : RegisterClass<"MBlaze", [i32], 32, (add CARRY)> {
+def CRC : RegisterClass<"MBLAZE", [i32], 32, (add CARRY)> {
   let CopyCost = -1;
 }
