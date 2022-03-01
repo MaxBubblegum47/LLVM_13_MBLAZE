@@ -14,24 +14,27 @@
 //HWEncoding is 16 because is defined as you can see in llvm/include/llvm/Target/Target.td:186:  bits<16> HWEncoding = 0;
 
 // We have banks of 32 registers each.
-class MBLAZEReg<bits<16> Enc, string n> : Register<n> {
+class MBLAZEReg<bits<5> Enc, string n> : Register<n> {
 // For tablegen(... -gen-emitter) in CMakeLists.txt
-let HWEncoding = Enc;
+let HWEncoding{4-0} = Enc;
 let Namespace = "MBLAZE";
 }
 
-// MBLAZE CPU Registers
-class MBLAZEGPRReg<bits<16> Enc, string n> : MBLAZEReg<Enc, n>;
-
-// Special purpose registers have 15-bit values
-class MBLAZESReg<bits<16> Enc, string n> : Register<n> {
-  let HWEncoding = Enc;
+// MBLAZE General Purpose Registers
+class MBLAZEGPRReg<bits<5> Enc, string n> : Register<n> {
+  let HWEncoding{4-0} = Enc;
   let Namespace = "MBLAZE";
 }
 
+// Special Purpose Registers have 15-bit values
+// class MBLAZESReg<bits<15> Enc, string n> : Register<n> {
+//   let HWEncoding{15-0} = Enc;
+//   let Namespace = "MBLAZE";
+// }
+
 // MBlaze special purpose registers
-class MBLAZESPRReg<bits<16> Enc, string n> : Register<n> {
-  let HWEncoding = Enc;
+class MBLAZESPRReg<bits<15> Enc, string n> : Register<n> {
+  let HWEncoding{14-0} = Enc;
   let Namespace = "MBLAZE";
 }
 
@@ -113,6 +116,8 @@ let Namespace = "MBLAZE" in {
 // // Reserved
 // R0,
 // R1)>;
+
+def GPR : RegisterClass<"MBlaze", [i32,f32], 32, (sequence "R%u", 0, 31)>;
 
 def SPR : RegisterClass<"MBLAZE", [i32], 32, (add
   // Reserved
