@@ -12,7 +12,7 @@
 //===----------------------------------------------------------------------===//
 
 // We have banks of 32 registers each.
-class MBLAZEReg<bits<5> Enc, string n> : Register<n> {
+class MBLAZEReg<bits<16> Enc, string n> : Register<n> {
 // For tablegen(... -gen-emitter) in CMakeLists.txt
 let HWEncoding = Enc;
 let Namespace = "MBLAZE";
