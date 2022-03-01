@@ -11,6 +11,8 @@
 // Declarations that describe the MBLAZE register file
 //===----------------------------------------------------------------------===//
 
+//HWEncoding is 16 because is defined as you can see in llvm/include/llvm/Target/Target.td:186:  bits<16> HWEncoding = 0;
+
 // We have banks of 32 registers each.
 class MBLAZEReg<bits<16> Enc, string n> : Register<n> {
 // For tablegen(... -gen-emitter) in CMakeLists.txt
@@ -22,13 +24,13 @@ let Namespace = "MBLAZE";
 class MBLAZEGPRReg<bits<16> Enc, string n> : MBLAZEReg<Enc, n>;
 
 // Special purpose registers have 15-bit values
-class MBLAZESReg<bits<15> Enc, string n> : Register<n> {
+class MBLAZESReg<bits<16> Enc, string n> : Register<n> {
   let HWEncoding = Enc;
   let Namespace = "MBLAZE";
 }
 
 // MBlaze special purpose registers
-class MBLAZESPRReg<bits<15> Enc, string n> : Register<n> {
+class MBLAZESPRReg<bits<16> Enc, string n> : Register<n> {
   let HWEncoding = Enc;
   let Namespace = "MBLAZE";
 }
