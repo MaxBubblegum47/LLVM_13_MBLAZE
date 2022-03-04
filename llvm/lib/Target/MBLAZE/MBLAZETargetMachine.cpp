@@ -17,9 +17,9 @@
 #include "llvm/CodeGen/Passes.h"
 #include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/Support/TargetRegistry.h"
-#include "llvm/Target/TargetOptions.h"
+#include  "llvm/Target/TargetOptions.h"
 
 using namespace llvm;
-#define DEBUG_TYPE "MBLAZE"
-    extern "C" void LLVMInitializeMBLAZETarget() {
+#define DEBUG_TYPE "mblaze"
+extern "C" void LLVMInitializeMBLAZETarget() {
 }
