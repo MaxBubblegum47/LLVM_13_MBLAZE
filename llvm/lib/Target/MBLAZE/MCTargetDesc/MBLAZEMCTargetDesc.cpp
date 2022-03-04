@@ -27,10 +27,13 @@
 #include "llvm/Support/TargetRegistry.h"
 
 using namespace llvm;
-//#define GET_INSTRINFO_MC_DESC
-//#include "MBLAZEGenInstrInfo.inc"
-//#define GET_SUBTARGETINFO_MC_DESC
-//#include "MBLAZEGenSubtargetInfo.inc"
+
+#define GET_INSTRINFO_MC_DESC
+#include "MBLAZEGenInstrInfo.inc"
+
+#define GET_SUBTARGETINFO_MC_DESC
+#include "MBLAZEGenSubtargetInfo.inc"
+
 #define GET_REGINFO_MC_DESC
 #include "MBLAZEGenRegisterInfo.inc"
 //@2 {
