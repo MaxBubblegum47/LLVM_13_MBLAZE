@@ -17,10 +17,13 @@
 
 //#include "MBLAZEConfig.h"
 #include "llvm/Support/DataTypes.h"
+
 #include <memory>
+
 namespace llvm {
     class Target;
     class Triple;
+
     extern Target TheMBLAZETarget;
     extern Target TheMBLAZEelTarget;
 } // End llvm namespace
@@ -32,8 +35,10 @@ namespace llvm {
 #include "MBLAZEGenRegisterInfo.inc"
 
 // Defines symbolic names for the MBLAZE instructions.
-//#define GET_INSTRINFO_ENUM
-//#include "MBLAZEGenInstrInfo.inc"
-//#define GET_SUBTARGETINFO_ENUM
-//#include "MBLAZEGenSubtargetInfo.inc"
+#define GET_INSTRINFO_ENUM
+#include "MBLAZEGenInstrInfo.inc"
+
+#define GET_SUBTARGETINFO_ENUM
+#include "MBLAZEGenSubtargetInfo.inc"
+
 #endif
