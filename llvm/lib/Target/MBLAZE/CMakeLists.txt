@@ -7,12 +7,13 @@ set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 # MBLAZEGenRegisterInfo.inc came from MBLAZERegisterInfo.td, MBLAZEGenInstrInfo.inc
 # came from MBLAZEInstrInfo.td.
 tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
-#tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
-#tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
+tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
 #tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 # MBLAZECommonTableGen must be defined
 add_public_tablegen_target(MBLAZECommonTableGen)
+
 # MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
 add_llvm_target(MBLAZECodeGen
 MBLAZETargetMachine.cpp
@@ -31,6 +32,7 @@ GlobalISel
 ADD_TO_COMPONENT
 MBLAZE
 )
+
 # Should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
 add_subdirectory(TargetInfo)
 add_subdirectory(MCTargetDesc)
