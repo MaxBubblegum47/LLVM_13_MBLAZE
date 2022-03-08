@@ -6,6 +6,7 @@ set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 # your hand code C++ files.
 # MBLAZEGenRegisterInfo.inc came from MBLAZERegisterInfo.td, MBLAZEGenInstrInfo.inc
 # came from MBLAZEInstrInfo.td.
+tablegen(LLVM MBlazeGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
