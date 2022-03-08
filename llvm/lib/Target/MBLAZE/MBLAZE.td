@@ -16,6 +16,7 @@ include "llvm/Target/Target.td"
 //===----------------------------------------------------------------------===//
 // Target-dependent interfaces
 //===----------------------------------------------------------------------===//
+include "MBLAZECallingConv.td"
 include "MBLAZERegisterInfo.td"
 include "MBLAZESchedule.td"
 include "MBLAZEInstrInfo.td"
