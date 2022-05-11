@@ -13,13 +13,21 @@
 // Target-independent interfaces
 //===----------------------------------------------------------------------===//
 include "llvm/Target/Target.td"
+
 //===----------------------------------------------------------------------===//
 // Target-dependent interfaces
 //===----------------------------------------------------------------------===//
-include "MBLAZECallingConv.td"
-include "MBLAZERegisterInfo.td"
+// ! important thing : don't change this order otherwise it may not works
+
 include "MBLAZESchedule.td"
+
+include "MBLAZERegisterInfo.td"
+
 include "MBLAZEInstrInfo.td"
+
+include "MBLAZECallingConv.td"
+
+
 
 
 def MBLAZEInstrInfo : InstrInfo;
@@ -65,5 +73,6 @@ def MBLAZEAsmWriter : AsmWriter {
 
 def MBLAZE : Target {
   let InstructionSet = MBLAZEInstrInfo;
-  let AssemblyWriters = [MBLAZEAsmWriter];
+  //let AssemblyParsers = [MBLAZEAsmParser];
+  //let AssemblyWriters = [MBLAZEAsmWriter];
 }
