@@ -1,5 +1,12 @@
 # The LLVM_13_MBLAZE Compiler Infrastructure
 
+## Quick Installation
+
+```
+cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;openmp"  -DLLVM_TARGETS_TO_BUILD="MBLAZE" ../llvm
+make -j $(nproc)
+```
+
 This directory and its sub-directories contain source code for LLVM,
 a toolkit for the construction of highly optimized compilers,
 optimizers, and run-time environments.
