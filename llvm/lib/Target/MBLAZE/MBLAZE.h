@@ -19,22 +19,7 @@
 #include "llvm/Target/TargetMachine.h"
 
 namespace llvm {
-    class MBLAZERegisterBankInfo;
-    class MBLAZESubtarget;
-    class MBLAZEGenSubtargetInfo;
-    class MBLAZEInstrInfo;
-    class MBLAZERegisterInfo;
     class MBLAZETargetMachine;
-    class MBLAZEFrameLowering;
-    class MBLAZETargetLowering;
-    class AsmPrinter;
     class FunctionPass;
-    class InstructionSelector;
-    class MCInst;
-    class MCOperand;
-    class MachineInstr;
-    class MachineOperand;
-    class PassRegistry;
-    class TargetFrameLowering;
 } // end namespace llvm;
 #endif
