@@ -22,5 +22,23 @@
 
 using namespace llvm;
 
-#define DEBUG_TYPE "mblaze"
-extern "C" void LLVMInitializeMBLAZETarget() {}
+MBLAZETargetMachine::MBLAZETargetMachine(const Target &T, const Triple &TT, StringRef CPU, 
+StringRef FS);
+
+namespace {
+class MBLAZEPassConfig : public TargetPassConfig {
+public:
+    MBLAZEPassConfig(MBLAZETargetMachine *TM, PassManagerBase &PM) 
+        : TargetPassConfig(TM, PM) {}
+
+    MBLAZETargetMachine &getMBLAZETargetMachine() const {
+        return getTM<MBLAZETargetMachine>();
+    }    
+};
+
+}
+
+#define DEBUG_TYPE "MBLAZE"
+extern "C" void LLVMInitializeMBLAZETarget() {
+    RegisterTargetMachine<MBLAZETargetMachine> X(TheMBLAZETarget);
+}

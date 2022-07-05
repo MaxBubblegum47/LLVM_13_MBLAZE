@@ -1,13 +1,11 @@
 #include "MBLAZESubtarget.h"
 #include "MBLAZE.h"
-#include "MBLAZEGenSubtarget.inc"
+#include "MBLAZEGenSubtargetInfo.inc"
 
 using namespace llvm;
 
+void MBLAZESubtarget::anchor() {}
+
 MBLAZESubtarget::MBLAZESubtarget(const std::string &TT,
                                  const std::string &CPU,
-                                 const std::string &FS):
-{
-  std::string CPUName = "MBLAZE"
-  ParseSubtargetFeatures(CPUName, FS);
-}
+                                 const std::string &FS){}
