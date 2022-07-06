@@ -8,4 +8,5 @@ void MBLAZESubtarget::anchor() {}
 
 MBLAZESubtarget::MBLAZESubtarget(const std::string &TT,
                                  const std::string &CPU,
-                                 const std::string &FS){}
+                                 const std::string &FS)
+                                 MBLAZEGenSubtargetInfo(TT, CPU, FS){}

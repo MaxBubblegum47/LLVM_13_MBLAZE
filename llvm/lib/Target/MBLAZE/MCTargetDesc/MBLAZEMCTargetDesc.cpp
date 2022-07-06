@@ -57,12 +57,14 @@ static MCInstrInfo *createMBLAZEInstrInfo(){
 static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
                                                  StringRef CPU,
                                                  StringRef FS) {
-  return createMBLAZEMCSubtargetInfoImpl(TT, CPU, FS);
+  MCSubtargetInfo *X = new MCSubtargetInfo();
+  CreateMBLAZEMCSubtargetInfo(X, TT, CPU, FS);
+  return X;
+  //return createMBLAZEMCSubtargetInfoImpl(TT, CPU, FS);
 }
 
 
 extern "C" void LLVMInitializeMBLAZETargetMC() {
      TargetRegistry::RegisterMCSubtargetInfo(TheMBLAZETarget, createMBLAZEMCSubtargetInfo);
-
 }
 
