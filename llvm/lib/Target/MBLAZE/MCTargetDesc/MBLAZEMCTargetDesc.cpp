@@ -57,9 +57,15 @@ static MCInstrInfo *createMBLAZEInstrInfo(){
 static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
                                                  StringRef CPU,
                                                  StringRef FS) {
-  MCSubtargetInfo *X = new MCSubtargetInfo();
-  CreateMBLAZEMCSubtargetInfo(X, TT, CPU, FS);
-  return X;
+  
+  std::string CPUName = std::string(CPU);                                                  
+  if (CPUName.empty())
+    CPUName = "generic";
+
+  return createMBLAZEMCSubtargetInfoImpl(TT, CPU, /*TuneCPU*/ CPU, FS);
+  // MCSubtargetInfo *X = new MCSubtargetInfo();
+  // CreateMBLAZEMCSubtargetInfo(X, TT, CPU, FS);
+  // return X;
   //return createMBLAZEMCSubtargetInfoImpl(TT, CPU, FS);
 }
 
