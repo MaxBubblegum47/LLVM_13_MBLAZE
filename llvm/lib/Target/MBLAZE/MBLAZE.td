@@ -36,20 +36,20 @@ def MBLAZEInstrInfo : InstrInfo;
 // Microblaze Subtarget features                                              //
 //===----------------------------------------------------------------------===//
 
-def FeatureBarrel      : SubtargetFeature<"barrel", "HasBarrel", "true",
-                                "Implements barrel shifter">;
-def FeatureDiv         : SubtargetFeature<"div", "HasDiv", "true",
-                                "Implements hardware divider">;
-def FeatureMul         : SubtargetFeature<"mul", "HasMul", "true",
-                                "Implements hardware multiplier">;
-def FeaturePatCmp      : SubtargetFeature<"patcmp", "HasPatCmp", "true",
-                                "Implements pattern compare instruction">;
-def FeatureFPU         : SubtargetFeature<"fpu", "HasFPU", "true",
-                                "Implements floating point unit">;
-def FeatureMul64       : SubtargetFeature<"mul64", "HasMul64", "true",
-                                "Implements multiplier with 64-bit result">;
-def FeatureSqrt        : SubtargetFeature<"sqrt", "HasSqrt", "true",
-                                "Implements sqrt and floating point convert">;
+// def FeatureBarrel      : SubtargetFeature<"barrel", "HasBarrel", "true",
+//                                 "Implements barrel shifter">;
+// def FeatureDiv         : SubtargetFeature<"div", "HasDiv", "true",
+//                                 "Implements hardware divider">;
+// def FeatureMul         : SubtargetFeature<"mul", "HasMul", "true",
+//                                 "Implements hardware multiplier">;
+// def FeaturePatCmp      : SubtargetFeature<"patcmp", "HasPatCmp", "true",
+//                                 "Implements pattern compare instruction">;
+// def FeatureFPU         : SubtargetFeature<"fpu", "HasFPU", "true",
+//                                 "Implements floating point unit">;
+// def FeatureMul64       : SubtargetFeature<"mul64", "HasMul64", "true",
+//                                 "Implements multiplier with 64-bit result">;
+// def FeatureSqrt        : SubtargetFeature<"sqrt", "HasSqrt", "true",
+//                                 "Implements sqrt and floating point convert">;
 
 
 //===----------------------------------------------------------------------===//

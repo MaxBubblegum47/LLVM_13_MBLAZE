@@ -1,39 +1,69 @@
+//===-- MBLAZESubtarget.cpp - MBLAZE Subtarget Information ------------------===//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+//
+// This file implements the MBLAZE specific subclass of TargetSubtargetInfo.
+//
+//===----------------------------------------------------------------------===//
+
 #include "MBLAZESubtarget.h"
 #include "MBLAZE.h"
-#include "MBLAZEGenSubtargetInfo.inc"
-#include "TargetInfo/MBLAZETargetInfo.h"
-#include "llvm/ADT/STLExtras.h"
-#include "llvm/MC/MCAsmBackend.h"
-#include "llvm/MC/MCAsmInfo.h"
-#include "llvm/MC/MCCodeEmitter.h"
-#include "llvm/MC/MCInstrAnalysis.h"
-#include "llvm/MC/MCInstrInfo.h"
-#include "llvm/MC/MCObjectWriter.h"
-#include "llvm/MC/MCRegisterInfo.h"
-#include "llvm/MC/MCStreamer.h"
-#include "llvm/MC/MCSubtargetInfo.h"
-#include "llvm/Support/ErrorHandling.h"
+#include "llvm/Support/MathExtras.h"
 #include "llvm/Support/TargetRegistry.h"
 
 using namespace llvm;
 
-void MBLAZESubtarget::anchor() {}
+#define DEBUG_TYPE "MBLAZE-subtarget"
 
-void MBLAZESubtarget::initSubtargetFeatures(StringRef CPU, StringRef FS) {
-  std::string CPUName = std::string(CPU);
-  if (CPUName.empty())
-    CPUName = "generic";
+#define GET_SUBTARGETINFO_TARGET_DESC
+#define GET_SUBTARGETINFO_CTOR
+#include "MBLAZEGenSubtargetInfo.inc"
 
-  ParseSubtargetFeatures(CPUName, /*TuneCPU*/ CPUName, FS);
-}
+void MBLAZESubtarget::anchor() { }
 
 MBLAZESubtarget &MBLAZESubtarget::initializeSubtargetDependencies(StringRef CPU,
                                                                 StringRef FS) {
-  initSubtargetFeatures(CPU, FS);
+  // UseSoftMulDiv = false;
+  // IsV9 = false;
+  // IsLeon = false;
+  // V8DeprecatedInsts = false;
+  // IsVIS = false;
+  // IsVIS2 = false;
+  // IsVIS3 = false;
+  // HasHardQuad = false;
+  // UsePopc = false;
+  // UseSoftFloat = false;
+  // HasNoFSMULD = false;
+  // HasNoFMULS = false;
+
+  // // Leon features
+  // HasLeonCasa = false;
+  // HasUmacSmac = false;
+  // HasPWRPSR = false;
+  // InsertNOPLoad = false;
+  // FixAllFDIVSQRT = false;
+  // DetectRoundChange = false;
+  // HasLeonCycleCounter = false;
+
+  // Determine default and user specified characteristics
+  std::string CPUName = std::string(CPU);
+  CPUName = "generic";
+
+  // Parse features string.
+  ParseSubtargetFeatures(CPUName, /*TuneCPU*/ CPUName, FS);
+
+
   return *this;
 }
 
-MBLAZESubtarget::MBLAZESubtarget(const std::string &TT,
-                                 const std::string &CPU,
-                                 const std::string &FS)
-                                 MBLAZEGenSubtargetInfo(TT, CPU, /*Tune CPU*/ CPU, FS){}
+MBLAZESubtarget::MBLAZESubtarget(const Triple &TT, const std::string &CPU,
+                               const std::string &FS)
+    : MBLAZEGenSubtargetInfo(TT, CPU, /*TuneCPU*/ CPU, FS), TargetTriple(TT),
+      {}
+
+
+
