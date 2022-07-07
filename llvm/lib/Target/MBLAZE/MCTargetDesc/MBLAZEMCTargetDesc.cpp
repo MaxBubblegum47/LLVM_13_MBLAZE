@@ -63,10 +63,6 @@ static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
     CPUName = "generic";
 
   return createMBLAZEMCSubtargetInfoImpl(TT, CPU, /*TuneCPU*/ CPU, FS);
-  // MCSubtargetInfo *X = new MCSubtargetInfo();
-  // CreateMBLAZEMCSubtargetInfo(X, TT, CPU, FS);
-  // return X;
-  //return createMBLAZEMCSubtargetInfoImpl(TT, CPU, FS);
 }
 
 

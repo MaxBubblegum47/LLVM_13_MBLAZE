@@ -27,33 +27,10 @@ void MBLAZESubtarget::anchor() { }
 
 MBLAZESubtarget &MBLAZESubtarget::initializeSubtargetDependencies(StringRef CPU,
                                                                 StringRef FS) {
-  // UseSoftMulDiv = false;
-  // IsV9 = false;
-  // IsLeon = false;
-  // V8DeprecatedInsts = false;
-  // IsVIS = false;
-  // IsVIS2 = false;
-  // IsVIS3 = false;
-  // HasHardQuad = false;
-  // UsePopc = false;
-  // UseSoftFloat = false;
-  // HasNoFSMULD = false;
-  // HasNoFMULS = false;
 
-  // // Leon features
-  // HasLeonCasa = false;
-  // HasUmacSmac = false;
-  // HasPWRPSR = false;
-  // InsertNOPLoad = false;
-  // FixAllFDIVSQRT = false;
-  // DetectRoundChange = false;
-  // HasLeonCycleCounter = false;
-
-  // Determine default and user specified characteristics
   std::string CPUName = std::string(CPU);
   CPUName = "generic";
 
-  // Parse features string.
   ParseSubtargetFeatures(CPUName, /*TuneCPU*/ CPUName, FS);
 
 
