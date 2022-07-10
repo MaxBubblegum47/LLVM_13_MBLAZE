@@ -60,6 +60,7 @@ public:
     hexagon,        // Hexagon: hexagon
     m68k,           // M68k: Motorola 680x0 family
     mblaze,         // MBLAZE: fpga
+    MBLAZE,
     mips,           // MIPS: mips, mipsallegrex, mipsr6
     mipsel,         // MIPSEL: mipsel, mipsallegrexe, mipsr6el
     mips64,         // MIPS64: mips64, mips64r6, mipsn32, mipsn32r6

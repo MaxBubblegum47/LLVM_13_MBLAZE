@@ -25,18 +25,7 @@
 #include "llvm/Support/ErrorHandling.h"
 #include "llvm/Support/FormattedStream.h"
 #include "llvm/Support/TargetRegistry.h"
-#include "llvm/ADT/STLExtras.h"
-#include "llvm/MC/MCAsmBackend.h"
-#include "llvm/MC/MCAsmInfo.h"
-#include "llvm/MC/MCCodeEmitter.h"
-#include "llvm/MC/MCInstrAnalysis.h"
-#include "llvm/MC/MCInstrInfo.h"
-#include "llvm/MC/MCObjectWriter.h"
-#include "llvm/MC/MCRegisterInfo.h"
-#include "llvm/MC/MCStreamer.h"
-#include "llvm/MC/MCSubtargetInfo.h"
-#include "llvm/Support/ErrorHandling.h"
-#include "llvm/Support/TargetRegistry.h"
+
 using namespace llvm;
 
 #define GET_INSTRINFO_MC_DESC
@@ -47,26 +36,7 @@ using namespace llvm;
 
 #define GET_REGINFO_MC_DESC
 #include "MBLAZEGenRegisterInfo.inc"
-
-static MCInstrInfo *createMBLAZEInstrInfo(){
-    MCInstrInfo *X = new MCInstrInfo();
-    InitMBLAZEMCInstrInfo(X);
-    return X;
-}
-
-static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
-                                                 StringRef CPU,
-                                                 StringRef FS) {
-  
-  std::string CPUName = std::string(CPU);                                                  
-  if (CPUName.empty())
-    CPUName = "generic";
-
-  return createMBLAZEMCSubtargetInfoImpl(TT, CPU, /*TuneCPU*/ CPU, FS);
-}
-
-
+//@2 {
 extern "C" void LLVMInitializeMBLAZETargetMC() {
-     TargetRegistry::RegisterMCSubtargetInfo(TheMBLAZETarget, createMBLAZEMCSubtargetInfo);
 }
-
+//@2 }

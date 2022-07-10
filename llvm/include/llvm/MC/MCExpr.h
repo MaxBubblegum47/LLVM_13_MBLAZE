@@ -353,7 +353,10 @@ public:
     VK_VE_TPOFF_LO32,  // symbol@tpoff_lo
 
     VK_TPREL,
-    VK_DTPREL
+    VK_DTPREL,
+
+    VK_MBLAZE_LO,
+    VK_MBLAZE_HI
   };
 
 private:

@@ -1,3 +1,6 @@
+#ifndef LLVM_LIB_TARGET_MBLAZE_TARGETINFO_MBLAZETARGETINFO_H
+#define LLVM_LIB_TARGET_MBLAZE_TARGETINFO_MBLAZETARGETINFO_H
+
 namespace llvm {
 
 class Target;
@@ -5,3 +8,5 @@ class Target;
 Target &getTheMBLAZETarget();
 
 } // namespace llvm
+
+#endif // LLVM_LIB_TARGET_MBLAZE_TARGETINFO_MBLAZETARGETINFO_H

@@ -1,4 +1,4 @@
-//===-- MBLAZESchedule.td - MBLAZE Scheduling Definitions --*- tablegen -*-===//
+//===-- MBlazeSchedule.td - MBlaze Scheduling Definitions --*- tablegen -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -8,7 +8,7 @@
 //===----------------------------------------------------------------------===//
 
 //===----------------------------------------------------------------------===//
-// MBLAZE functional units.
+// MBlaze functional units.
 //===----------------------------------------------------------------------===//
 def IF : FuncUnit;
 def ID : FuncUnit;
@@ -17,8 +17,10 @@ def MA : FuncUnit;
 def WB : FuncUnit;
 
 //===----------------------------------------------------------------------===//
-// Instruction Itinerary classes used for MBLAZE
+// Instruction Itinerary classes used for MBlaze
 //===----------------------------------------------------------------------===//
+// Check if this formulation still makes sense --> InstrItinClass
+
 def IIC_ALU    : InstrItinClass;
 def IIC_ALUm   : InstrItinClass;
 def IIC_ALUd   : InstrItinClass;
@@ -38,13 +40,3 @@ def IIC_BRc    : InstrItinClass;
 def IIC_BRl    : InstrItinClass;
 def IIC_WDC    : InstrItinClass;
 def IIC_Pseudo : InstrItinClass;
-
-//===----------------------------------------------------------------------===//
-// MBLAZE instruction itineraries for three stage pipeline.
-//===----------------------------------------------------------------------===//
-include "MBLAZESchedule3.td"
-
-//===----------------------------------------------------------------------===//
-// MBLAZE instruction itineraries for five stage pipeline.
-//===----------------------------------------------------------------------===//
-include "MBLAZESchedule5.td"
