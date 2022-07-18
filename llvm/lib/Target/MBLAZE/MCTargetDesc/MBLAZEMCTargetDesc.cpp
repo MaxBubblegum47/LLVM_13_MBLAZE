@@ -1,42 +1,78 @@
 //===-- MBLAZEMCTargetDesc.cpp - MBLAZE Target Descriptions -------------------===//
 //
-//
-//                  The LLVM Compiler Infrastructure
-//
-// This file is distributed under the University of Illinois Open Source
-// License. See LICENSE.TXT for details.
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
 //===----------------------------------------------------------------------===//
-//
-// This file provides MBLAZE specific target descriptions.
-//
+///
+/// This file provides MBLAZE specific target descriptions.
+///
 //===----------------------------------------------------------------------===//
+#include <iostream>
 #include "MBLAZEMCTargetDesc.h"
-#include "llvm/MC/MachineLocation.h"
-#include "llvm/MC/MCELFStreamer.h"
-#include "llvm/MC/MCInstrAnalysis.h"
-#include "llvm/MC/MCInstPrinter.h"
-
+#include "MBLAZEAsmBackend.h"
+#include "MBLAZEMCAsmInfo.h"
+#include "MBLAZEMCCodeEmitter.h"
+#include "TargetInfo/MBLAZETargetInfo.h"
 #include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/MCSubtargetInfo.h"
-#include "llvm/MC/MCSymbol.h"
-#include "llvm/Support/CommandLine.h"
-#include "llvm/Support/ErrorHandling.h"
-#include "llvm/Support/FormattedStream.h"
 #include "llvm/Support/TargetRegistry.h"
-
-using namespace llvm;
-
+#include "llvm/MC/MCStreamer.h"
 #define GET_INSTRINFO_MC_DESC
 #include "MBLAZEGenInstrInfo.inc"
 
-#define GET_SUBTARGETINFO_MC_DESC
-#include "MBLAZEGenSubtargetInfo.inc"
-
 #define GET_REGINFO_MC_DESC
 #include "MBLAZEGenRegisterInfo.inc"
-//@2 {
-extern "C" void LLVMInitializeMBLAZETargetMC() {
+
+using namespace llvm;
+
+static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
+                                      const Triple &TT,
+                                      const MCTargetOptions &Options) {
+  MCAsmInfo *MAI = new MBLAZEMCAsmInfo(TT);
+
+  // Initial state of the frame pointer is SP.
+  unsigned Reg = MRI.getDwarfRegNum(MBLAZE::R0, true);
+  MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, Reg, 0);
+  MAI->addInitialFrameState(Inst);
+  return MAI;
 }
-//@2 }
+
+static MCInstrInfo *createMBLAZEMCInstrInfo() {
+  MCInstrInfo *Info = new MCInstrInfo();
+  InitMBLAZEMCInstrInfo(Info);
+ std::cout << "création des objets pour MBLAZE "<< '\n';
+  return Info;
+}
+
+static MCRegisterInfo *createMBLAZEMCRegisterInfo(const Triple &TT) {
+  MCRegisterInfo *Info = new MCRegisterInfo();
+  InitMBLAZEMCRegisterInfo(Info, MBLAZE::R1);
+  return Info;
+}
+static MCSubtargetInfo* createMBLAZEMCSubtargetInfo 	( 	const Triple &  	TT,
+		StringRef  	CPU,
+		StringRef  	FS 
+	) 		{
+		
+		
+}
+
+
+
+
+
+extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
+	printf("init mc ");
+	std::cout << "ini t_mc " << '\n';
+  auto &MBLAZETarget = getTheMBLAZETarget();
+  TargetRegistry::RegisterMCAsmBackend(MBLAZETarget, createMBLAZEAsmBackend);
+  TargetRegistry::RegisterMCAsmInfo(MBLAZETarget, createMBLAZEMCAsmInfo);
+  TargetRegistry::RegisterMCInstrInfo(MBLAZETarget, createMBLAZEMCInstrInfo);
+  TargetRegistry::RegisterMCRegInfo(MBLAZETarget, createMBLAZEMCRegisterInfo);
+  TargetRegistry::RegisterMCSubtargetInfo(MBLAZETarget, createMBLAZEMCSubtargetInfo);
+  TargetRegistry::RegisterMCCodeEmitter(MBLAZETarget, createMBLAZEMCCodeEmitter);
+
+}
