@@ -8,7 +8,7 @@ set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 # came from MBLAZEInstrInfo.td.
 tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
-tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM MBLAZEGenMCCodeEmitter.inc -gen-emitter)
 #tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 # MBLAZECommonTableGen must be defined
