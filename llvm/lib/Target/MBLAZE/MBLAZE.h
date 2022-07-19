@@ -21,5 +21,9 @@
 namespace llvm {
     class MBLAZETargetMachine;
     class FunctionPass;
+    class MachineCodeEmitter;
+    
+    FunctionPass *createMBLAZEISelDag(MBLAZETargetMachine &TM);
+    FunctionPass *createMBLAZEDelaySlotFillerPass(MBLAZETargetMachine &TM);
 } // end namespace llvm;
 #endif
