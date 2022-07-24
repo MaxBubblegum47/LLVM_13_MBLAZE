@@ -11,9 +11,7 @@
 //===----------------------------------------------------------------------===//
 #include <iostream>
 #include "MBLAZEMCTargetDesc.h"
-#include "MBLAZEAsmBackend.h"
-#include "MBLAZEMCAsmInfo.h"
-#include "MBLAZEMCCodeEmitter.h"
+
 #include "TargetInfo/MBLAZETargetInfo.h"
 #include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
@@ -28,17 +26,7 @@
 
 using namespace llvm;
 
-static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
-                                      const Triple &TT,
-                                      const MCTargetOptions &Options) {
-  MCAsmInfo *MAI = new MBLAZEMCAsmInfo(TT);
 
-  // Initial state of the frame pointer is SP.
-  unsigned Reg = MRI.getDwarfRegNum(MBLAZE::R0, true);
-  MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, Reg, 0);
-  MAI->addInitialFrameState(Inst);
-  return MAI;
-}
 
 static MCInstrInfo *createMBLAZEMCInstrInfo() {
   MCInstrInfo *Info = new MCInstrInfo();
@@ -68,11 +56,11 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
 	printf("init mc ");
 	std::cout << "ini t_mc " << '\n';
   auto &MBLAZETarget = getTheMBLAZETarget();
-  TargetRegistry::RegisterMCAsmBackend(MBLAZETarget, createMBLAZEAsmBackend);
-  TargetRegistry::RegisterMCAsmInfo(MBLAZETarget, createMBLAZEMCAsmInfo);
+  // TargetRegistry::RegisterMCAsmBackend(MBLAZETarget, createMBLAZEAsmBackend);
+  // TargetRegistry::RegisterMCAsmInfo(MBLAZETarget, createMBLAZEMCAsmInfo);
   TargetRegistry::RegisterMCInstrInfo(MBLAZETarget, createMBLAZEMCInstrInfo);
   TargetRegistry::RegisterMCRegInfo(MBLAZETarget, createMBLAZEMCRegisterInfo);
-  TargetRegistry::RegisterMCSubtargetInfo(MBLAZETarget, createMBLAZEMCSubtargetInfo);
-  TargetRegistry::RegisterMCCodeEmitter(MBLAZETarget, createMBLAZEMCCodeEmitter);
+  // TargetRegistry::RegisterMCSubtargetInfo(MBLAZETarget, createMBLAZEMCSubtargetInfo);
+  // TargetRegistry::RegisterMCCodeEmitter(MBLAZETarget, createMBLAZEMCCodeEmitter);
 
 }
