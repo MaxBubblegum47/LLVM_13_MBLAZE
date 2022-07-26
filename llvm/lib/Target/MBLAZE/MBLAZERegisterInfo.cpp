@@ -12,14 +12,6 @@
 #include "llvm/Support/ErrorHandling.h"
 
 #define GET_REGINFO_TARGET_DESC
-#include "MBLAZEGenRegisterInfo.inc"
+// #include "MBLAZEGenRegisterInfo.inc"
 
 using namespace llvm;
-
-MBLAZERegisterInfo::
-MBLAZERegisterInfo(const MBLAZESubtarget &ST, const TargetInstrInfo &tii)
-  : MBLAZEGenRegisterInfo(MBLAZE::R15), Subtarget(ST), TII(tii) {}
-
-unsigned MBLAZERegisterInfo::getPICCallReg() {
-  return MBLAZE::R20;
-}
