@@ -146,15 +146,14 @@ def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
 
 // This instruction not works for the moment, I need to fix them
 // // As stack alignment is always done with addiu, we need a 16-bit immediate
-// let Defs = [R1], Uses = [R1] in {
-// def ADJCALLSTACKDOWN : MBLAZEPseudo<(outs), (ins simm16:$amt),
-//                                   "#ADJCALLSTACKDOWN $amt",
-//                                   [(callseq_start timm:$amt)]>;
-// def ADJCALLSTACKUP   : MBLAZEPseudo<(outs),
-//                                   (ins uimm16:$amt1, simm16:$amt2),
-//                                   "#ADJCALLSTACKUP $amt1",
-//                                   [(callseq_end timm:$amt1, timm:$amt2)]>;
-// }
+let Defs = [R1], Uses = [R1] in {
+def ADJCALLSTACKDOWN : MBLAZEPseudo<(outs), (ins uimm16:$amt0, simm16:$amt1),
+                                  "#ADJCALLSTACKDOWN $amt",
+                                  [(callseq_end timm:$amt0, timm:$amt1)]>;
+def ADJCALLSTACKUP   : MBLAZEPseudo<(outs), (ins uimm16:$amt2, simm16:$amt3),
+                                  "#ADJCALLSTACKUP $amt2",
+                                  [(callseq_end timm:$amt2, timm:$amt3)]>;
+}
 
 //===----------------------------------------------------------------------===//
 // Instructions specific format
