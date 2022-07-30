@@ -21,8 +21,6 @@ include "MBLAZERegisterInfo.td"
 include "MBLAZEInstrInfo.td"
 
 
-def MBLAZEInstrInfo : InstrInfo;
-
 //===----------------------------------------------------------------------===//
 // Microblaze Subtarget features                                              //
 //===----------------------------------------------------------------------===//
@@ -58,6 +56,9 @@ def MBLAZEAsmWriter : AsmWriter {
   bit isMCAsmWriter = 1;
 }
 
+def MBLAZEInstrInfo : InstrInfo {
+  let guessInstructionProperties = 1;
+}
 //===----------------------------------------------------------------------===//
 // Target Declaration
 //===----------------------------------------------------------------------===//
