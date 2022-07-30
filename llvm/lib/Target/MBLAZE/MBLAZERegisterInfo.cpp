@@ -12,6 +12,6 @@
 #include "llvm/Support/ErrorHandling.h"
 
 #define GET_REGINFO_TARGET_DESC
-// #include "MBLAZEGenRegisterInfo.inc"
+// #include "MBLAZEGenRegisterInfo.inc" --> ERROR: error: invalid ‘static_cast’ from type ‘const llvm::TargetFrameLowering*’ to type ‘const llvm::MBLAZEFrameLowering*’
 
 using namespace llvm;
