@@ -31,7 +31,6 @@ using namespace llvm;
 static MCInstrInfo *createMBLAZEMCInstrInfo() {
   MCInstrInfo *Info = new MCInstrInfo();
   InitMBLAZEMCInstrInfo(Info);
- std::cout << "création des objets pour MBLAZE "<< '\n';
   return Info;
 }
 
@@ -54,13 +53,12 @@ static MCSubtargetInfo* createMBLAZEMCSubtargetInfo 	( 	const Triple &  	TT,
 
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
 	printf("init mc ");
-	std::cout << "ini t_mc " << '\n';
   auto &MBLAZETarget = getTheMBLAZETarget();
   // TargetRegistry::RegisterMCAsmBackend(MBLAZETarget, createMBLAZEAsmBackend);
   // TargetRegistry::RegisterMCAsmInfo(MBLAZETarget, createMBLAZEMCAsmInfo);
   TargetRegistry::RegisterMCInstrInfo(MBLAZETarget, createMBLAZEMCInstrInfo);
   TargetRegistry::RegisterMCRegInfo(MBLAZETarget, createMBLAZEMCRegisterInfo);
-  // TargetRegistry::RegisterMCSubtargetInfo(MBLAZETarget, createMBLAZEMCSubtargetInfo);
+  TargetRegistry::RegisterMCSubtargetInfo(MBLAZETarget, createMBLAZEMCSubtargetInfo);
   // TargetRegistry::RegisterMCCodeEmitter(MBLAZETarget, createMBLAZEMCCodeEmitter);
 
 }
