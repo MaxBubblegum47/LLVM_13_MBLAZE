@@ -17,6 +17,7 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 
 # MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
 add_llvm_target(MBLAZECodeGen
+MBLAZEInstrInfo.cpp
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
