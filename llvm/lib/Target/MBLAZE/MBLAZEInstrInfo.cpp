@@ -28,3 +28,16 @@ using namespace MBLAZE;
 MBLAZEInstrInfo::MBLAZEInstrInfo(MBLAZESubtarget &STI)
     : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP)
     {}
+
+
+void MBLAZEInstrInfo::copyPhysReg(MachineBasicBlock &MBB,
+                                 MachineBasicBlock::iterator MBBI,
+                                 const DebugLoc &DL, MCRegister DstReg,
+                                 MCRegister SrcReg, bool KillSrc) const {
+  if (MBLAZE::GPRRegClass.contains(DstReg, SrcReg)) {
+    BuildMI(MBB, MBBI, DL, get(MBLAZE::ADDI), DstReg)
+        .addReg(SrcReg, getKillRegState(KillSrc))
+        .addImm(0);
+    return;
+  }    
+}
