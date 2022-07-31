@@ -48,11 +48,7 @@ static MCSubtargetInfo* createMBLAZEMCSubtargetInfo 	( 	const Triple &  	TT,
 }
 
 
-
-
-
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
-	printf("init mc ");
   auto &MBLAZETarget = getTheMBLAZETarget();
   // TargetRegistry::RegisterMCAsmBackend(MBLAZETarget, createMBLAZEAsmBackend);
   // TargetRegistry::RegisterMCAsmInfo(MBLAZETarget, createMBLAZEMCAsmInfo);
