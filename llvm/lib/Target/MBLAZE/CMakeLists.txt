@@ -20,7 +20,6 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
 MBLAZERegisterInfo.cpp
-MBLAZESubtarget.cpp
 MBLAZETargetMachine.cpp
 
 
