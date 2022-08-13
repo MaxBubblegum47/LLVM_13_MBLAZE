@@ -56,9 +56,8 @@ def MBLAZEAsmWriter : AsmWriter {
   bit isMCAsmWriter = 1;
 }
 
-def MBLAZEInstrInfo : InstrInfo {
-  let guessInstructionProperties = 1;
-}
+def MBLAZEInstrInfo : InstrInfo;
+
 //===----------------------------------------------------------------------===//
 // Target Declaration
 //===----------------------------------------------------------------------===//
