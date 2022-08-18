@@ -6,6 +6,9 @@ set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 # your hand code C++ files.
 # MBLAZEGenRegisterInfo.inc came from MBLAZERegisterInfo.td, MBLAZEGenInstrInfo.inc
 # came from MBLAZEInstrInfo.td.
+tablegen(LLVM MBLAZEGenAsmMatcher.inc -gen-asm-matcher)
+tablegen(LLVM MBLAZEGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM MBLAZEGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM MBLAZEGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
@@ -19,6 +22,7 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 # MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
 add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
+MBLAZEISelDAGToDAG.cpp
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
