@@ -14,11 +14,9 @@ static std::string computeDataLayout(const Triple &TT) {
   std::string Ret;
 
   // Only support little endian for now.
-  // TODO: Add support for big endian.
   Ret += "e";
 
-  // MBLAZE is always 32-bit target with the MBLAZEv2 ABI as prefer now.
-  // It's a 4-byte aligned stack with ELF mangling only.
+  // This is just a sample
   Ret += "-m:e-S32-p:32:32-i32:32:32-i64:32:32-f32:32:32-f64:32:32-v64:32:32"
          "-v128:32:32-a:0:32-Fi32-n32";
 
