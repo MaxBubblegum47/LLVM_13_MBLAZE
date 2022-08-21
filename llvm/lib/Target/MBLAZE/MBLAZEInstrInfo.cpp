@@ -1,4 +1,5 @@
 #include "MBLAZE.h"
+#include "MBLAZERegisterInfo.h"
 #include "MBLAZEInstrInfo.h"
 #include "llvm/ADT/STLExtras.h"
 #include "llvm/ADT/SmallVector.h"
@@ -26,10 +27,11 @@ void MBLAZEInstrInfo::copyPhysReg(MachineBasicBlock &MBB,
                                  MachineBasicBlock::iterator MBBI,
                                  const DebugLoc &DL, MCRegister DstReg,
                                  MCRegister SrcReg, bool KillSrc) const {
-  if (MBLAZE::GPRRegClass.contains(DstReg, SrcReg)) {
-    BuildMI(MBB, MBBI, DL, get(MBLAZE::ADDI), DstReg)
-        .addReg(SrcReg, getKillRegState(KillSrc))
-        .addImm(0);
+  // Only the Lord knows why GPRRegClass, but also any other possible GRP, GPRClass, GPRReg combination that I tried,
+  // even copying the all the possible ones inside MBLAZERegisterInfo.td still not working :)
+  // if (MBLAZE::GPRRegClass.contains(DstReg, SrcReg)) {
+  //   BuildMI(MBB, MBBI, DL, get(MBLAZE::ADDI), DstReg)
+  //       .addReg(SrcReg, getKillRegState(KillSrc))
+  //       .addImm(0);
     return;
   }    
-}
