@@ -4,8 +4,10 @@
 #include "MBLAZE.h"
 #include "llvm/CodeGen/TargetRegisterInfo.h"
 
+// BUG: 
 #define GET_REGINFO_HEADER
-#include "MBLAZEGenRegisterInfo.inc"
+#include "MBLAZEGenRegisterInfo.inc" 
+
 
 
 #endif
