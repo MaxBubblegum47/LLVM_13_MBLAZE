@@ -22,7 +22,8 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 # MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
 add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
-MBLAZEISelDAGToDAG.cpp
+MBLAZEFrameLowering.cpp
+# MBLAZEISelDAGToDAG.cpp
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
