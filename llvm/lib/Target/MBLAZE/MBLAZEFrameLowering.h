@@ -8,8 +8,7 @@ namespace llvm {
     class MBLAZEFrameLowering : public TargetFrameLowering {
         public:
             explicit MBLAZEFrameLowering()
-                : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(2), -2,
-                                        Align(2)) {}
+                : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(16), 0) {} //taken directly from RISCV
 
             void emitPrologue(MachineFunction &MF) const;
             void emitEpilogue(MachineFunction &MF, MachineBasicBlock &MBB) const;
