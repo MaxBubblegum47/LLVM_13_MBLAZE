@@ -19,11 +19,45 @@
 #include "llvm/Target/TargetMachine.h"
 
 namespace llvm {
+    class MBLAZERegisterBankInfo;
+    class MBLAZESubtarget;
     class MBLAZETargetMachine;
+    class AsmPrinter;
     class FunctionPass;
-    class MachineCodeEmitter;
+    class InstructionSelector;
+    class MCInst;
+    class MCOperand;
+    class MachineInstr;
+    class MachineOperand;
+    class PassRegistry;
+
+    bool lowerMBLAZEMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+                                    AsmPrinter &AP);
     
+    bool LowerMBLAZEMachineOperandToMCOperand(const MachineOperand &MO,
+                                         MCOperand &MCOp, const AsmPrinter &AP);
+
+
     FunctionPass *createMBLAZEISelDag(MBLAZETargetMachine &TM);
+
+    FunctionPass *createMBLAZEMergeBaseOffsetOptPass();
+    void initializeMBLAZEMergeBaseOffsetOptPass(PassRegistry &);
+
+    FunctionPass *createMBLAZEExpandPseudoPass();
+    void initializeMBLAZEExpandPseudoPass(PassRegistry &);
+
+    FunctionPass *createMBLAZEExpandAtomicPseudoPass();
+    void initializeMBLAZEExpandAtomicPseudoPass(PassRegistry &);
+
+    FunctionPass *createMBLAZEInsertVSETVLIPass();
+    void initializeMBLAZEInsertVSETVLIPass(PassRegistry &);
+
+    InstructionSelector *createMBLAZEInstructionSelector(const MBLAZETargetMachine &,
+                                                        MBLAZESubtarget &,
+                                                        MBLAZERegisterBankInfo &);
+    
+
+    // idk what is this, maybe some legacy code
     FunctionPass *createMBLAZEDelaySlotFillerPass(MBLAZETargetMachine &TM);
 } // end namespace llvm;
 #endif
