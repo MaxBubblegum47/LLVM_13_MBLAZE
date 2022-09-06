@@ -34,12 +34,7 @@ public:
                     "-m:e"
                     // 32-bit pointers, 32-bit aligned
                     "-p:32:32"
-                    // 64-bit integers, 64-bit aligned
-                    "-i64:64"
-                    // 32-bit native integer width i.e register are 32-bit
-                    "-n32"
-                    // 128-bit natural stack alignment
-                    "-S128"
+
     );
     SuitableAlign = 128;
     WCharType = SignedInt;
