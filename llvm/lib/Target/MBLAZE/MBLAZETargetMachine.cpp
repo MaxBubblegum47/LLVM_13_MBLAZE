@@ -17,8 +17,7 @@ static std::string computeDataLayout(const Triple &TT) {
   Ret += "e";
 
   // This is just a sample
-  Ret += "-m:e-S32-p:32:32-i32:32:32-i64:32:32-f32:32:32-f64:32:32-v64:32:32"
-         "-v128:32:32-a:0:32-Fi32-n32";
+  Ret += "-m:e-S32-p:32:32"
 
   return Ret;
 }
