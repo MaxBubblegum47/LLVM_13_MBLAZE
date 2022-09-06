@@ -1433,7 +1433,6 @@ Triple Triple::get64BitArchVariant() const {
   case Triple::kalimba:
   case Triple::lanai:
   case Triple::m68k:
-  case Triple::mblaze:
   case Triple::msp430:
   case Triple::r600:
   case Triple::shave:
