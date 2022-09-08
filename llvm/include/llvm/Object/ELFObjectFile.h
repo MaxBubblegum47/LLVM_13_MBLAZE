@@ -1280,12 +1280,7 @@ template <class ELFT> Triple::ArchType ELFObjectFile<ELFT>::getArch() const {
     return Triple::systemz;
   
   case ELF::EM_MBLAZE:
-    switch (EF.getHeader()->e_ident[ELF::EI_CLASS]) {
-    case ELF::ELFCLASS32:
     return Triple::mblaze;
-    default:
-      report_fatal_error("Invalid ELFCLASS!");
-    }
 
   case ELF::EM_SPARC:
   case ELF::EM_SPARC32PLUS:
