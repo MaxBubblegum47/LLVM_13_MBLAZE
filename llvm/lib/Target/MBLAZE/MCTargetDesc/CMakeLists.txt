@@ -2,6 +2,7 @@
 add_llvm_component_library(LLVMMBLAZEDesc
 
 MBLAZEMCTargetDesc.cpp
+MBLAZEMCAsmInfo.cpp
 
 LINK_COMPONENTS
 
