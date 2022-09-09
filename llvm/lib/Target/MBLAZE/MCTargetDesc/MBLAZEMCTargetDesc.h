@@ -1,4 +1,4 @@
-//===-- MBLAZEMCTargetDesc.h - MBLAZE Target Descriptions -----------*- C++ -*-===//
+//===- MBLAZEMCTargetDesc.h - MBLAZE Target Descriptions --------------*- C++ -*-===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
@@ -13,36 +13,24 @@
 #ifndef LLVM_LIB_TARGET_MBLAZE_MCTARGETDESC_MBLAZEMCTARGETDESC_H
 #define LLVM_LIB_TARGET_MBLAZE_MCTARGETDESC_MBLAZEMCTARGETDESC_H
 
-#include "llvm/MC/MCTargetOptions.h"
-#include <memory>
+#include "llvm/Support/DataTypes.h"
 
 namespace llvm {
-class MCAsmBackend;
-class MCCodeEmitter;
-class MCContext;
-class MCInstrInfo;
-class MCRegisterInfo;
-class MCObjectTargetWriter;
-class MCRegisterInfo;
-class MCSubtargetInfo;
+
 class Target;
-class Triple;
 
-std::unique_ptr<MCObjectTargetWriter> createMBLAZEELFObjectWriter();
+} // end namespace llvm
 
-MCAsmBackend *createMBLAZEAsmBackend(const Target &T, const MCSubtargetInfo &STI,
-                                   const MCRegisterInfo &MRI,
-                                   const MCTargetOptions &Options);
-
-MCCodeEmitter *createMBLAZEMCCodeEmitter(const MCInstrInfo &MCII,
-                                       const MCRegisterInfo &MRI,
-                                       MCContext &Ctx);
-} // namespace llvm
-
+// Defines symbolic names for MBLAZE registers.  This defines a mapping from
+// register name to register number.
 #define GET_REGINFO_ENUM
 #include "MBLAZEGenRegisterInfo.inc"
 
+// Defines symbolic names for the MBLAZE instructions.
 #define GET_INSTRINFO_ENUM
 #include "MBLAZEGenInstrInfo.inc"
+
+#define GET_SUBTARGETINFO_ENUM
+#include "MBLAZEGenSubtargetInfo.inc"
 
 #endif // LLVM_LIB_TARGET_MBLAZE_MCTARGETDESC_MBLAZEMCTARGETDESC_H
