@@ -38,26 +38,32 @@ namespace llvm {
                                          MCOperand &MCOp, const AsmPrinter &AP);
 
 
-    FunctionPass *createMBLAZEISelDag(MBLAZETargetMachine &TM);
+    FunctionPass *createMBLAZEISelDag(MBLAZETargetMachine &TM,
+                               CodeGenOpt::Level OptLevel);
+FunctionPass *createMBLAZEExpandPseudosPass();
+FunctionPass *createMBLAZEOptAddrMode();
+FunctionPass *createMBLAZEBranchFinalizePass();
 
-    FunctionPass *createMBLAZEMergeBaseOffsetOptPass();
-    void initializeMBLAZEMergeBaseOffsetOptPass(PassRegistry &);
+    // FunctionPass *createMBLAZEISelDag(MBLAZETargetMachine &TM);
 
-    FunctionPass *createMBLAZEExpandPseudoPass();
-    void initializeMBLAZEExpandPseudoPass(PassRegistry &);
+    // FunctionPass *createMBLAZEMergeBaseOffsetOptPass();
+    // void initializeMBLAZEMergeBaseOffsetOptPass(PassRegistry &);
 
-    FunctionPass *createMBLAZEExpandAtomicPseudoPass();
-    void initializeMBLAZEExpandAtomicPseudoPass(PassRegistry &);
+    // FunctionPass *createMBLAZEExpandPseudoPass();
+    // void initializeMBLAZEExpandPseudoPass(PassRegistry &);
 
-    FunctionPass *createMBLAZEInsertVSETVLIPass();
-    void initializeMBLAZEInsertVSETVLIPass(PassRegistry &);
+    // FunctionPass *createMBLAZEExpandAtomicPseudoPass();
+    // void initializeMBLAZEExpandAtomicPseudoPass(PassRegistry &);
 
-    InstructionSelector *createMBLAZEInstructionSelector(const MBLAZETargetMachine &,
-                                                        MBLAZESubtarget &,
-                                                        MBLAZERegisterBankInfo &);
+    // FunctionPass *createMBLAZEInsertVSETVLIPass();
+    // void initializeMBLAZEInsertVSETVLIPass(PassRegistry &);
+
+    // InstructionSelector *createMBLAZEInstructionSelector(const MBLAZETargetMachine &,
+    //                                                     MBLAZESubtarget &,
+    //                                                     MBLAZERegisterBankInfo &);
     
 
-    // idk what is this, maybe some legacy code
-    FunctionPass *createMBLAZEDelaySlotFillerPass(MBLAZETargetMachine &TM);
+    // // idk what is this, maybe some legacy code
+    // FunctionPass *createMBLAZEDelaySlotFillerPass(MBLAZETargetMachine &TM);
 } // end namespace llvm;
 #endif
