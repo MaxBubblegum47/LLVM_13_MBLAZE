@@ -1,3 +1,4 @@
+#include "MBLAZE.h"
 #include "MBLAZETargetMachine.h"
 #include "TargetInfo/MBLAZETargetInfo.h"
 #include "llvm/CodeGen/TargetLoweringObjectFileImpl.h"
@@ -46,6 +47,9 @@ public:
   MBLAZETargetMachine &getMBLAZETargetMachine() const {
     return getTM<MBLAZETargetMachine>();
   }
+
+  bool addInstSelector() override;
+
 };
 
 } // namespace
@@ -54,4 +58,9 @@ TargetPassConfig *MBLAZETargetMachine::createPassConfig(PassManagerBase &PM) {
   //  addISelPrepare();
     
   return new MBLAZEPassConfig(*this, PM);
+}
+
+bool MBLAZEPassConfig::addInstSelector() {
+  addPass(createMBLAZEISelDag(getMBLAZETargetMachine(), getOptLevel()));
+  return false;
 }
