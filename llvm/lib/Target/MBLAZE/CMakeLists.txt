@@ -23,7 +23,7 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
 MBLAZEFrameLowering.cpp
-# MBLAZEISelDAGToDAG.cpp
+MBLAZEISelDAGToDAG.cpp
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
