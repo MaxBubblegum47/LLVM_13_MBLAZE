@@ -1,5 +1,6 @@
 #include "MBLAZE.h"
 #include "MBLAZETargetMachine.h"
+#include "MBLAZEISelLowering.h"
 #include "llvm/CodeGen/MachineFrameInfo.h"
 #include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineInstrBuilder.h"
@@ -26,6 +27,14 @@ namespace {
         MBLAZEDAGToDAGISel(MBLAZETargetMachine &TM, CodeGenOpt::Level OptLevel)
             : SelectionDAGISel(TM, OptLevel) {}
 
+      void Select(SDNode *N) override;
+      bool SelectAddrModeImm(SDValue Addr, SDValue &Base, SDValue &Offset);
+
+
+        StringRef getPassName() const override {
+    return "MBLAZE DAG->DAG Pattern Instruction Selection";
+  }
+
     #include "MBLAZEGenDAGISel.inc"
 
 
@@ -36,4 +45,14 @@ namespace {
 FunctionPass *llvm::createMBLAZEISelDag(MBLAZETargetMachine &TM,
                                      CodeGenOpt::Level OptLevel) {
   return new MBLAZEDAGToDAGISel(TM, OptLevel);
+}
+
+bool MBLAZEDAGToDAGISel::SelectAddrModeImm(SDValue Addr, SDValue &Base,
+                                        SDValue &Offset) {
+  if (Addr.getOpcode() == MBLAZEISD::Wrap) {
+    Base = Addr.getOperand(0);
+    Offset = CurDAG->getTargetConstant(0, SDLoc(Addr), MVT::i32);
+    return true;
+  }
+  return false;
 }
