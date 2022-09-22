@@ -3,8 +3,8 @@
 ## Quick Installation
 
 ```
-cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;openmp"  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="MBLAZE" ../llvm
-make -j $(nproc)
+cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="MBLAZE" ..
+make -j 4
 ```
 
 This directory and its sub-directories contain source code for LLVM,
