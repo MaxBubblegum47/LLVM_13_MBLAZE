@@ -56,3 +56,17 @@ bool MBLAZEDAGToDAGISel::SelectAddrModeImm(SDValue Addr, SDValue &Base,
   }
   return false;
 }
+
+void MBLAZEDAGToDAGISel::Select(SDNode *N) {
+  switch (N->getOpcode()) {
+  case ISD::Constant: {
+    uint64_t CVal = cast<ConstantSDNode>(N)->getZExtValue();
+    // ReplaceNode(N, CurDAG->getMachineNode(
+    //                    isInt<12>(CVal) ? MBLAZE::MOV_rs12 : MBLAZE::MOV_rlimm,
+    //                    SDLoc(N), MVT::i32,
+    //                    CurDAG->getTargetConstant(CVal, SDLoc(N), MVT::i32)));
+    return;
+  }
+  }
+  SelectCode(N);
+}
