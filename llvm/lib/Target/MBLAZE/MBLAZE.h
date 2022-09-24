@@ -20,7 +20,7 @@
 
 namespace llvm {
     class MBLAZERegisterBankInfo;
-    class MBLAZESubtarget;
+    // class MBLAZESubtarget;
     class MBLAZETargetMachine;
     class AsmPrinter;
     class FunctionPass;
