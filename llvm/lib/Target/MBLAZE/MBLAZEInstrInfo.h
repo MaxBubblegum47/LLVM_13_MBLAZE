@@ -10,12 +10,12 @@
 
 namespace llvm {
 
-class MBLAZESubtarget;
+// class MBLAZESubtarget;
 
 class MBLAZEInstrInfo : public MBLAZEGenInstrInfo {
 
 public:
-  explicit MBLAZEInstrInfo(MBLAZESubtarget &STI); // STI refers to subtarget feature that right now i don't have
+  // explicit MBLAZEInstrInfo(MBLAZESubtarget &STI); // STI refers to subtarget feature that right now i don't have
     
   void copyPhysReg(MachineBasicBlock &MBB, MachineBasicBlock::iterator MBBI,
                   const DebugLoc &DL, MCRegister DstReg, MCRegister SrcReg,
