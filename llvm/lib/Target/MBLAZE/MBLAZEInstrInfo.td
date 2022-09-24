@@ -49,22 +49,22 @@ def callseq_end   : SDNode<"ISD::CALLSEQ_END", SDT_MBCallSeqEnd,
 //===----------------------------------------------------------------------===//
 // For the moment I've Removed some Instructions About Floating Point Operations
 
-// def HasPipe3     : Predicate<"Subtarget.hasPipe3()">;
-def HasBarrel    : Predicate<"Subtarget.hasBarrel()">;
-// def NoBarrel     : Predicate<"!Subtarget.hasBarrel()">;
-def HasDiv       : Predicate<"Subtarget.hasDiv()">;
-def HasMul       : Predicate<"Subtarget.hasMul()">;
-// def HasFSL       : Predicate<"Subtarget.hasFSL()">;
-// def HasEFSL      : Predicate<"Subtarget.hasEFSL()">;
-// def HasMSRSet    : Predicate<"Subtarget.hasMSRSet()">;
-// def HasException : Predicate<"Subtarget.hasException()">;
-def HasPatCmp    : Predicate<"Subtarget.hasPatCmp()">;
-def HasFPU       : Predicate<"Subtarget.hasFPU()">;
-// def HasESR       : Predicate<"Subtarget.hasESR()">;
-// def HasPVR       : Predicate<"Subtarget.hasPVR()">;
-def HasMul64     : Predicate<"Subtarget.hasMul64()">;
-def HasSqrt      : Predicate<"Subtarget.hasSqrt()">;
-// def HasMMU       : Predicate<"Subtarget.hasMMU()">;
+// // def HasPipe3     : Predicate<"Subtarget.hasPipe3()">;
+// def HasBarrel    : Predicate<"Subtarget.hasBarrel()">;
+// // def NoBarrel     : Predicate<"!Subtarget.hasBarrel()">;
+// def HasDiv       : Predicate<"Subtarget.hasDiv()">;
+// def HasMul       : Predicate<"Subtarget.hasMul()">;
+// // def HasFSL       : Predicate<"Subtarget.hasFSL()">;
+// // def HasEFSL      : Predicate<"Subtarget.hasEFSL()">;
+// // def HasMSRSet    : Predicate<"Subtarget.hasMSRSet()">;
+// // def HasException : Predicate<"Subtarget.hasException()">;
+// def HasPatCmp    : Predicate<"Subtarget.hasPatCmp()">;
+// def HasFPU       : Predicate<"Subtarget.hasFPU()">;
+// // def HasESR       : Predicate<"Subtarget.hasESR()">;
+// // def HasPVR       : Predicate<"Subtarget.hasPVR()">;
+// def HasMul64     : Predicate<"Subtarget.hasMul64()">;
+// def HasSqrt      : Predicate<"Subtarget.hasSqrt()">;
+// // def HasMMU       : Predicate<"Subtarget.hasMMU()">;
 
 //===----------------------------------------------------------------------===//
 // MBLAZE Operand, Complex Patterns and Transformations Definitions.
@@ -137,8 +137,8 @@ def immZExt5 : PatLeaf<(imm), [{
 
 // MBLAZE Address Mode. SDNode frameindex could possibily be a match
 // since load and store instructions from stack used it.
-def iaddr : ComplexPattern<i32, 2, "SelectAddrRegImm", [frameindex], []>;
-def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
+// def iaddr : ComplexPattern<i32, 2, "SelectAddrRegImm", [frameindex], []>;
+// def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
 
 //===----------------------------------------------------------------------===//
 // Pseudo instructions
@@ -255,10 +255,10 @@ class LoadM<bits<6> op, bits<11> flags, string instr_asm> :
                [], IIC_MEMl>;
 }
 
-class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-             TB<op, (outs GPR:$dst), (ins memri:$addr),
-                !strconcat(instr_asm, "   $dst, $addr"),
-                [(set (i32 GPR:$dst), (OpNode iaddr:$addr))], IIC_MEMl>;
+// class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+//              TB<op, (outs GPR:$dst), (ins memri:$addr),
+//                 !strconcat(instr_asm, "   $dst, $addr"),
+//                 [(set (i32 GPR:$dst), (OpNode iaddr:$addr))], IIC_MEMl>;
 
 let mayStore = 1 in {
 class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
@@ -267,10 +267,10 @@ class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
                 [], IIC_MEMs>;
 }
 
-class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-              TB<op, (outs), (ins GPR:$dst, memri:$addr),
-                 !strconcat(instr_asm, "   $dst, $addr"),
-                 [(OpNode (i32 GPR:$dst), iaddr:$addr)], IIC_MEMs>;
+// class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+//               TB<op, (outs), (ins GPR:$dst, memri:$addr),
+//                  !strconcat(instr_asm, "   $dst, $addr"),
+//                  [(OpNode (i32 GPR:$dst), iaddr:$addr)], IIC_MEMs>;
 
 //===----------------------------------------------------------------------===//
 // Branch Instructions
@@ -342,11 +342,11 @@ let isCommutable = 1, isAsCheapAsAMove = 1 in {
   def OR     :  Logic<0x20, 0x000, "or     ", or>;
   def XOR    :  Logic<0x22, 0x000, "xor    ", xor>;
 
-  let Predicates=[HasPatCmp] in {
-    def PCMPBF : PatCmp<0x20, 0x400, "pcmpbf ">;
-    def PCMPEQ : PatCmp<0x22, 0x400, "pcmpeq ">;
-    def PCMPNE : PatCmp<0x23, 0x400, "pcmpne ">;
-  }
+  // let Predicates=[HasPatCmp] in {
+  //   def PCMPBF : PatCmp<0x20, 0x400, "pcmpbf ">;
+  //   def PCMPEQ : PatCmp<0x22, 0x400, "pcmpeq ">;
+  //   def PCMPNE : PatCmp<0x23, 0x400, "pcmpne ">;
+  // }
 
   let Defs = [CARRY] in {
     def ADD    :  Arith<0x00, 0x000, "add    ", addc, IIC_ALU>;
@@ -380,32 +380,32 @@ let isAsCheapAsAMove = 1 in {
   }
 }
 
-let isCommutable = 1, Predicates=[HasMul] in {
-  def MUL    : Arith<0x10, 0x000, "mul    ", mul,   IIC_ALUm>;
-}
+// let isCommutable = 1, Predicates=[HasMul] in {
+//   def MUL    : Arith<0x10, 0x000, "mul    ", mul,   IIC_ALUm>;
+// }
 
-let isCommutable = 1, Predicates=[HasMul,HasMul64] in {
-  def MULH   : Arith<0x10, 0x001, "mulh   ", mulhs, IIC_ALUm>;
-  def MULHU  : Arith<0x10, 0x003, "mulhu  ", mulhu, IIC_ALUm>;
-}
+// let isCommutable = 1, Predicates=[HasMul,HasMul64] in {
+//   def MULH   : Arith<0x10, 0x001, "mulh   ", mulhs, IIC_ALUm>;
+//   def MULHU  : Arith<0x10, 0x003, "mulhu  ", mulhu, IIC_ALUm>;
+// }
 
-let Predicates=[HasMul,HasMul64] in {
-  def MULHSU : ArithN<0x10, 0x002, "mulhsu ", IIC_ALUm>;
-}
+// let Predicates=[HasMul,HasMul64] in {
+//   def MULHSU : ArithN<0x10, 0x002, "mulhsu ", IIC_ALUm>;
+// }
 
-let Predicates=[HasBarrel] in {
-  def BSRL   :   Arith<0x11, 0x000, "bsrl   ", srl, IIC_SHT>;
-  def BSRA   :   Arith<0x11, 0x200, "bsra   ", sra, IIC_SHT>;
-  def BSLL   :   Arith<0x11, 0x400, "bsll   ", shl, IIC_SHT>;
-  def BSRLI  :  ShiftI<0x19, 0x0, "bsrli  ", srl, uimm5, immZExt5>;
-  def BSRAI  :  ShiftI<0x19, 0x1, "bsrai  ", sra, uimm5, immZExt5>;
-  def BSLLI  :  ShiftI<0x19, 0x2, "bslli  ", shl, uimm5, immZExt5>;
-}
+// let Predicates=[HasBarrel] in {
+//   def BSRL   :   Arith<0x11, 0x000, "bsrl   ", srl, IIC_SHT>;
+//   def BSRA   :   Arith<0x11, 0x200, "bsra   ", sra, IIC_SHT>;
+//   def BSLL   :   Arith<0x11, 0x400, "bsll   ", shl, IIC_SHT>;
+//   def BSRLI  :  ShiftI<0x19, 0x0, "bsrli  ", srl, uimm5, immZExt5>;
+//   def BSRAI  :  ShiftI<0x19, 0x1, "bsrai  ", sra, uimm5, immZExt5>;
+//   def BSLLI  :  ShiftI<0x19, 0x2, "bslli  ", shl, uimm5, immZExt5>;
+// }
 
-let Predicates=[HasDiv] in {
-  def IDIV   :  ArithR<0x12, 0x000, "idiv   ", sdiv, IIC_ALUd>;
-  def IDIVU  :  ArithR<0x12, 0x002, "idivu  ", udiv, IIC_ALUd>;
-}
+// let Predicates=[HasDiv] in {
+//   def IDIV   :  ArithR<0x12, 0x000, "idiv   ", sdiv, IIC_ALUd>;
+//   def IDIVU  :  ArithR<0x12, 0x002, "idivu  ", udiv, IIC_ALUd>;
+// }
 
 //===----------------------------------------------------------------------===//
 // MBLAZE immediate mode arithmetic instructions
@@ -434,9 +434,9 @@ let isAsCheapAsAMove = 1 in {
 
 }
 
-let Predicates=[HasMul] in {
-  def MULI    :   ArithI<0x18, "muli   ", mul, simm16, immSExt16>;
-}
+// let Predicates=[HasMul] in {
+//   def MULI    :   ArithI<0x18, "muli   ", mul, simm16, immSExt16>;
+// }
 
 //===----------------------------------------------------------------------===//
 // MBLAZE memory access instructions
@@ -455,9 +455,9 @@ let Defs = [CARRY] in {
   def LWX  :  LoadM<0x32, 0x400, "lwx    ">;
 }
 
-def LBUI : LoadMI<0x38, "lbui   ", zextloadi8>;
-def LHUI : LoadMI<0x39, "lhui   ", zextloadi16>;
-def LWI  : LoadMI<0x3A, "lwi    ", load>;
+// def LBUI : LoadMI<0x38, "lbui   ", zextloadi8>;
+// def LHUI : LoadMI<0x39, "lhui   ", zextloadi16>;
+// def LWI  : LoadMI<0x3A, "lwi    ", load>;
 
 def SB  :  StoreM<0x34, 0x000, "sb     ">;
 def SBR :  StoreM<0x34, 0x200, "sbr    ">;
@@ -472,9 +472,9 @@ let Defs = [CARRY] in {
   def SWX :  StoreM<0x36, 0x400, "swx    ">;
 }
 
-def SBI : StoreMI<0x3C, "sbi    ", truncstorei8>;
-def SHI : StoreMI<0x3D, "shi    ", truncstorei16>;
-def SWI : StoreMI<0x3E, "swi    ", store>;
+// def SBI : StoreMI<0x3C, "sbi    ", truncstorei8>;
+// def SHI : StoreMI<0x3D, "shi    ", truncstorei16>;
+// def SWI : StoreMI<0x3E, "swi    ", store>;
 
 //===----------------------------------------------------------------------===//
 // MBLAZE branch instructions
@@ -594,10 +594,10 @@ let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
   def NOP :  MBLAZEInst<0x20, FC, (outs), (ins), "nop    ", [], IIC_ALU>;
 
 
-let Predicates=[HasPatCmp] in {
-  def CLZ :  TCLZ<0x24, 0x00E0, (outs GPR:$dst), (ins GPR:$src),
-                  "clz    $dst, $src", [], IIC_ALU>;
-}
+// let Predicates=[HasPatCmp] in {
+//   def CLZ :  TCLZ<0x24, 0x00E0, (outs GPR:$dst), (ins GPR:$src),
+//                   "clz    $dst, $src", [], IIC_ALU>;
+// }
 
 def IMEMBAR  : MBAR<0x2E, 0x0420004, (outs), (ins), "mbar   2", [], IIC_ALU>;
 def DMEMBAR  : MBAR<0x2E, 0x0220004, (outs), (ins), "mbar   1", [], IIC_ALU>;
@@ -1018,25 +1018,25 @@ def : Pat<(MBWrapper tconstpool:$in),  (ORI (i32 R0), tconstpool:$in)>;
 def : Pat<(and (i32 GPR:$lh), (not (i32 GPR:$rh))),(ANDN GPR:$lh, GPR:$rh)>;
 
 // Convert any extend loads into zero extend loads
-def : Pat<(extloadi8  iaddr:$src), (i32 (LBUI iaddr:$src))>;
-def : Pat<(extloadi16 iaddr:$src), (i32 (LHUI iaddr:$src))>;
-def : Pat<(extloadi8  xaddr:$src), (i32 (LBU xaddr:$src))>;
-def : Pat<(extloadi16 xaddr:$src), (i32 (LHU xaddr:$src))>;
+// def : Pat<(extloadi8  iaddr:$src), (i32 (LBUI iaddr:$src))>;
+// def : Pat<(extloadi16 iaddr:$src), (i32 (LHUI iaddr:$src))>;
+// def : Pat<(extloadi8  xaddr:$src), (i32 (LBU xaddr:$src))>;
+// def : Pat<(extloadi16 xaddr:$src), (i32 (LHU xaddr:$src))>;
 
-// 32-bit load and store
-def : Pat<(store (i32 GPR:$dst), xaddr:$addr), (SW GPR:$dst, xaddr:$addr)>;
-def : Pat<(load xaddr:$addr), (i32 (LW xaddr:$addr))>;
+// // 32-bit load and store
+// def : Pat<(store (i32 GPR:$dst), xaddr:$addr), (SW GPR:$dst, xaddr:$addr)>;
+// def : Pat<(load xaddr:$addr), (i32 (LW xaddr:$addr))>;
 
-// 16-bit load and store
-def : Pat<(truncstorei16 (i32 GPR:$dst), xaddr:$ad), (SH GPR:$dst, xaddr:$ad)>;
-def : Pat<(zextloadi16 xaddr:$addr), (i32 (LHU xaddr:$addr))>;
+// // 16-bit load and store
+// def : Pat<(truncstorei16 (i32 GPR:$dst), xaddr:$ad), (SH GPR:$dst, xaddr:$ad)>;
+// def : Pat<(zextloadi16 xaddr:$addr), (i32 (LHU xaddr:$addr))>;
 
-// 8-bit load and store
-def : Pat<(truncstorei8 (i32 GPR:$dst), xaddr:$ad), (SB GPR:$dst, xaddr:$ad)>;
-def : Pat<(zextloadi8 xaddr:$addr), (i32 (LBU xaddr:$addr))>;
+// // 8-bit load and store
+// def : Pat<(truncstorei8 (i32 GPR:$dst), xaddr:$ad), (SB GPR:$dst, xaddr:$ad)>;
+// def : Pat<(zextloadi8 xaddr:$addr), (i32 (LBU xaddr:$addr))>;
 
 // Peepholes
-def : Pat<(store (i32 0), iaddr:$dst), (SWI (i32 R0), iaddr:$dst)>;
+// def : Pat<(store (i32 0), iaddr:$dst), (SWI (i32 R0), iaddr:$dst)>;
 
 // Atomic fence
 def : Pat<(atomic_fence (imm), (imm)), (MEMBARRIER)>;
