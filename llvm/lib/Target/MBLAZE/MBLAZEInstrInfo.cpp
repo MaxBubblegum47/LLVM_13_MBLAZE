@@ -18,7 +18,7 @@ using namespace llvm;
 #define GET_INSTRINFO_CTOR_DTOR
 #include "MBLAZEGenInstrInfo.inc"
 
-MBLAZEInstrInfo::MBLAZEInstrInfo(MBLAZESubtarget &STI)
+MBLAZEInstrInfo::MBLAZEInstrInfo()
     : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP)
     {}
 
