@@ -18,20 +18,8 @@ using namespace llvm;
 #define GET_INSTRINFO_CTOR_DTOR
 #include "MBLAZEGenInstrInfo.inc"
 
-// MBLAZEInstrInfo::MBLAZEInstrInfo(MBLAZESubtarget &STI)
-//     : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP)
-//     {}
+MBLAZEInstrInfo::MBLAZEInstrInfo(MBLAZESubtarget &STI)
+    : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP)
+    {}
 
 
-// void MBLAZEInstrInfo::copyPhysReg(MachineBasicBlock &MBB,
-//                                  MachineBasicBlock::iterator MBBI,
-//                                  const DebugLoc &DL, MCRegister DstReg,
-//                                  MCRegister SrcReg, bool KillSrc) const {
-//   // Only the Lord knows why GPRRegClass, but also any other possible GRP, GPRClass, GPRReg combination that I tried,
-//   // even copying the all the possible ones inside MBLAZERegisterInfo.td still not working :)
-//   // if (MBLAZE::GPRRegClass.contains(DstReg, SrcReg)) {
-//   //   BuildMI(MBB, MBBI, DL, get(MBLAZE::ADDI), DstReg)
-//   //       .addReg(SrcReg, getKillRegState(KillSrc))
-//   //       .addImm(0);
-//     return;
-//   }    
