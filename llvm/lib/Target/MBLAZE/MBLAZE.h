@@ -19,7 +19,7 @@
 #include "llvm/Target/TargetMachine.h"
 
 namespace llvm {
-    class MBLAZERegisterBankInfo;
+    class MBLAZERegisterInfo;
     // class MBLAZESubtarget;
     class MBLAZETargetMachine;
     class AsmPrinter;
