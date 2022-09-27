@@ -21,7 +21,7 @@
 namespace llvm {
 
 // Forward delcarations
-// class MBLAZESubtarget;
+class MBLAZESubtarget;
 class MBLAZETargetMachine;
 
 namespace MBLAZEISD {
@@ -114,6 +114,6 @@ namespace MBLAZEISD {
 //   bool mayBeEmittedAsTailCall(const CallInst *CI) const override;
 // };
 
-// } // end namespace llvm
+ // end namespace llvm
 
 #endif // LLVM_LIB_TARGET_MBLAZE_MBLAZEISELLOWERING_H
