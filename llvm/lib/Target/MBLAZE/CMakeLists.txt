@@ -13,7 +13,7 @@ tablegen(LLVM MBLAZEGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM MBLAZEGenMCCodeEmitter.inc -gen-emitter)
-# tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
 # tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 # MBLAZECommonTableGen must be defined
@@ -24,6 +24,7 @@ add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
 MBLAZEFrameLowering.cpp
 MBLAZEISelDAGToDAG.cpp
+
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
