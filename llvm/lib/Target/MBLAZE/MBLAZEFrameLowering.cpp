@@ -8,6 +8,8 @@
 #include "llvm/IR/DiagnosticInfo.h"
 #include "llvm/MC/MCDwarf.h"
 
+#define DEBUG_TYPE "mblaze-frame-lowering"
+
 using namespace llvm;
 
 // Prologue
