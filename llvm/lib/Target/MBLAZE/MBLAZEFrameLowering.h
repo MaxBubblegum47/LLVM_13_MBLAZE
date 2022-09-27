@@ -5,6 +5,12 @@
 #include "llvm/CodeGen/TargetFrameLowering.h"
 
 namespace llvm {
+    
+    class MachineFunction;
+    class MBLAZESubtarget;
+    class MBLAZEInstrInfo;
+
+
     class MBLAZEFrameLowering : public TargetFrameLowering {
         public:
             explicit MBLAZEFrameLowering()
