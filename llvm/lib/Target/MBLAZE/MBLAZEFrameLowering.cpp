@@ -11,5 +11,9 @@
 using namespace llvm;
 
 // Prologue
+void MBLAZEFrameLowering::emitPrologue(MachineFunction &MF,
+                                    MachineBasicBlock &MBB) const {}
 
 // Epilogue
+void MBLAZEFrameLowering::emitEpilogue(MachineFunction &MF,
+                                    MachineBasicBlock &MBB) const {}
