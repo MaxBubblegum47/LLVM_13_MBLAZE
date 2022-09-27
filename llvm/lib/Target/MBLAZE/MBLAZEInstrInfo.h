@@ -10,18 +10,19 @@
 
 namespace llvm {
 
-// class MBLAZESubtarget;
+class MBLAZESubtarget;
 
 class MBLAZEInstrInfo : public MBLAZEGenInstrInfo {
+  const MBLAZERegisterInfo RI;
+  virtual void anchor();
 
 public:
-  // explicit MBLAZEInstrInfo(MBLAZESubtarget &STI); // STI refers to subtarget feature that right now i don't have
-    
-  void copyPhysReg(MachineBasicBlock &MBB, MachineBasicBlock::iterator MBBI,
-                  const DebugLoc &DL, MCRegister DstReg, MCRegister SrcReg,
-                  bool KillSrc) const override;  
+  MBLAZEInstrInfo();
+  const MBLAZERegisterInfo &getRegisterInfo() const { return RI; }
+  
+ 
       
-    };                                            // but at the same time i'm not super sure about how to do a function
-}                                                 // without inlcuding it
+    };                                            
+}                                                 
 
 #endif
