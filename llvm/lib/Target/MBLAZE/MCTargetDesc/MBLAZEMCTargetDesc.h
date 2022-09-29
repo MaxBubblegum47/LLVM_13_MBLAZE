@@ -31,6 +31,6 @@ class Target;
 #include "MBLAZEGenInstrInfo.inc"
 
 // #define GET_SUBTARGETINFO_ENUM
-// #include "MBLAZEGenSubtargetInfo.inc"
+#include "MBLAZEGenSubtargetInfo.inc"
 
 #endif // LLVM_LIB_TARGET_MBLAZE_MCTARGETDESC_MBLAZEMCTARGETDESC_H
