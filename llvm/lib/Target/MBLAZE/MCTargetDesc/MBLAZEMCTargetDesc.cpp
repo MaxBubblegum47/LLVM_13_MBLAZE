@@ -11,7 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "MBLAZEMCTargetDesc.h"
-// #include "MBLAZEInstPrinter.h"
+#include "MBLAZEInstPrinter.h"
 #include "MBLAZEMCAsmInfo.h"
 // #include "MBLAZETargetStreamer.h"
 #include "TargetInfo/MBLAZETargetInfo.h"
@@ -66,13 +66,13 @@ static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
 // InstPrinter ancora non funziona insieme a streamer probabilmente per la mancanza di file cpp 
 // corrispondenti. Per altro non funziona nemmeno molto se viene stabbata perché ci sono alcuni elementi
 // di instrinfo che proprio non vogliono funzionare (vedi printUnsigned something something)
-// static MCInstPrinter *createMBLAZEMCInstPrinter(const Triple &T,
-//                                              unsigned SyntaxVariant,
-//                                              const MCAsmInfo &MAI,
-//                                              const MCInstrInfo &MII,
-//                                              const MCRegisterInfo &MRI) {
-//   return new MBLAZEInstPrinter(MAI, MII, MRI);
-// }
+static MCInstPrinter *createMBLAZEMCInstPrinter(const Triple &T,
+                                             unsigned SyntaxVariant,
+                                             const MCAsmInfo &MAI,
+                                             const MCInstrInfo &MII,
+                                             const MCRegisterInfo &MRI) {
+  return new MBLAZEInstPrinter(MAI, MII, MRI);
+}
 
 // MBLAZETargetStreamer::MBLAZETargetStreamer(MCStreamer &S) : MCTargetStreamer(S) {}
 // MBLAZETargetStreamer::~MBLAZETargetStreamer() = default;
