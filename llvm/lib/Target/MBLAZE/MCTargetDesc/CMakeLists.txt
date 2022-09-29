@@ -1,6 +1,7 @@
 # MCTargetDesc/CMakeLists.txt
 add_llvm_component_library(LLVMMBLAZEDesc
 
+MBLAZEInstPrinter.cpp
 MBLAZEMCTargetDesc.cpp
 MBLAZEMCAsmInfo.cpp
 
