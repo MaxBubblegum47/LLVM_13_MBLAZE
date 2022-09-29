@@ -28,8 +28,8 @@ using namespace llvm;
 #define GET_INSTRINFO_MC_DESC
 #include "MBLAZEGenInstrInfo.inc"
 
-// #define GET_SUBTARGETINFO_MC_DESC
-// #include "MBLAZEGenSubtargetInfo.inc"
+#define GET_SUBTARGETINFO_MC_DESC
+#include "MBLAZEGenSubtargetInfo.inc"
 
 #define GET_REGINFO_MC_DESC
 #include "MBLAZEGenRegisterInfo.inc"
@@ -46,10 +46,10 @@ static MCRegisterInfo *createMBLAZEMCRegisterInfo(const Triple &TT) {
   return X;
 }
 
-// static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
-//                                                  StringRef CPU, StringRef FS) {
-//   return createMBLAZEMCSubtargetInfoImpl(TT, CPU, /*TuneCPU=*/CPU, FS);
-// }
+static MCSubtargetInfo *createMBLAZEMCSubtargetInfo(const Triple &TT,
+                                                 StringRef CPU, StringRef FS) {
+  return createMBLAZEMCSubtargetInfoImpl(TT, CPU, /*TuneCPU=*/CPU, FS);
+}
 
 static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
                                      const Triple &TT,
@@ -76,8 +76,8 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
   // Register the MC register info.
   TargetRegistry::RegisterMCRegInfo(TheMBLAZETarget, createMBLAZEMCRegisterInfo);
 
-  // // Register the MC subtarget info.
-  // TargetRegistry::RegisterMCSubtargetInfo(TheMBLAZETarget,
-  //                                         createMBLAZEMCSubtargetInfo);
+  // Register the MC subtarget info.
+  TargetRegistry::RegisterMCSubtargetInfo(TheMBLAZETarget,
+                                          createMBLAZEMCSubtargetInfo);
 
 }
