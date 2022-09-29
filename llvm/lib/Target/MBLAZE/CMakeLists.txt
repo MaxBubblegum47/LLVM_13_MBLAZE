@@ -24,7 +24,7 @@ add_llvm_target(MBLAZECodeGen
 MBLAZEInstrInfo.cpp
 MBLAZEFrameLowering.cpp
 MBLAZEISelDAGToDAG.cpp
-# MBLAZESubtarget.cpp
+MBLAZESubtarget.cpp
 MBLAZERegisterInfo.cpp
 MBLAZETargetMachine.cpp
 
