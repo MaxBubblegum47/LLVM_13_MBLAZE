@@ -17,9 +17,11 @@
 
 namespace llvm {
 
+class MCInstPrinter;
 class Target;
 
 } // end namespace llvm
+
 
 // Defines symbolic names for MBLAZE registers.  This defines a mapping from
 // register name to register number.

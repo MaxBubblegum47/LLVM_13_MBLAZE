@@ -13,7 +13,7 @@
 #include "MBLAZEMCTargetDesc.h"
 #include "MBLAZEInstPrinter.h"
 #include "MBLAZEMCAsmInfo.h"
-// #include "MBLAZETargetStreamer.h"
+#include "MBLAZETargetStreamer.h"
 #include "TargetInfo/MBLAZETargetInfo.h"
 #include "llvm/MC/MCDwarf.h"
 #include "llvm/MC/MCInstrInfo.h"
@@ -63,9 +63,6 @@ static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
   return MAI;
 }
 
-// InstPrinter ancora non funziona insieme a streamer probabilmente per la mancanza di file cpp 
-// corrispondenti. Per altro non funziona nemmeno molto se viene stabbata perché ci sono alcuni elementi
-// di instrinfo che proprio non vogliono funzionare (vedi printUnsigned something something)
 static MCInstPrinter *createMBLAZEMCInstPrinter(const Triple &T,
                                              unsigned SyntaxVariant,
                                              const MCAsmInfo &MAI,
@@ -74,15 +71,15 @@ static MCInstPrinter *createMBLAZEMCInstPrinter(const Triple &T,
   return new MBLAZEInstPrinter(MAI, MII, MRI);
 }
 
-// MBLAZETargetStreamer::MBLAZETargetStreamer(MCStreamer &S) : MCTargetStreamer(S) {}
-// MBLAZETargetStreamer::~MBLAZETargetStreamer() = default;
+MBLAZETargetStreamer::MBLAZETargetStreamer(MCStreamer &S) : MCTargetStreamer(S) {}
+MBLAZETargetStreamer::~MBLAZETargetStreamer() = default;
 
-// static MCTargetStreamer *createTargetAsmStreamer(MCStreamer &S,
-//                                                  formatted_raw_ostream &OS,
-//                                                  MCInstPrinter *InstPrint,
-//                                                  bool isVerboseAsm) {
-//   return new MBLAZETargetStreamer(S);
-// }
+static MCTargetStreamer *createTargetAsmStreamer(MCStreamer &S,
+                                                 formatted_raw_ostream &OS,
+                                                 MCInstPrinter *InstPrint,
+                                                 bool isVerboseAsm) {
+  return new MBLAZETargetStreamer(S);
+}
 
 // Force static initialization.
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
@@ -100,9 +97,9 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetMC() {
   TargetRegistry::RegisterMCSubtargetInfo(TheMBLAZETarget,
                                           createMBLAZEMCSubtargetInfo);
 
-  // Register the MCInstPrinter
-  // TargetRegistry::RegisterMCInstPrinter(TheMBLAZETarget, createMBLAZEMCInstPrinter);
+  //Register the MCInstPrinter
+  TargetRegistry::RegisterMCInstPrinter(TheMBLAZETarget, createMBLAZEMCInstPrinter);
 
-  // TargetRegistry::RegisterAsmTargetStreamer(TheMBLAZETarget,
-  //                                           createTargetAsmStreamer);
+  TargetRegistry::RegisterAsmTargetStreamer(TheMBLAZETarget,
+                                            createTargetAsmStreamer);
 }
