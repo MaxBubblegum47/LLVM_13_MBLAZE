@@ -13,6 +13,7 @@
 
 #define DEBUG_TYPE "asm-printer"
 #include "MBLAZEInstPrinter.h"
+#include "MBLAZE.h"
 #include "llvm/MC/MCAsmInfo.h"
 #include "llvm/MC/MCExpr.h"
 #include "llvm/MC/MCInst.h"
@@ -24,11 +25,13 @@ using namespace llvm;
 // Include the auto-generated portion of the assembly writer.
 #include "MBLAZEGenAsmWriter.inc"
 
-void MBLAZEInstPrinter::printInst(const MCInst *MI, raw_ostream &O,
-                                  StringRef Annot) {
-  printInstruction(MI, O);
+void MBLAZEInstPrinter::printInst(const MCInst *MI, uint64_t Address,
+                               StringRef Annot, const MCSubtargetInfo &STI,
+                               raw_ostream &O) {
+  printInstruction(MI, Address, O);
   printAnnotation(O, Annot);
 }
+
 
 void MBLAZEInstPrinter::printOperand(const MCInst *MI, unsigned OpNo,
                                      raw_ostream &O, const char *Modifier) {
