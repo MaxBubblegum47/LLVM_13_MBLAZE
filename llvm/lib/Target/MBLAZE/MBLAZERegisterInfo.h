@@ -15,6 +15,6 @@ struct MBLAZERegisterInfo : public MBLAZEGenRegisterInfo {
 public:
   MBLAZERegisterInfo();
 
-}
+};
 
 #endif
