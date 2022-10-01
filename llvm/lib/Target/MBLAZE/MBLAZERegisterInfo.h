@@ -16,5 +16,5 @@ public:
   MBLAZERegisterInfo();
 
 };
-
+}
 #endif
