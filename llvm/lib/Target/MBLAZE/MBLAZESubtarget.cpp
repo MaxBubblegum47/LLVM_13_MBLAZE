@@ -26,6 +26,6 @@ using namespace llvm;
 
 MBLAZESubtarget::MBLAZESubtarget(const Triple &TT, const std::string &CPU,
                            const std::string &FS, const TargetMachine &TM)
-    : MBLAZEGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS) FrameLowering(*this),
-      TLInfo(TM, *this) 
+    : MBLAZEGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS) //FrameLowering(*this),
+      //TLInfo(TM, *this) 
       {}
