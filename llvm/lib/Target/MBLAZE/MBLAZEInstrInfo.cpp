@@ -19,6 +19,6 @@ using namespace llvm;
 #include "MBLAZEGenInstrInfo.inc"
 
 MBLAZEInstrInfo::MBLAZEInstrInfo()
-    : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP), RI() {}
+    : MBLAZEGenInstrInfo(MBLAZE::ADJCALLSTACKDOWN, MBLAZE::ADJCALLSTACKUP) {}
 
 
