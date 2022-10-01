@@ -13,12 +13,12 @@ namespace llvm {
 class MBLAZESubtarget;
 
 class MBLAZEInstrInfo : public MBLAZEGenInstrInfo {
-  //const MBLAZERegisterInfo RI;
+  const MBLAZERegisterInfo RI;
   virtual void anchor();
 
 public:
   MBLAZEInstrInfo();
-  const MBLAZERegisterInfo &getRegisterInfo() const {  }
+  const MBLAZERegisterInfo &getRegisterInfo() const { return RI; }
   
  
       
