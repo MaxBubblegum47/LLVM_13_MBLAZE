@@ -14,7 +14,7 @@ namespace llvm {
     class MBLAZEFrameLowering : public TargetFrameLowering {
         public:
             explicit MBLAZEFrameLowering(const MBLAZESubtarget &st)
-                : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(16), 0), ST(st) {} //taken directly from RISCV
+                : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(16), 0) {} //taken directly from RISCV
 
             /// Insert Prologue into the function.
             void emitPrologue(MachineFunction &MF, MachineBasicBlock &MBB) const override;
