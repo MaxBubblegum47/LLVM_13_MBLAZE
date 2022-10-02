@@ -2,10 +2,6 @@ add_llvm_component_group(MBLAZE)
 
 set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 
-# Generate MBLAZEGenRegisterInfo.inc and MBLAZEGenInstrInfo.inc which included by
-# your hand code C++ files.
-# MBLAZEGenRegisterInfo.inc came from MBLAZERegisterInfo.td, MBLAZEGenInstrInfo.inc
-# came from MBLAZEInstrInfo.td.
 tablegen(LLVM MBLAZEGenAsmMatcher.inc -gen-asm-matcher)
 tablegen(LLVM MBLAZEGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM MBLAZEGenCallingConv.inc -gen-callingconv)
@@ -45,6 +41,5 @@ ADD_TO_COMPONENT
 MBLAZE
 )
 
-# Should match with "subdirectories = MCTargetDesc TargetInfo" in LLVMBuild.txt
 add_subdirectory(TargetInfo)
 add_subdirectory(MCTargetDesc)
