@@ -36,7 +36,7 @@ def SDT_MBCallSeqEnd   : SDCallSeqEnd<[SDTCisVT<0, i32>, SDTCisVT<1, i32>]>;
 //                            [SDNPHasChain,SDNPOptInGlue,SDNPOutGlue,
 //                             SDNPVariadic]>;
 
-// def MBWrapper   : SDNode<"MBLAZEISD::Wrap", SDTIntUnaryOp>;
+def MBWrapper   : SDNode<"MBLAZEISD::Wrap", SDTIntUnaryOp>;
 
 // def callseq_start : SDNode<"ISD::CALLSEQ_START", SDT_MBCallSeqStart,
 //                            [SDNPHasChain, SDNPOutGlue]>;
