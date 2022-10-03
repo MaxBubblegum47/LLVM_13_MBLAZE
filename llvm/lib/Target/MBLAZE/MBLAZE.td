@@ -16,8 +16,12 @@ include "llvm/Target/Target.td"
 //===----------------------------------------------------------------------===//
 // Target-dependent interfaces
 //===----------------------------------------------------------------------===//
+
+// This is a holy orders, if someone change anything the project
+// will be broken
 include "MBLAZESchedule.td"
 include "MBLAZERegisterInfo.td"
+include "MBLAZECallingConv.td"
 include "MBLAZEInstrInfo.td"
 
 
