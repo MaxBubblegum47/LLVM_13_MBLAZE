@@ -32,9 +32,12 @@ MBLAZETargetMachine::MBLAZETargetMachine(const Target &T, const Triple &TT,
     : LLVMTargetMachine(T, computeDataLayout(TT), TT, CPU, FS, Options,
                         RM.getValueOr(Reloc::Static),
                         getEffectiveCodeModel(CM, CodeModel::Small), OL),
-      TLOF(std::make_unique<TargetLoweringObjectFileELF>()) {
+      TLOF(std::make_unique<TargetLoweringObjectFileELF>()),
+      Subtarget(TT, std::string(CPU), std::string(FS), *this) {
   initAsmInfo();
 }
+
+MBLAZETargetMachine::~MBLAZETargetMachine() = default;
 
 namespace {
 class MBLAZEPassConfig : public TargetPassConfig {
@@ -49,14 +52,15 @@ public:
   }
 
   bool addInstSelector() override;
-
+  // void addPreEmitPass() override;
+  // void addPreRegAlloc() override;
 };
 
 } // namespace
 
+
+//NEW CONFIGURATION TAKEN FROM MBLAZE
 TargetPassConfig *MBLAZETargetMachine::createPassConfig(PassManagerBase &PM) {
-  //  addISelPrepare();
-    
   return new MBLAZEPassConfig(*this, PM);
 }
 
@@ -64,3 +68,34 @@ bool MBLAZEPassConfig::addInstSelector() {
   addPass(createMBLAZEISelDag(getMBLAZETargetMachine(), getOptLevel()));
   return false;
 }
+
+//void MBLAZEPassConfig::addPreEmitPass() { addPass(createMBLAZEBranchFinalizePass()); }
+
+// void MBLAZEPassConfig::addPreRegAlloc() {
+//     addPass(createMBLAZEExpandPseudosPass());
+//     addPass(createMBLAZEOptAddrMode());
+// }
+
+
+
+// OLD CONFIGURATION
+// TargetPassConfig *MBLAZETargetMachine::createPassConfig(PassManagerBase &PM) {
+//   //  addISelPrepare();
+    
+//   return new MBLAZEPassConfig(*this, PM);
+// }
+
+// bool MBLAZEPassConfig::addInstSelector() {
+//   addPass(createMBLAZEISelDag(getMBLAZETargetMachine(), getOptLevel()));
+//   return false;
+// }
+
+// Force static initialization.
+// extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETarget() {
+//   RegisterTargetMachine<MBLAZETargetMachine> X(getTheMBLAZETarget());
+// }
+
+// TargetTransformInfo
+// MBLAZETargetMachine::getTargetTransformInfo(const Function &F) {
+//   return TargetTransformInfo(MBLAZETTIImpl(this, F));
+// }
