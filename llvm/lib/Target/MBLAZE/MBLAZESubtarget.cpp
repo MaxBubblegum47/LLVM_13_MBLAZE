@@ -22,10 +22,9 @@ using namespace llvm;
 #define GET_SUBTARGETINFO_CTOR
 #include "MBLAZEGenSubtargetInfo.inc"
 
-// void MBLAZESubtarget::anchor() {}
+void MBLAZESubtarget::anchor() {}
 
 MBLAZESubtarget::MBLAZESubtarget(const Triple &TT, const std::string &CPU,
                            const std::string &FS, const TargetMachine &TM)
-    : MBLAZEGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS) //FrameLowering(*this),
-      //TLInfo(TM, *this) 
-      {}
+    : MBLAZEGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), FrameLowering(*this),
+      TLInfo(TM, *this) {}
