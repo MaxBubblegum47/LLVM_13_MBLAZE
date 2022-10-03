@@ -1,6 +1,7 @@
 #include "MBLAZERegisterInfo.h"
 #include "MBLAZE.h"
-// #include "MBLAZEMachineFunctionInfo.h" --> From MBLAZE Example we should have also this at a certain point
+#include "MBLAZEInstrInfo.h"
+#include "MBLAZEMachineFunctionInfo.h" 
 #include "MBLAZESubtarget.h"
 #include "llvm/ADT/BitVector.h"
 #include "llvm/CodeGen/MachineFrameInfo.h"
@@ -18,6 +19,7 @@
 
 using namespace llvm;
 
-// BUG --> error: invalid ‘static_cast’ from type ‘const llvm::TargetFrameLowering*’ to type ‘const llvm::MBLAZEFrameLowering*’
 #define GET_REGINFO_TARGET_DESC
 #include "MBLAZEGenRegisterInfo.inc" 
+
+MBLAZERegisterInfo::MBLAZERegisterInfo() : MBLAZEGenRegisterInfo(MBLAZE::R1,0U, 0U, 0U, 0U) {}
