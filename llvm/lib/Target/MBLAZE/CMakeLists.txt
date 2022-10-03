@@ -2,13 +2,12 @@ add_llvm_component_group(MBLAZE)
 
 set(LLVM_TARGET_DEFINITIONS MBLAZE.td)
 
-tablegen(LLVM MBLAZEGenAsmMatcher.inc -gen-asm-matcher)
 tablegen(LLVM MBLAZEGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM MBLAZEGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM MBLAZEGenDAGISel.inc -gen-dag-isel)
-tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
+tablegen(LLVM MBLAZEGenDisassemblerTables.inc -gen-disassembler)
 tablegen(LLVM MBLAZEGenInstrInfo.inc -gen-instr-info)
-tablegen(LLVM MBLAZEGenMCCodeEmitter.inc -gen-emitter)
+tablegen(LLVM MBLAZEGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM MBLAZEGenSubtargetInfo.inc -gen-subtarget)
 #tablegen(LLVM MBLAZEGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
@@ -18,12 +17,14 @@ add_public_tablegen_target(MBLAZECommonTableGen)
 # MBLAZECodeGen should match with LLVMBuild.txt MBLAZECodeGen
 add_llvm_target(MBLAZECodeGen
 MBLAZEAsmPrinter.cpp
-MBLAZEInstrInfo.cpp
 MBLAZEFrameLowering.cpp
-MBLAZEMCInstLower.cpp
+MBLAZEInstrInfo.cpp
 MBLAZEISelDAGToDAG.cpp
-MBLAZESubtarget.cpp
+MBLAZEISelLowering.cpp
+MBLAZEMachineFunctionInfo.cpp
+MBLAZEMCInstLower.cpp
 MBLAZERegisterInfo.cpp
+MBLAZESubtarget.cpp
 MBLAZETargetMachine.cpp
 
 
