@@ -1,12 +1,12 @@
 #include "MBLAZEFrameLowering.h"
+#include "MBLAZESubtarget.h"
 #include "MBLAZEInstrInfo.h"
-#include "llvm/CodeGen/MachineFrameInfo.h"
-#include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineInstrBuilder.h"
-#include "llvm/CodeGen/MachineRegisterInfo.h"
+#include "llvm/CodeGen/MachineModuleInfo.h"
 #include "llvm/CodeGen/RegisterScavenging.h"
-#include "llvm/IR/DiagnosticInfo.h"
-#include "llvm/MC/MCDwarf.h"
+#include "llvm/CodeGen/TargetRegisterInfo.h"
+#include "llvm/IR/Function.h"
+#include "llvm/Support/Debug.h"
 
 #define DEBUG_TYPE "mblaze-frame-lowering"
 
@@ -19,3 +19,5 @@ void MBLAZEFrameLowering::emitPrologue(MachineFunction &MF,
 // Epilogue
 void MBLAZEFrameLowering::emitEpilogue(MachineFunction &MF,
                                     MachineBasicBlock &MBB) const {}
+
+bool MBLAZEFrameLowering::hasFP(const MachineFunction &MF) const {}
