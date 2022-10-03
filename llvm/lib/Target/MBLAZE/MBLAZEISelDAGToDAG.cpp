@@ -49,12 +49,14 @@ FunctionPass *llvm::createMBLAZEISelDag(MBLAZETargetMachine &TM,
 
 bool MBLAZEDAGToDAGISel::SelectAddrModeImm(SDValue Addr, SDValue &Base,
                                         SDValue &Offset) {
-  if (Addr.getOpcode() == MBLAZEISD::Wrap) {
-    Base = Addr.getOperand(0);
-    Offset = CurDAG->getTargetConstant(0, SDLoc(Addr), MVT::i32);
-    return true;
-  }
-  return false;
+  // if (Addr.getOpcode() == MBLAZEISD::Wrap) {
+  //   Base = Addr.getOperand(0);
+  //   Offset = CurDAG->getTargetConstant(0, SDLoc(Addr), MVT::i32);
+  //   return true;
+  // }
+  // return false;
+  return true;
+
 }
 
 void MBLAZEDAGToDAGISel::Select(SDNode *N) {
