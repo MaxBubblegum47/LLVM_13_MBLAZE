@@ -3,7 +3,6 @@
 
 #include "MBLAZERegisterInfo.h"
 #include "llvm/CodeGen/TargetInstrInfo.h"
-#include "llvm/IR/DiagnosticInfo.h"
 
 #define GET_INSTRINFO_HEADER
 #include "MBLAZEGenInstrInfo.inc"
@@ -13,14 +12,13 @@ namespace llvm {
 class MBLAZESubtarget;
 
 class MBLAZEInstrInfo : public MBLAZEGenInstrInfo {
-  
+  const MBLAZERegisterInfo RI;
   virtual void anchor();
 
 public:
   MBLAZEInstrInfo();
-  // const MBLAZERegisterInfo &getRegisterInfo() const { }
-  
- 
+
+  const MBLAZERegisterInfo &getRegisterInfo() const { return RI; }
       
     };                                            
 }                                                 
