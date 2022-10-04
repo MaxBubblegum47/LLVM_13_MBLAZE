@@ -149,6 +149,8 @@ const char *MBLAZETargetLowering::getTargetNodeName(unsigned Opcode) const {
     return "MBLAZEISD::BRcc";
   case MBLAZEISD::RET:
     return "MBLAZEISD::RET";
+  case MBLAZEISD::IRET:
+    return "MBLAZEISD::IRET";
   case MBLAZEISD::GAWRAPPER:
     return "MBLAZEISD::GAWRAPPER";
   }
