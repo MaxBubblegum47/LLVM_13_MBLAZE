@@ -35,10 +35,8 @@ namespace {
     return "MBLAZE DAG->DAG Pattern Instruction Selection";
   }
 
-    #include "MBLAZEGenDAGISel.inc"
-
-
-    };
+  #include "MBLAZEGenDAGISel.inc"
+  };
 }
 
 
