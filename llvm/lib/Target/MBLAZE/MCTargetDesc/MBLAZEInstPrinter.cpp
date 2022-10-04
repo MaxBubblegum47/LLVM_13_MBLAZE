@@ -154,7 +154,7 @@ void MBLAZEInstPrinter::printOperand(const MCInst *MI, unsigned OpNum,
   printExpr(Op.getExpr(), &MAI, O);
 }
 
-void MBLAZEInstPrinter::printMemOperandRI(const MCInst *MI, unsigned OpNum,
+void MBLAZEInstPrinter::printMemOperand(const MCInst *MI, unsigned OpNum,
                                        raw_ostream &O) {
   const MCOperand &base = MI->getOperand(OpNum);
   const MCOperand &offset = MI->getOperand(OpNum + 1);
