@@ -49,7 +49,9 @@ enum NodeType : unsigned {
   GAWRAPPER,
 
   // return, (j_s [blink])
-  RET
+  RET,
+
+  IRET
 };
 
 } // end namespace MBLAZEISD
