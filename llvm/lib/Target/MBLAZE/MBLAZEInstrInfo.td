@@ -17,7 +17,7 @@ include "MBLAZEInstrFormats.td"
 //===----------------------------------------------------------------------===//
 
 // def SDTMBLAZESelectCC : SDTypeProfile<1, 3, [SDTCisSameAs<0, 1>]>;
-def SDT_MBLAZERet     : SDTypeProfile<0, 1, [SDTCisInt<0>]>;
+// def SDT_MBLAZERet     : SDTypeProfile<0, 1, [SDTCisInt<0>]>;
 def SDT_MBLAZEIRet    : SDTypeProfile<0, 1, [SDTCisInt<0>]>;
 // def SDT_MBLAZEJmpLink : SDTypeProfile<0, -1, [SDTCisVT<0, i32>]>;
 // def SDT_MBCallSeqStart : SDCallSeqStart<[SDTCisVT<0, i32>]>;
@@ -27,10 +27,19 @@ def SDT_MBCallSeqEnd   : SDCallSeqEnd<[SDTCisVT<0, i32>, SDTCisVT<1, i32>]>;
 // MBLAZE specific nodes
 //===----------------------------------------------------------------------===//
 
-def MBLAZERet     : SDNode<"MBLAZEISD::RET", SDT_MBLAZERet,
+def MBLAZERet     : SDNode<"MBLAZEISD::RET", SDTNone,
                            [SDNPHasChain, SDNPOptInGlue, SDNPVariadic]>;
-def MBLAZEIRet    : SDNode<"MBLAZEISD::IRET", SDT_MBLAZEIRet,
-                           [SDNPHasChain, SDNPOptInGlue, SDNPVariadic]>;
+// def MBLAZEIRet    : SDNode<"MBLAZEISD::IRET", SDT_MBLAZEIRet,
+//                            [SDNPHasChain, SDNPOptInGlue, SDNPVariadic]>;
+
+
+let isReturn = 1, isTerminator = 1, isBarrier = 1  in
+// This is a specialized 2-byte instruction that doesn't generalize
+// to any larger 2-byte class, so go ahead and define it here.
+def J_S_BLINK : InstMBLAZE<2, (outs), (ins), "j_s\t[%blink]", [(MBLAZERet)]> {
+  let Inst{15-0} = 0b0111111011100000;
+}
+
 
 // def MBLAZEJmpLink : SDNode<"MBLAZEISD::JmpLink",SDT_MBLAZEJmpLink,
 //                            [SDNPHasChain,SDNPOptInGlue,SDNPOutGlue,
@@ -557,21 +566,21 @@ let isCommutable = 1, isAsCheapAsAMove = 1 in {
 //   def BRALD  : BranchL<0x26, 0x1C, 0x000, "brald  ">;
 // }
 
-let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
-    rd=0x10, Form=FCRI in {
-  def RTSD   : TB<0x2D, (outs), (ins GPR:$target, simm16:$imm),
-                  "rtsd      $target, $imm",
-                  [],
-                  IIC_BR>;
-}
+// let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
+//     rd=0x10, Form=FCRI in {
+// //   def RTSD   : TB<0x2D, (outs), (ins GPR:$target, simm16:$imm),
+// //                   "rtsd      $target, $imm",
+// //                   [],
+// //                   IIC_BR>;
+// // }
 
-let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
-    rd=0x11, Form=FCRI in {
-  def RTID   : TB<0x2D, (outs), (ins GPR:$target, simm16:$imm),
-                  "rtid      $target, $imm",
-                  [],
-                  IIC_BR>;
-}
+// let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
+//     rd=0x11, Form=FCRI in {
+//   def RTID   : TB<0x2D, (outs), (ins GPR:$target, simm16:$imm),
+//                   "rtid      $target, $imm",
+//                   [],
+//                   IIC_BR>;
+// }
 
 // let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
 //     rd=0x12, Form=FCRI in {
@@ -939,8 +948,8 @@ let isReturn=1, isTerminator=1, hasDelaySlot=1, isBarrier=1,
 //           (Select_CC GPR:$T, GPR:$F, (CMPU GPR:$R, GPR:$L), 6)>;
 
 // // Ret instructions
-def : Pat<(MBLAZERet GPR:$target), (RTSD GPR:$target, 0x8)>;
-def : Pat<(MBLAZEIRet GPR:$target), (RTID GPR:$target, 0x0)>;
+// def : Pat<(MBLAZERet GPR:$target), (RTSD GPR:$target, 0x8)>;
+// def : Pat<(MBLAZEIRet GPR:$target), (RTID GPR:$target, 0x0)>;
 
 // // BR instructions
 // def : Pat<(br bb:$T), (BRID bb:$T)>;

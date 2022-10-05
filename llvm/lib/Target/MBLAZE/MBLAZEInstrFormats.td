@@ -50,7 +50,76 @@ def FRR     : Format<21>; // CLZ
 //
 //===----------------------------------------------------------------------===//
 
+class Encoding64 {
+  field bits<64> Inst;
+  field bits<64> SoftFail = 0;
+}
+
+class DataSizeMode<bits<2> mode, string instSfx, string asmSfx> {
+  bits<2> Value = mode;
+  string  InstSuffix = instSfx;
+  string  AsmSuffix  = asmSfx;
+}
+
+class ExtMode<bit mode, string instSfx, string asmSfx> {
+  bit     Value = mode;
+  string  InstSuffix = instSfx;
+  string  AsmSuffix  = asmSfx;
+}
+
+class AddrMode<bits<2> mode, string instSfx, string asmSfx> {
+  bits<2> Value = mode;
+  string  InstSuffix = instSfx;
+  string  AsmSuffix  = asmSfx;
+}
+
+class CacheMode<bit mode, string instSfx, string asmSfx> {
+  bit     Value = mode;
+  string  InstSuffix = instSfx;
+  string  AsmSuffix  = asmSfx;
+}
+
+def ByteSM : DataSizeMode<0b01, "B", "b">;
+def HalfSM : DataSizeMode<0b10, "H", "h">;
+def WordSM : DataSizeMode<0b00,  "",  "">;
+
+def NoEM      : ExtMode<0,   "",   "">;
+def SignedEM  : ExtMode<1, "_X", ".x">;
+
+def NoAM      : AddrMode<0b00, "", "">;
+def PreIncAM  : AddrMode<0b01, "_AW", ".aw">;
+def PostIncAM : AddrMode<0b10, "_AB", ".ab">;
+
+def NoCC       : CacheMode<0b0,    "",    "">;
+def UncachedCC : CacheMode<0b1, "_DI", ".di">;
+
+
 // Generic MBLAZE Format
+class InstMBLAZE<int sz, dag outs, dag ins, string asmstr, list<dag> pattern>
+    : Instruction, Encoding64 {
+
+  let Namespace = "MBLAZE";
+  dag OutOperandList = outs;
+  dag InOperandList = ins;
+  let AsmString = asmstr;
+  let Pattern = pattern;
+  let Size = sz;
+
+  // Load/Store instruction properties
+  DataSizeMode ZZ = WordSM;
+  ExtMode X = NoEM;
+  AddrMode AA = NoAM;
+  CacheMode DI = NoCC;
+
+  // Field used for relation models
+  string BaseOpcode = "";
+
+  //TSFlags
+  let TSFlags{1-0} = AA.Value;
+}
+
+
+
 class MBLAZEInst<bits<6> op, Format form, dag outs, dag ins, string asmstr,
                  list<dag> pattern, InstrItinClass itin> : Instruction {
   let Namespace = "MBLAZE";
