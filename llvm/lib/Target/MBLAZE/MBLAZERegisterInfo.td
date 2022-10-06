@@ -1,49 +1,44 @@
-//===-- MBLAZERegisterInfo.td - MBLAZE Register defs -----------*- tablegen -*-===//
+//===-- MBLAZERegisterInfo.td - MBLAZE Register defs -------*- tablegen -*-===//
 //
-//
-//                       The LLVM Compiler Infrastructure
+//                     The LLVM Compiler Infrastructure
 //
 // This file is distributed under the University of Illinois Open Source
 // License. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
-//===----------------------------------------------------------------------===//
-// Declarations that describe the MBLAZE register file
-//===----------------------------------------------------------------------===//
 
-//HWEncoding is 16 because is defined as you can see in llvm/include/llvm/Target/Target.td:186:  bits<16> HWEncoding = 0;
+//===----------------------------------------------------------------------===//
+//  Declarations that describe the MicroBlaze register file
+//===----------------------------------------------------------------------===//
 
 // We have banks of 32 registers each.
-class MBLAZEReg<bits<5> Enc, string n> : Register<n> {
-// For tablegen(... -gen-emitter) in CMakeLists.txt
-let HWEncoding{4-0} = Enc;
-let Namespace = "MBLAZE";
-}
-
-// MBLAZE General Purpose Registers
-class MBLAZEGPRReg<bits<5> Enc, string n> : Register<n> {
-  let HWEncoding{4-0} = Enc;
+class MBLAZEReg<string n> : Register<n> {
+  field bits<5> Num;
   let Namespace = "MBLAZE";
 }
 
-// Special Purpose Registers have 15-bit values
-// class MBLAZESReg<bits<15> Enc, string n> : Register<n> {
-//   let HWEncoding{15-0} = Enc;
-//   let Namespace = "MBLAZE";
-// }
-
-// MBlaze special purpose registers
-class MBLAZESPRReg<bits<15> Enc, string n> : Register<n> {
-  let HWEncoding{14-0} = Enc;
+// Special purpose registers have 15-bit values
+class MBLAZESReg<string n> : Register<n> {
+  field bits<15> Num;
   let Namespace = "MBLAZE";
 }
 
+// MBLAZE general purpose registers
+class MBLAZEGPRReg<bits<5> num, string n> : MBLAZEReg<n> {
+  let Num = num;
+}
+
+// MBLAZE special purpose registers
+class MBLAZESPRReg<bits<15> num, string n> : MBLAZESReg<n> {
+  let Num = num;
+}
+
 //===----------------------------------------------------------------------===//
-//@Registers
+//  Registers
 //===----------------------------------------------------------------------===//
-// The register string, such as "9" or "gp" will show on "llvm-objdump -d"
-//@ All registers definition
+
 let Namespace = "MBLAZE" in {
+  // General Purpose Registers
   def R0  : MBLAZEGPRReg< 0,  "r0">,   DwarfRegNum<[0]>;
   def R1  : MBLAZEGPRReg< 1,  "r1">,   DwarfRegNum<[1]>;
   def R2  : MBLAZEGPRReg< 2,  "r2">,   DwarfRegNum<[2]>;
@@ -109,13 +104,10 @@ let Namespace = "MBLAZE" in {
   // are interested in modeling.
   def CARRY  : MBLAZESPRReg<0x0000, "rmsr[c]">;
 }
+
 //===----------------------------------------------------------------------===//
-//@Register Classes
+// Register Classes
 //===----------------------------------------------------------------------===//
-// def CPURegs : RegisterClass<"MBLAZE", [i32], 32, (add
-// // Reserved
-// R0,
-// R1)>;
 
 def GPR : RegisterClass<"MBLAZE", [i32,f32], 32, (sequence "R%u", 0, 31)>;
 
@@ -146,8 +138,8 @@ def SPR : RegisterClass<"MBLAZE", [i32], 32, (add
   RPVR10,
   RPVR11
   )>
-
 {
+  // None of the special purpose registers are allocatable.
   let isAllocatable = 0;
 }
 
