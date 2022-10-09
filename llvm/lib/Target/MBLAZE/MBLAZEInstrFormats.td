@@ -6,37 +6,7 @@
 // License. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
-
-// Format specifies the encoding used by the instruction.  This is part of the
-// ad-hoc solution used to emit machine instruction encodings by our machine
-// code emitter.
-class Format<bits<6> val> {
-      bits<6> Value = val;
-}
-
-def FPseudo : Format<0>;
-def FRRR    : Format<1>;  // ADD, OR, etc.
-def FRRI    : Format<2>;  // ADDI, ORI, etc.
-def FCRR    : Format<3>;  // PUTD, WDC, WIC, BEQ, BNE, BGE, etc.
-def FCRI    : Format<4>;  // RTID, RTED, RTSD, BEQI, BNEI, BGEI, etc.
-def FRCR    : Format<5>;  // BRLD, BRALD, GETD
-def FRCI    : Format<6>;  // BRLID, BRALID, MSRCLR, MSRSET
-def FCCR    : Format<7>;  // BR, BRA, BRD, etc.
-def FCCI    : Format<8>;  // IMM, BRI, BRAI, BRID, etc.
-def FRRCI   : Format<9>;  // BSRLI, BSRAI, BSLLI
-def FRRC    : Format<10>; // SEXT8, SEXT16, SRA, SRC, SRL, FLT, FINT, FSQRT
-def FRCX    : Format<11>; // GET
-def FRCS    : Format<12>; // MFS
-def FCRCS   : Format<13>; // MTS
-def FCRCX   : Format<14>; // PUT
-def FCX     : Format<15>; // TPUT
-def FCR     : Format<16>; // TPUTD
-def FRIR    : Format<17>; // RSUBI
-def FRRRR   : Format<18>; // RSUB, FRSUB
-def FRI     : Format<19>; // RSUB, FRSUB
-def FC      : Format<20>; // NOP
-def FRR     : Format<21>; // CLZ
-
+//  General Information
 //===----------------------------------------------------------------------===//
 //  Describe MBLAZE instructions format
 //
@@ -50,116 +20,33 @@ def FRR     : Format<21>; // CLZ
 //
 //===----------------------------------------------------------------------===//
 
-class Encoding64 {
-  field bits<64> Inst;
-  field bits<64> SoftFail = 0;
-}
-
-class DataSizeMode<bits<2> mode, string instSfx, string asmSfx> {
-  bits<2> Value = mode;
-  string  InstSuffix = instSfx;
-  string  AsmSuffix  = asmSfx;
-}
-
-class ExtMode<bit mode, string instSfx, string asmSfx> {
-  bit     Value = mode;
-  string  InstSuffix = instSfx;
-  string  AsmSuffix  = asmSfx;
-}
-
-class AddrMode<bits<2> mode, string instSfx, string asmSfx> {
-  bits<2> Value = mode;
-  string  InstSuffix = instSfx;
-  string  AsmSuffix  = asmSfx;
-}
-
-class CacheMode<bit mode, string instSfx, string asmSfx> {
-  bit     Value = mode;
-  string  InstSuffix = instSfx;
-  string  AsmSuffix  = asmSfx;
-}
-
-def ByteSM : DataSizeMode<0b01, "B", "b">;
-def HalfSM : DataSizeMode<0b10, "H", "h">;
-def WordSM : DataSizeMode<0b00,  "",  "">;
-
-def NoEM      : ExtMode<0,   "",   "">;
-def SignedEM  : ExtMode<1, "_X", ".x">;
-
-def NoAM      : AddrMode<0b00, "", "">;
-def PreIncAM  : AddrMode<0b01, "_AW", ".aw">;
-def PostIncAM : AddrMode<0b10, "_AB", ".ab">;
-
-def NoCC       : CacheMode<0b0,    "",    "">;
-def UncachedCC : CacheMode<0b1, "_DI", ".di">;
-
-
-// Generic MBLAZE Format
-class InstMBLAZE<int sz, dag outs, dag ins, string asmstr, list<dag> pattern>
-    : Instruction, Encoding64 {
-
-  let Namespace = "MBLAZE";
-  dag OutOperandList = outs;
-  dag InOperandList = ins;
-  let AsmString = asmstr;
-  let Pattern = pattern;
-  let Size = sz;
-
-  // Load/Store instruction properties
-  DataSizeMode ZZ = WordSM;
-  ExtMode X = NoEM;
-  AddrMode AA = NoAM;
-  CacheMode DI = NoCC;
-
-  // Field used for relation models
-  string BaseOpcode = "";
-
-  //TSFlags
-  let TSFlags{1-0} = AA.Value;
-}
-
-
-
-class MBLAZEInst<bits<6> op, Format form, dag outs, dag ins, string asmstr,
-                 list<dag> pattern, InstrItinClass itin> : Instruction {
-  let Namespace = "MBLAZE";
-  field bits<32> Inst;
-
-  bits<6> opcode = op;
-  Format Form = form;
-  bits<6> FormBits = Form.Value;
-
-  // Top 6 bits are the 'opcode' field
-  let Inst{0-5} = opcode;
-
-  // If the instruction is marked as a pseudo, set isCodeGenOnly so that the
-  // assembler and disassmbler ignore it.
-  let isCodeGenOnly = !eq(!cast<string>(form), "FPseudo");
-
-  dag OutOperandList = outs;
-  dag InOperandList  = ins;
-
-  let AsmString   = asmstr;
-  let Pattern     = pattern;
-  let Itinerary   = itin;
-
-  // TSFlags layout should be kept in sync with MBLAZEInstrInfo.h.
-  let TSFlags{5-0}   = FormBits;
+class InstMBLAZE<dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin = NoItinerary>
+  : Instruction {
+    field bits<32> Inst;
+    field bits<32> SoftFail = 0;
+    let Namespace = "MBLAZE";
+    let Size = 4;
+    dag OutOperandList = outs;
+    dag InOperandList = ins;
+    let AsmString = asmstr;
+    let Pattern = pattern;
+    let DecoderNamespace = "MBLAZE";
+    let Itinerary = itin;
 }
 
 //===----------------------------------------------------------------------===//
 // Pseudo instruction class
 //===----------------------------------------------------------------------===//
-class MBLAZEPseudo<dag outs, dag ins, string asmstr, list<dag> pattern>:
-      MBLAZEInst<0x0, FPseudo, outs, ins, asmstr, pattern, IIC_Pseudo>;
+class MBLAZEPseudo<dag outs, dag ins, string asmstr, list<dag> pattern, InstrItinClass itin = NoItinerary>:
+      InstMBLAZE<outs, ins, asmstr, pattern, itin>{}
 
 //===----------------------------------------------------------------------===//
 // Type A instruction class in MBLAZE : <|opcode|rd|ra|rb|flags|>
 //===----------------------------------------------------------------------===//
 
 class TA<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
-         list<dag> pattern, InstrItinClass itin> :
-         MBLAZEInst<op,FRRR,outs, ins, asmstr, pattern, itin>
+         list<dag> pattern,  InstrItinClass itin = NoItinerary> :
+         InstMBLAZE<outs, ins, asmstr, pattern, itin>
 {
   bits<5> rd;
   bits<5> ra;
@@ -177,7 +64,7 @@ class TA<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
 
 class TB<bits<6> op, dag outs, dag ins, string asmstr, list<dag> pattern,
          InstrItinClass itin> :
-         MBLAZEInst<op, FRRI, outs, ins, asmstr, pattern, itin>
+         InstMBLAZE<outs, ins, asmstr, pattern, itin>
 {
   bits<5>  rd;
   bits<5>  ra;
@@ -186,112 +73,4 @@ class TB<bits<6> op, dag outs, dag ins, string asmstr, list<dag> pattern,
   let Inst{6-10}  = rd;
   let Inst{11-15} = ra;
   let Inst{16-31} = imm16;
-}
-
-//===----------------------------------------------------------------------===//
-// Type A instruction class in MBLAZE but with the operands reversed
-// in the LLVM DAG : <|opcode|rd|ra|rb|flags|>
-//===----------------------------------------------------------------------===//
-
-class TAR<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
-          list<dag> pattern, InstrItinClass itin> :
-          TA<op, flags, outs, ins, asmstr, pattern, itin>
-{
-  bits<5> rrd;
-  bits<5> rrb;
-  bits<5> rra;
-
-  let Form = FRRRR;
-
-  let rd = rrd;
-  let ra = rra;
-  let rb = rrb;
-}
-
-//===----------------------------------------------------------------------===//
-// Type B instruction class in MBLAZE but with the operands reversed in
-// the LLVM DAG : <|opcode|rd|ra|immediate|>
-//===----------------------------------------------------------------------===//
-class TBR<bits<6> op, dag outs, dag ins, string asmstr, list<dag> pattern,
-         InstrItinClass itin> :
-         TB<op, outs, ins, asmstr, pattern, itin> {
-  bits<5>  rrd;
-  bits<16> rimm16;
-  bits<5>  rra;
-
-  let Form = FRIR;
-
-  let rd = rrd;
-  let ra = rra;
-  let imm16 = rimm16;
-}
-
-//===----------------------------------------------------------------------===//
-// Shift immediate instruction class in MBLAZE : <|opcode|rd|ra|immediate|>
-//===----------------------------------------------------------------------===//
-class SHT<bits<6> op, bits<2> flags, dag outs, dag ins, string asmstr,
-          list<dag> pattern, InstrItinClass itin> :
-          MBLAZEInst<op, FRRI, outs, ins, asmstr, pattern, itin> {
-  bits<5>  rd;
-  bits<5>  ra;
-  bits<5>  imm5;
-
-  let Inst{6-10}  = rd;
-  let Inst{11-15} = ra;
-  let Inst{16-20} = 0x0;
-  let Inst{21-22} = flags;
-  let Inst{23-26} = 0x0;
-  let Inst{27-31} = imm5;
-}
-
-//===----------------------------------------------------------------------===//
-// Special instruction class in MBLAZE : <|opcode|rd|imm14|>
-//===----------------------------------------------------------------------===//
-class SPC<bits<6> op, bits<2> flags, dag outs, dag ins, string asmstr,
-          list<dag> pattern, InstrItinClass itin> :
-          MBLAZEInst<op, FRI, outs, ins, asmstr, pattern, itin> {
-  bits<5>  rd;
-  bits<14> imm14;
-
-  let Inst{6-10}  = rd;
-  let Inst{11-15} = 0x0;
-  let Inst{16-17} = flags;
-  let Inst{18-31} = imm14;
-}
-
-//===----------------------------------------------------------------------===//
-// MSR instruction class in MBLAZE : <|opcode|rd|imm15|>
-//===----------------------------------------------------------------------===//
-class MSR<bits<6> op, bits<6> flags, dag outs, dag ins, string asmstr,
-          list<dag> pattern, InstrItinClass itin> :
-          MBLAZEInst<op, FRI, outs, ins, asmstr, pattern, itin> {
-  bits<5>  rd;
-  bits<15> imm15;
-
-  let Inst{6-10}  = rd;
-  let Inst{11-16} = flags;
-  let Inst{17-31} = imm15;
-}
-
-//===----------------------------------------------------------------------===//
-// TCLZ instruction class in MBLAZE : <|opcode|rd|imm15|>
-//===----------------------------------------------------------------------===//
-class TCLZ<bits<6> op, bits<16> flags, dag outs, dag ins, string asmstr,
-           list<dag> pattern, InstrItinClass itin> :
-           MBLAZEInst<op, FRR, outs, ins, asmstr, pattern, itin> {
-  bits<5>  rd;
-  bits<5>  ra;
-
-  let Inst{6-10}  = rd;
-  let Inst{11-15}  = ra;
-  let Inst{16-31}  = flags;
-}
-
-//===----------------------------------------------------------------------===//
-// MBAR instruction class in MBLAZE : <|opcode|rd|imm15|>
-//===----------------------------------------------------------------------===//
-class MBAR<bits<6> op, bits<26> flags, dag outs, dag ins, string asmstr,
-           list<dag> pattern, InstrItinClass itin> :
-           MBLAZEInst<op, FC, outs, ins, asmstr, pattern, itin> {
-  let Inst{6-31}  = flags;
 }
