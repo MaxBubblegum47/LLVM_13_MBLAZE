@@ -132,6 +132,7 @@ static void ReplaceFrameIndex(MachineBasicBlock::iterator II,
 
   // Erase old instruction.
   MBB.erase(II);
+  return;
 }
 
 
