@@ -1,18 +1,16 @@
-//===- MBLAZECallingConv.td - Calling Conventions for MBLAZE -*- tablegen -*-=//
+//===- MBLAZECallingConv.td - Calling Conventions for MBLAZE -----*- tablegen -*-===//
 //
-//                     The LLVM Compiler Infrastructure
-//
-// This file is distributed under the University of Illinois Open Source
-// License. See LICENSE.TXT for details.
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
 //===----------------------------------------------------------------------===//
-// This describes the calling conventions for MBLAZE architecture.
+// This describes the calling conventions for MBLAZE MBLAZEhitecture.
 //===----------------------------------------------------------------------===//
 
 //===----------------------------------------------------------------------===//
-// MBLAZE ABI Calling Convention
+// MBLAZE Return Value Calling Convention
 //===----------------------------------------------------------------------===//
-
 def RetCC_MBLAZE : CallingConv<[
   // i32 are returned in registers R3, R4
   CCIfType<[i32,f32], CCAssignToReg<[R3, R4]>>,
@@ -20,10 +18,7 @@ def RetCC_MBLAZE : CallingConv<[
 ]>;
 
 def CC_MBLAZE : CallingConv<[
-  // this need to be change in terms of registers, I just set some random
-  // register to see if it is working
-  //CCIfType<[i32, f32], CCAssignToReg<[R0, R1, R2, R3, R4, R5, R6, R7]>>, --> taken from ARC just for testing purpose
   CCIfType<[i32,f32], CCAssignToStack<4, 4>>
 ]>;
 
-
+def CSR_MBLAZE : CalleeSavedRegs<(add (sequence "R%u", 21, 31), GP, FP)>;
