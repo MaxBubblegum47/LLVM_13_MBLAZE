@@ -72,12 +72,12 @@ MBLAZETargetLowering::MBLAZETargetLowering(const TargetMachine &TM,
                                      const MBLAZESubtarget &Subtarget)
     : TargetLowering(TM), Subtarget(Subtarget) {
   // Set up the register classes.
-  addRegisterClass(MVT::i32, &MBLAZE::GPRRegClass);
+  addRegisterClass(MVT::i32, &MBLAZE::GPR32RegClass);
 
   // Compute derived properties from the register classes
   computeRegisterProperties(Subtarget.getRegisterInfo());
 
-  setStackPointerRegisterToSaveRestore(MBLAZE::R1);
+  setStackPointerRegisterToSaveRestore(MBLAZE::SP);
 
   setSchedulingPreference(Sched::Source);
 
@@ -288,7 +288,7 @@ SDValue MBLAZETargetLowering::LowerCall(TargetLowering::CallLoweringInfo &CLI,
     } else {
       assert(VA.isMemLoc() && "Must be register or memory argument.");
       if (!StackPtr.getNode())
-        StackPtr = DAG.getCopyFromReg(Chain, dl, MBLAZE::R1,
+        StackPtr = DAG.getCopyFromReg(Chain, dl, MBLAZE::SP,
                                       getPointerTy(DAG.getDataLayout()));
       // Calculate the stack position.
       SDValue SOffset = DAG.getIntPtrConstant(VA.getLocMemOffset(), dl);
@@ -398,7 +398,7 @@ static SDValue lowerCallResult(SDValue Chain, SDValue Glue,
   for (unsigned i = 0, e = ResultMemLocs.size(); i != e; ++i) {
     int Offset = ResultMemLocs[i].first;
     unsigned Index = ResultMemLocs[i].second;
-    SDValue StackPtr = DAG.getRegister(MBLAZE::R1, MVT::i32);
+    SDValue StackPtr = DAG.getRegister(MBLAZE::SP, MVT::i32);
     SDValue SpLoc = DAG.getNode(ISD::ADD, dl, MVT::i32, StackPtr,
                                 DAG.getConstant(Offset, dl, MVT::i32));
     SDValue Load =
@@ -491,7 +491,7 @@ SDValue MBLAZETargetLowering::LowerCallArguments(
         llvm_unreachable("Unhandled LowerFormalArguments type.");
       }
       case MVT::i32:
-        unsigned VReg = RegInfo.createVirtualRegister(&MBLAZE::GPRRegClass);
+        unsigned VReg = RegInfo.createVirtualRegister(&MBLAZE::GPR32RegClass);
         RegInfo.addLiveIn(VA.getLocReg(), VReg);
         ArgIn = DAG.getCopyFromReg(Chain, dl, VReg, RegVT);
         CFRegNode.push_back(ArgIn.getValue(ArgIn->getNumValues() - 1));
@@ -519,7 +519,7 @@ SDValue MBLAZETargetLowering::LowerCallArguments(
   // 1b. CopyFromReg vararg registers.
   if (IsVarArg) {
     // Argument registers
-    static const MCPhysReg ArgRegs[] = {MBLAZE::R0, MBLAZE::R1, MBLAZE::R2, MBLAZE::R3,
+    static const MCPhysReg ArgRegs[] = {MBLAZE::R0, MBLAZE::SP, MBLAZE::R2, MBLAZE::R3,
                                         MBLAZE::R4, MBLAZE::R5, MBLAZE::R6, MBLAZE::R7};
     auto *AFI = MF.getInfo<MBLAZEFunctionInfo>();
     unsigned FirstVAReg = CCInfo.getFirstUnallocated(ArgRegs);
@@ -536,7 +536,7 @@ SDValue MBLAZETargetLowering::LowerCallArguments(
       SDValue FIN = DAG.getFrameIndex(VarFI, MVT::i32);
       for (unsigned i = FirstVAReg; i < array_lengthof(ArgRegs); i++) {
         // Move argument from phys reg -> virt reg
-        unsigned VReg = RegInfo.createVirtualRegister(&MBLAZE::GPRRegClass);
+        unsigned VReg = RegInfo.createVirtualRegister(&MBLAZE::GPR32RegClass);
         RegInfo.addLiveIn(ArgRegs[i], VReg);
         SDValue Val = DAG.getCopyFromReg(Chain, dl, VReg, MVT::i32);
         CFRegNode.push_back(Val.getValue(Val->getNumValues() - 1));
