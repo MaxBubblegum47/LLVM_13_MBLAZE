@@ -48,7 +48,7 @@ enum NodeType : unsigned {
   // Global Address Wrapper
   GAWRAPPER,
 
-  // return, (j_s [blink])
+  // return, (rtsd)
   RET,
 
   IRET
