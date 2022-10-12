@@ -49,8 +49,6 @@ public:
 
   ArrayRef<const char *> getGCCRegNames() const override;
 
-  ArrayRef<TargetInfo::GCCRegAlias> getGCCRegAliases() const override;
-
   BuiltinVaListKind getBuiltinVaListKind() const override {
     return TargetInfo::VoidPtrBuiltinVaList;
   }
