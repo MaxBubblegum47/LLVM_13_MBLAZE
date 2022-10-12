@@ -57,7 +57,7 @@ static MCAsmInfo *createMBLAZEMCAsmInfo(const MCRegisterInfo &MRI,
   MCAsmInfo *MAI = new MBLAZEMCAsmInfo(TT);
 
   // Initial state of the frame pointer is SP.
-  MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, MBLAZE::R1, 0);
+  MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, MBLAZE::SP, 0);
   MAI->addInitialFrameState(Inst);
 
   return MAI;
