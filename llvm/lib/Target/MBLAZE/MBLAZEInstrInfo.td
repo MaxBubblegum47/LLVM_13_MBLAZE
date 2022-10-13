@@ -134,6 +134,9 @@ def STB_FAR : PseudoInstMBLAZE<(outs), (ins GPR32:$dst, MEMrlimm:$addr),
 // multiclass.  These classes do not contain Selection DAG patterns.
 //===----------------------------------------------------------------------===//
 
+
+
+
 // Generic 3 operand binary instructions (i.e., add r0, r1, r2).
 multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
                        string opasm, bit Commutable> {
@@ -143,6 +146,7 @@ multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
                         !strconcat(opasm, "\t$A, $B, $C"),
                         []>
   { let isCommutable = Commutable; }
+
   def _f_rrr : F32_DOP_RR<major, mincode, 1, (outs GPR32:$A),
                           (ins GPR32:$B, GPR32:$C),
                           !strconcat(opasm, ".f\t$A, $B, $C"),
@@ -235,9 +239,39 @@ multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
 
 
 multiclass MBLAZEBinaryGEN4Inst<bits<6> mincode, string opasm, bit Commutable = 0> :
-  MBLAZEBinaryInst<0b00100, mincode, opasm, Commutable>;
+  MBLAZEBinaryInst<0b00100, mincode, opasm, Commutable>; 
 multiclass MBLAZEBinaryEXT5Inst<bits<6> mincode, string opasm> :
   MBLAZEBinaryInst<0b00101, mincode, opasm, 0>;
+
+
+
+// TYPE A format
+multiclass MBLAZEBinaryInstDUMMY<bits<6> op, bits<11> flag,
+                       string opasm, bit Commutable> {
+  def _rrr : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>
+  { let isCommutable = Commutable; }
+
+  def _rru6 : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>;
+  
+  def _rrlimm : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>;
+
+  def _rrs12 : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>;                        
+
+}
+multiclass MBLAZEBinaryGENDummy<bits<6> mincode, string opasm, bit Commutable = 0> : 
+MBLAZEBinaryInstDUMMY<0b00100, mincode, opasm, Commutable>;
 
 // multiclass MBLAZEUnaryGEN4Inst<bits<6> mincode, string opasm> :
 //   MBLAZEUnaryInst<0b00100, mincode, opasm>;
@@ -256,8 +290,13 @@ multiclass MultiPat<SDPatternOperator InFrag,
 // // Instruction definitions and patterns for 3 operand binary instructions.
 // // ---------------------------------------------------------------------------
 
-// // Definitions for 3 operand binary instructions.
-defm ADD : MBLAZEBinaryGEN4Inst<0b000000, "add",1>;
+
+// Definitions for 3 operand binary instructions.
+// codificata come mblaze
+//defm DUMMY : MBLAZEBinaryInstDUMMY<000000, 00000, "dummy",1>;
+defm ADD : MBLAZEBinaryInstDUMMY<000000, 00000000000, "add",1>;
+
+//defm ADD : MBLAZEBinaryGEN4Inst<0b000000, "add",1>;
 defm SUB : MBLAZEBinaryGEN4Inst<0b000010, "sub">;
 defm SUB1 : MBLAZEBinaryGEN4Inst<0b010111, "sub1">;
 defm SUB2 : MBLAZEBinaryGEN4Inst<0b011000, "sub2">;
@@ -278,6 +317,7 @@ defm MPYMU : MBLAZEBinaryGEN4Inst<0b011100, "mpymu",1>;
 defm SETEQ : MBLAZEBinaryGEN4Inst<0b111000, "seteq",1>;
 
 // // Patterns for 3 operand binary instructions.
+//defm : MultiPat<dummy, DUMMY_dummy>;
 defm : MultiPat<add, ADD_rrr, ADD_rru6, ADD_rrlimm>;
 defm : MultiPat<sub, SUB_rrr, SUB_rru6, SUB_rrlimm>;
 defm : MultiPat<or, OR_rrr, OR_rru6, OR_rrlimm>;
@@ -444,7 +484,7 @@ def : Pat<(MBLAZEBranchLink texternalsym:$dst), (BL texternalsym:$dst)>;
 let isReturn = 1, isTerminator = 1, isBarrier = 1  in
 // This is a specialized 2-byte instruction that doesn't generalize
 // to any larger 2-byte class, so go ahead and define it here.
-def J_S_BLINK : TB<4, (outs), (ins), "rtsd\t[%r0]", [(ret)]> {
+def RTSD : TB<4, (outs), (ins), "rtsd\t[%r0]", [(ret)]> {
   let Inst{0-11} = 10110110000;
 }
 
