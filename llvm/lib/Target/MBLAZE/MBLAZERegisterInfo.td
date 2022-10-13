@@ -74,12 +74,12 @@ def STATUS32 : Status<"status32">, DwarfRegNum<[32]>;
 // Register classes.
 //
 def GPR32: RegisterClass<"MBLAZE", [i32], 32,
-  (add R0, R2, R3,
+  (add R2, R3,
   R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19,
   GP, R21, R22, R23, R24, R25, R26, R27, R28, ILINK, R30, BLINK)>;
 
 def SREG : RegisterClass<"MBLAZE", [i32], 1, (add STATUS32)>;
 
 def GPR_S : RegisterClass<"MBLAZE", [i32], 8,
-  (add R0, R2, R3, R12, R13, R14, R15)>;
+  (add R2, R3, R12, R13, R14, R15)>;
 
