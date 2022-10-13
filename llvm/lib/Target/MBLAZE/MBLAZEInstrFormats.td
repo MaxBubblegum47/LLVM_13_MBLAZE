@@ -162,20 +162,21 @@ class TA<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
   let Inst{6-10}  = rd;
   let Inst{11-15} = ra;
   let Inst{16-20} = rb;
-  //let Inst{21-31} = flags;
+  let Inst{21-31} = flags;
 }
 
 // Reference
 // class F32_DOP_RR<bits<5> major, bits<6> subop, bit F, dag outs, dag ins,
 //                  string asmstr, list<dag> pattern> :
 
-class TB<bits<5> major, dag outs, dag ins,string asmstr, list<dag> pattern> 
+class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern> 
   : InstMBLAZE<4, outs, ins, asmstr, pattern>{
 
   bits<5>  rd;
   bits<5>  ra;
   bits<16> imm16;
 
+  let Inst{0-5} = op;
   let Inst{6-10}  = rd;
   let Inst{11-15} = ra;
   let Inst{16-31} = imm16;
