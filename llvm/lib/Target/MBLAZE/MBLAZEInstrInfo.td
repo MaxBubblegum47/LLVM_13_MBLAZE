@@ -133,10 +133,6 @@ def STB_FAR : PseudoInstMBLAZE<(outs), (ins GPR32:$dst, MEMrlimm:$addr),
 // Generate many variants of a single instruction with a single defining
 // multiclass.  These classes do not contain Selection DAG patterns.
 //===----------------------------------------------------------------------===//
-
-
-
-
 // Generic 3 operand binary instructions (i.e., add r0, r1, r2).
 multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
                        string opasm, bit Commutable> {
@@ -246,7 +242,7 @@ multiclass MBLAZEBinaryEXT5Inst<bits<6> mincode, string opasm> :
 
 
 // TYPE A format
-multiclass MBLAZEBinaryInstDUMMY<bits<6> op, bits<11> flag,
+multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
                        string opasm, bit Commutable> {
   def _rrr : TA<op, flag, (outs GPR32:$A),
                         (ins GPR32:$B, GPR32:$C),
@@ -255,28 +251,21 @@ multiclass MBLAZEBinaryInstDUMMY<bits<6> op, bits<11> flag,
   { let isCommutable = Commutable; }
 
   def _rru6 : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, GPR32:$C),
-                        !strconcat(opasm, "\t$A, $B, $C"),
+                        (ins GPR32:$B, immU6:$U6),
+                        !strconcat(opasm, "\t$A, $B, $U6"),
                         []>;
   
   def _rrlimm : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, GPR32:$C),
-                        !strconcat(opasm, "\t$A, $B, $C"),
+                        (ins GPR32:$B, i32imm:$LImm),
+                        !strconcat(opasm, "\t$A, $B, $LImm"),
                         []>;
 
-  def _rrs12 : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, GPR32:$C),
-                        !strconcat(opasm, "\t$A, $B, $C"),
+  def _rrs12 : TA<op, flag, (outs GPR32:$B),
+                        (ins GPR32:$in, immS<12>:$S12),
+                        !strconcat(opasm, "\t$B, $in, $S12"),
                         []>;                        
 
 }
-multiclass MBLAZEBinaryGENDummy<bits<6> mincode, string opasm, bit Commutable = 0> : 
-MBLAZEBinaryInstDUMMY<0b00100, mincode, opasm, Commutable>;
-
-// multiclass MBLAZEUnaryGEN4Inst<bits<6> mincode, string opasm> :
-//   MBLAZEUnaryInst<0b00100, mincode, opasm>;
-// multiclass MBLAZEUnaryEXT5Inst<bits<6> mincode, string opasm> :
-//   MBLAZEUnaryInst<0b00101, mincode, opasm>;
 
 // // Pattern generation for different instruction variants.
 multiclass MultiPat<SDPatternOperator InFrag,
@@ -289,12 +278,15 @@ multiclass MultiPat<SDPatternOperator InFrag,
 // // ---------------------------------------------------------------------------
 // // Instruction definitions and patterns for 3 operand binary instructions.
 // // ---------------------------------------------------------------------------
-
-
 // Definitions for 3 operand binary instructions.
-// codificata come mblaze
-//defm DUMMY : MBLAZEBinaryInstDUMMY<000000, 00000, "dummy",1>;
-defm ADD : MBLAZEBinaryInstDUMMY<000000, 00000000000, "add",1>;
+
+// The instruction codification is:
+// |31|30|29|28|27|26|25|24|23|22|21|20|19|18|17|16|15|14|13|12|11|10|9|8|7|6|5|4|3|2|1|0   |
+// |-----------FLAGS----------------|-----RB-------|-------RA-----|-----RD---|0CK000|
+// C add with carry
+// K add and keep carry
+// KC add with carry and keep carry 
+defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add",1>; //mblaze codifica
 
 //defm ADD : MBLAZEBinaryGEN4Inst<0b000000, "add",1>;
 defm SUB : MBLAZEBinaryGEN4Inst<0b000010, "sub">;
