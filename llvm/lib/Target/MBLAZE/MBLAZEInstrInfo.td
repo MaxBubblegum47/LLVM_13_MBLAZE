@@ -35,10 +35,10 @@ let PrintMethod = "printU6" in {
 // ---------------------------------------------------------------------------
 
 // Selection DAG types.
-// def SDT_MBLAZEcmptst : SDTypeProfile<0, 2, [SDTCisSameAs<0, 1>]>;
-// def SDT_MBLAZEcmov : SDTypeProfile<1, 3, [SDTCisSameAs<0, 1>]>;
-// def SDT_MBLAZEmov : SDTypeProfile<1, 1, [SDTCisSameAs<0, 1>]>;
-// def SDT_MBLAZEbrcc : SDTypeProfile<0, 4, []>;
+def SDT_MBLAZEcmptst : SDTypeProfile<0, 2, [SDTCisSameAs<0, 1>]>;
+def SDT_MBLAZEcmov : SDTypeProfile<1, 3, [SDTCisSameAs<0, 1>]>;
+def SDT_MBLAZEmov : SDTypeProfile<1, 1, [SDTCisSameAs<0, 1>]>;
+def SDT_MBLAZEbrcc : SDTypeProfile<0, 4, []>;
 def SDT_MBLAZEBranchLink : SDTypeProfile<0, 1, [SDTCisPtrTy<0>]>;
 def SDT_MBLAZECallSeqStart : SDCallSeqStart<[ SDTCisVT<0, i32>,
                                            SDTCisVT<1, i32> ]>;
@@ -46,18 +46,18 @@ def SDT_MBLAZECallSeqEnd   : SDCallSeqEnd<[ SDTCisVT<0, i32>,
                                          SDTCisVT<1, i32> ]>;
 
 
-// // Global Address.
-// def MBLAZEGAWrapper : SDNode<"MBLAZEISD::GAWRAPPER", SDT_MBLAZEmov, []>;
+// Global Address.
+def MBLAZEGAWrapper : SDNode<"MBLAZEISD::GAWRAPPER", SDT_MBLAZEmov, []>;
 
-// // Comparison
-// def MBLAZEcmp : SDNode<"MBLAZEISD::CMP", SDT_MBLAZEcmptst, [SDNPOutGlue]>;
+// Comparison
+def MBLAZEcmp : SDNode<"MBLAZEISD::CMP", SDT_MBLAZEcmptst, [SDNPOutGlue]>;
 
-// // Conditional mov
-// def MBLAZEcmov : SDNode<"MBLAZEISD::CMOV", SDT_MBLAZEcmov, [SDNPInGlue]>;
+// Conditional mov
+def MBLAZEcmov : SDNode<"MBLAZEISD::CMOV", SDT_MBLAZEcmov, [SDNPInGlue]>;
 
-// // Conditional Branch
-// def MBLAZEbrcc : SDNode<"MBLAZEISD::BRcc", SDT_MBLAZEbrcc,
-//                        [SDNPHasChain, SDNPInGlue, SDNPOutGlue]>;
+// Conditional Branch
+def MBLAZEbrcc : SDNode<"MBLAZEISD::BRcc", SDT_MBLAZEbrcc,
+                       [SDNPHasChain, SDNPInGlue, SDNPOutGlue]>;
 
 // Direct Call
 def MBLAZEBranchLink     : SDNode<"MBLAZEISD::BL",SDT_MBLAZEBranchLink,
@@ -205,33 +205,33 @@ multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
   { let Constraints = "$B = $in"; let Defs = [STATUS32]; }
 }
 
-// // Special multivariant GEN4 DOP format instruction that take 2 registers.
-// // This is the class that is used for various comparison instructions.
-// multiclass MBLAZESpecialDOPInst<bits<6> subop, string opasm, bit F> {
-//   def _rr : F32_DOP_RR<0b00100, subop, F, (outs), (ins GPR32:$B, GPR32:$C),
-//                !strconcat(opasm, "\t$B, $C"),
-//                []>;
+// Special multivariant GEN4 DOP format instruction that take 2 registers.
+// This is the class that is used for various comparison instructions.
+multiclass MBLAZESpecialDOPInst<bits<6> subop, string opasm, bit F> {
+  def _rr : F32_DOP_RR<0b00100, subop, F, (outs), (ins GPR32:$B, GPR32:$C),
+               !strconcat(opasm, "\t$B, $C"),
+               []>;
 
-//   def _ru6 : F32_DOP_RU6<0b00100, subop, F, (outs), (ins GPR32:$B, i32imm:$U6),
-//                !strconcat(opasm, "\t$B, $U6"),
-//                []>;
+  def _ru6 : F32_DOP_RU6<0b00100, subop, F, (outs), (ins GPR32:$B, i32imm:$U6),
+               !strconcat(opasm, "\t$B, $U6"),
+               []>;
 
-//   def _rlimm : F32_DOP_RLIMM<0b00100, subop, F, (outs),
-//                (ins GPR32:$B, i32imm:$LImm),
-//                !strconcat(opasm, "\t$B, $LImm"),
-//                []>;
-// }
+  def _rlimm : F32_DOP_RLIMM<0b00100, subop, F, (outs),
+               (ins GPR32:$B, i32imm:$LImm),
+               !strconcat(opasm, "\t$B, $LImm"),
+               []>;
+}
 
-// // Generic 2-operand unary instructions.
-// multiclass MBLAZEUnaryInst<bits<5> major, bits<6> subop,
-//                         string opasm> {
-//   def _rr : F32_SOP_RR<major, subop, 0, (outs GPR32:$B), (ins GPR32:$C),
-//                        !strconcat(opasm, "\t$B, $C"), []>;
+// Generic 2-operand unary instructions.
+multiclass MBLAZEUnaryInst<bits<5> major, bits<6> subop,
+                        string opasm> {
+  def _rr : F32_SOP_RR<major, subop, 0, (outs GPR32:$B), (ins GPR32:$C),
+                       !strconcat(opasm, "\t$B, $C"), []>;
 
-//   def _f_rr : F32_SOP_RR<major, subop, 1, (outs GPR32:$B), (ins GPR32:$C),
-//                        !strconcat(opasm, ".f\t$B, $C"), []>
-//   { let Defs = [STATUS32]; }
-// }
+  def _f_rr : F32_SOP_RR<major, subop, 1, (outs GPR32:$B), (ins GPR32:$C),
+                       !strconcat(opasm, ".f\t$B, $C"), []>
+  { let Defs = [STATUS32]; }
+}
 
 
 multiclass MBLAZEBinaryGEN4Inst<bits<6> mincode, string opasm, bit Commutable = 0> :
@@ -239,9 +239,13 @@ multiclass MBLAZEBinaryGEN4Inst<bits<6> mincode, string opasm, bit Commutable = 
 multiclass MBLAZEBinaryEXT5Inst<bits<6> mincode, string opasm> :
   MBLAZEBinaryInst<0b00101, mincode, opasm, 0>;
 
+multiclass MBLAZEUnaryGEN4Inst<bits<6> mincode, string opasm> :
+  MBLAZEUnaryInst<0b00100, mincode, opasm>;
+multiclass MBLAZEUnaryEXT5Inst<bits<6> mincode, string opasm> :
+  MBLAZEUnaryInst<0b00101, mincode, opasm>;
 
 
-// TYPE A format
+// TYPE A format reference
 multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
                        string opasm, bit Commutable> {
   def _rrr : TA<op, flag, (outs GPR32:$A),
@@ -267,6 +271,31 @@ multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
 
 }
 
+multiclass MBLAZEBinaryInstSub<bits<6> op, bits<11> flag,
+                       string opasm> {
+  def _rrr : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>;
+  
+
+  def _rru6 : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, immU6:$U6),
+                        !strconcat(opasm, "\t$A, $B, $U6"),
+                        []>;
+  
+  def _rrlimm : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, i32imm:$LImm),
+                        !strconcat(opasm, "\t$A, $B, $LImm"),
+                        []>;
+
+  def _rrs12 : TAR<op, flag, (outs GPR32:$B),
+                        (ins GPR32:$in, immS<12>:$S12),
+                        !strconcat(opasm, "\t$B, $in, $S12"),
+                        []>;                        
+
+}
+
 // // Pattern generation for different instruction variants.
 multiclass MultiPat<SDPatternOperator InFrag,
                Instruction RRR, Instruction RRU6, Instruction RRLImm> {
@@ -286,17 +315,25 @@ multiclass MultiPat<SDPatternOperator InFrag,
 // C add with carry
 // K add and keep carry
 // KC add with carry and keep carry 
-defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add",1>; //mblaze codifica
 
-//defm ADD : MBLAZEBinaryGEN4Inst<0b000000, "add",1>;
-defm SUB : MBLAZEBinaryGEN4Inst<0b000010, "sub">;
+// implemented with mblaze
+defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
+defm SUB : MBLAZEBinaryInstSub<000001, 00000000000, "sub">;
+defm OR  : MBLAZEBinaryInstAdd<100000, 00000000000,"or",1>; // the same codec as the add with 2 registers as arguments
+defm AND : MBLAZEBinaryInstAdd<100001, 00000000000,"and",1>; // the same codec as the add with 2 registers as arguments
+defm XOR : MBLAZEBinaryInstAdd<100010, 00000000000,"xor",1>;
+
+
+// implemented in arc
+// idk how to handle, I need to do some test and understand where and how they are used for
 defm SUB1 : MBLAZEBinaryGEN4Inst<0b010111, "sub1">;
 defm SUB2 : MBLAZEBinaryGEN4Inst<0b011000, "sub2">;
 defm SUB3 : MBLAZEBinaryGEN4Inst<0b011001, "sub3">;
-defm RSUB : MBLAZEBinaryGEN4Inst<0b001110, "rsub">;
-defm OR  : MBLAZEBinaryGEN4Inst<0b000101, "or",1>;
-defm AND : MBLAZEBinaryGEN4Inst<0b000100, "and",1>;
-defm XOR : MBLAZEBinaryGEN4Inst<0b000111, "xor",1>;
+defm RSUB : MBLAZEBinaryGEN4Inst<0b001110, "rsub">; // this is equivalent to mblaze sub (that's called rsub in doc)
+
+
+
+// this dik wtf is that, seems some sort of shortcut(?) I'm thinking about MAX/MIN for example
 defm MAX : MBLAZEBinaryGEN4Inst<0b001000, "max",1>;
 defm MIN : MBLAZEBinaryGEN4Inst<0b001001, "min",1>;
 defm ASL : MBLAZEBinaryEXT5Inst<0b000000, "asl">;
@@ -325,27 +362,27 @@ defm : MultiPat<mul, MPY_rrr, MPY_rru6, MPY_rrlimm>;
 defm : MultiPat<mulhs, MPYM_rrr, MPYM_rru6, MPYM_rrlimm>;
 defm : MultiPat<mulhu, MPYMU_rrr, MPYMU_rru6, MPYMU_rrlimm>;
 
-// // ---------------------------------------------------------------------------
-// // Unary Instruction definitions.
-// // ---------------------------------------------------------------------------
-// // General unary instruction definitions.
-// defm SEXB : MBLAZEUnaryGEN4Inst<0b000101, "sexb">;
-// defm SEXH : MBLAZEUnaryGEN4Inst<0b000110, "sexh">;
+// ---------------------------------------------------------------------------
+// Unary Instruction definitions.
+// ---------------------------------------------------------------------------
+// General unary instruction definitions.
+defm SEXB : MBLAZEUnaryGEN4Inst<0b000101, "sexb">;
+defm SEXH : MBLAZEUnaryGEN4Inst<0b000110, "sexh">;
 
-// // Extension unary instruction definitions.
-// defm FLS : MBLAZEUnaryEXT5Inst<0b010011, "fls">;
+// Extension unary instruction definitions.
+defm FLS : MBLAZEUnaryEXT5Inst<0b010011, "fls">;
 
-// // General Unary Instruction fragments.
-// def : Pat<(sext_inreg i32:$a, i8), (SEXB_rr i32:$a)>;
-// def : Pat<(sext_inreg i32:$a, i16), (SEXH_rr i32:$a)>;
+// General Unary Instruction fragments.
+def : Pat<(sext_inreg i32:$a, i8), (SEXB_rr i32:$a)>;
+def : Pat<(sext_inreg i32:$a, i16), (SEXH_rr i32:$a)>;
 
-// // Comparison instruction definition
-// let isCompare = 1, Defs = [STATUS32] in {
-// defm CMP : MBLAZESpecialDOPInst<0b001100, "cmp", 1>;
-// }
+// Comparison instruction definition
+let isCompare = 1, Defs = [STATUS32] in {
+defm CMP : MBLAZESpecialDOPInst<0b001100, "cmp", 1>;
+}
 
-// def cmp : PatFrag<(ops node:$op1, node:$op2), (MBLAZEcmp $op1, $op2)>;
-// defm : MultiPat<cmp, CMP_rr, CMP_ru6, CMP_rlimm>;
+def cmp : PatFrag<(ops node:$op1, node:$op2), (MBLAZEcmp $op1, $op2)>;
+defm : MultiPat<cmp, CMP_rr, CMP_ru6, CMP_rlimm>;
 
 // // ---------------------------------------------------------------------------
 // // MOV instruction and variants (conditional mov).
@@ -357,44 +394,44 @@ def MOV_rs12 : F32_DOP_RS12<0b00100, 0b001010, 0,
                  [(set GPR32:$B, immS<12>:$S12)]>;
 }
 
-// def MOV_rr : F32_DOP_RR<0b00100, 0b001010, 0,
-//                 (outs GPR32:$B), (ins GPR32:$C),
-//                 "mov\t$B, $C", []>;
+def MOV_rr : F32_DOP_RR<0b00100, 0b001010, 0,
+                (outs GPR32:$B), (ins GPR32:$C),
+                "mov\t$B, $C", []>;
 
 def MOV_rlimm : F32_DOP_RLIMM<0b00100, 0b001010, 0,
                       (outs GPR32:$B), (ins i32imm:$LImm),
                       "mov\t$B, $LImm", []>;
 
-// def MOV_ru6 : F32_DOP_RU6<0b00100, 0b001010, 0,
-//                           (outs GPR32:$B), (ins immU6:$U6),
-//                           "mov\t$B, $U6", []>;
+def MOV_ru6 : F32_DOP_RU6<0b00100, 0b001010, 0,
+                          (outs GPR32:$B), (ins immU6:$U6),
+                          "mov\t$B, $U6", []>;
 
-// def cmov : PatFrag<(ops node:$op1, node:$op2, node:$cc),
-//                    (MBLAZEcmov $op1, $op2, $cc)>;
-// let Uses = [STATUS32] in {
-//   def MOVcc : F32_DOP_CC_RR<0b00100, 0b001010, 0,
-//                  (outs GPR32:$B),
-//                  (ins GPR32:$C, GPR32:$fval, cmovpred:$cc),
-//                  !strconcat("mov.", "$cc\t$B, $C"),
-//                  [(set GPR32:$B, (cmov i32:$C, i32:$fval, cmovpred:$cc))]> {
-//     let Constraints = "$B = $fval";
-//   }
+def cmov : PatFrag<(ops node:$op1, node:$op2, node:$cc),
+                   (MBLAZEcmov $op1, $op2, $cc)>;
+let Uses = [STATUS32] in {
+  def MOVcc : F32_DOP_CC_RR<0b00100, 0b001010, 0,
+                 (outs GPR32:$B),
+                 (ins GPR32:$C, GPR32:$fval, cmovpred:$cc),
+                 !strconcat("mov.", "$cc\t$B, $C"),
+                 [(set GPR32:$B, (cmov i32:$C, i32:$fval, cmovpred:$cc))]> {
+    let Constraints = "$B = $fval";
+  }
 
-//   def MOVcc_ru6 : F32_SOP_CC_RU6<0b00100, 0b001010, 0,
-//                  (outs GPR32:$b), (ins u6:$c, CCOp:$cc, GPR32:$b2),
-//                  "mov.$cc\t$b, $c", []> {
-//     let isAsCheapAsAMove=0;
-//     let isPredicable=1;
-//     let isReMaterializable=0;
-//     let Constraints="$b2 = $b";
-//   }
-// }
+  def MOVcc_ru6 : F32_SOP_CC_RU6<0b00100, 0b001010, 0,
+                 (outs GPR32:$b), (ins u6:$c, CCOp:$cc, GPR32:$b2),
+                 "mov.$cc\t$b, $c", []> {
+    let isAsCheapAsAMove=0;
+    let isPredicable=1;
+    let isReMaterializable=0;
+    let Constraints="$b2 = $b";
+  }
+}
 
-// def : Pat<(MBLAZEGAWrapper tglobaladdr:$addr),
-//            (MOV_rlimm tglobaladdr:$addr)>;
+def : Pat<(MBLAZEGAWrapper tglobaladdr:$addr),
+           (MOV_rlimm tglobaladdr:$addr)>;
 
-// def : Pat<(MBLAZEGAWrapper tjumptable:$addr),
-//            (MOV_rlimm tjumptable:$addr)>;
+def : Pat<(MBLAZEGAWrapper tjumptable:$addr),
+           (MOV_rlimm tjumptable:$addr)>;
 
 
 // ---------------------------------------------------------------------------
@@ -402,56 +439,56 @@ def MOV_rlimm : F32_DOP_RLIMM<0b00100, 0b001010, 0,
 // ---------------------------------------------------------------------------
 
 // Branch instructions
-// let isBranch = 1, isTerminator = 1 in {
+let isBranch = 1, isTerminator = 1 in {
 
-//   // Unconditional branch.
-//   let isBarrier = 1 in
-//   def BR : F32_BR0_UCOND_FAR<(outs), (ins btargetS25:$S25),
-//                              "b\t$S25", [(br bb:$S25)]>;
+  // Unconditional branch.
+  let isBarrier = 1 in
+  def BR : F32_BR0_UCOND_FAR<(outs), (ins btargetS25:$S25),
+                             "b\t$S25", [(br bb:$S25)]>;
 
-//   let Uses=[STATUS32] in
-//   // Conditional branch.
-//   def Bcc : F32_BR0_COND<(outs), (ins btargetS21:$S21, ccond:$cc),
-//                          "b$cc\t$S21", []>;
+  let Uses=[STATUS32] in
+  // Conditional branch.
+  def Bcc : F32_BR0_COND<(outs), (ins btargetS21:$S21, ccond:$cc),
+                         "b$cc\t$S21", []>;
 
   // Compare and branch (limited range).
-  // def BRcc_rr  : F32_BR1_BCC<(outs),
-  //                            (ins btargetS9:$S9, GPR32:$B, GPR32:$C, brccond:$cc),
-  //                            "br$cc\t$B, $C, $S9", 0, []>;
-  // def BRcc_ru6 : F32_BR1_BCC<(outs),
-  //                            (ins btargetS9:$S9, GPR32:$B, immU6:$C, brccond:$cc),
-  //                            "br$cc\t$B, $C, $S9", 1, []>;
+  def BRcc_rr  : F32_BR1_BCC<(outs),
+                             (ins btargetS9:$S9, GPR32:$B, GPR32:$C, brccond:$cc),
+                             "br$cc\t$B, $C, $S9", 0, []>;
+  def BRcc_ru6 : F32_BR1_BCC<(outs),
+                             (ins btargetS9:$S9, GPR32:$B, immU6:$C, brccond:$cc),
+                             "br$cc\t$B, $C, $S9", 1, []>;
 
   // Pseudo compare and branch.
   // After register allocation, this can expand into either a limited range
   // Compare and branch (BRcc), or into CMP + Bcc.
   // At worst, this expands into 2 4-byte instructions.
-  // def BRcc_rr_p : PseudoInstMBLAZE<(outs),
-  //                               (ins btarget:$T, GPR32:$B, GPR32:$C, ccond:$cc),
-  //                               "pbr$cc\t$B, $C, $T",
-  //                               [(MBLAZEbrcc bb:$T, i32:$B, i32:$C, imm32:$cc)]>
-  //                               { let Size = 8; }
+  def BRcc_rr_p : PseudoInstMBLAZE<(outs),
+                                (ins btarget:$T, GPR32:$B, GPR32:$C, ccond:$cc),
+                                "pbr$cc\t$B, $C, $T",
+                                [(MBLAZEbrcc bb:$T, i32:$B, i32:$C, imm32:$cc)]>
+                                { let Size = 8; }
 
-  // def BRcc_ru6_p : PseudoInstMBLAZE<(outs),
-  //                                (ins btarget:$T, GPR32:$B, i32imm:$C, ccond:$cc),
-  //                                "pbr$cc\t$B, $C, $T",
-  //                                [(MBLAZEbrcc bb:$T, i32:$B, immU6:$C, imm32:$cc)]>
-  //                                { let Size = 8; }
-//} // let isBranch, isTerminator
+  def BRcc_ru6_p : PseudoInstMBLAZE<(outs),
+                                 (ins btarget:$T, GPR32:$B, i32imm:$C, ccond:$cc),
+                                 "pbr$cc\t$B, $C, $T",
+                                 [(MBLAZEbrcc bb:$T, i32:$B, immU6:$C, imm32:$cc)]>
+                                 { let Size = 8; }
+} // let isBranch, isTerminator
 
 // Unconditional Jump.
-// let isBranch = 1, isTerminator = 1, isBarrier = 1 in {
-//   // Indirect.
-//   let isIndirectBranch = 1 in
-//   def J :  F32_DOP_RR<0b00100, 0b100000, 0,
-//                       (outs), (ins GPR32:$C),
-//                       "j\t[$C]", [(brind i32:$C)]>;
+let isBranch = 1, isTerminator = 1, isBarrier = 1 in {
+  // Indirect.
+  let isIndirectBranch = 1 in
+  def J :  F32_DOP_RR<0b00100, 0b100000, 0,
+                      (outs), (ins GPR32:$C),
+                      "j\t[$C]", [(brind i32:$C)]>;
 
-//   // Direct.
-//   def J_LImm : F32_DOP_RLIMM<0b00100, 0b100000, 0,
-//                              (outs), (ins i32imm:$LImm),
-//                              "j\t$LImm", []>;
-// }
+  // Direct.
+  def J_LImm : F32_DOP_RLIMM<0b00100, 0b100000, 0,
+                             (outs), (ins i32imm:$LImm),
+                             "j\t$LImm", []>;
+}
 
 // Call instructions.
 let isCall = 1, isBarrier = 1, Defs = [BLINK], Uses = [SP] in {
@@ -494,382 +531,382 @@ def PUSH_S_BLINK : F16_SP_OPS_buconst<0b111, "push_s">;
 let Defs = [BLINK, SP] in
 def POP_S_BLINK : F16_SP_OPS_buconst<0b110, "pop_s">;
 
-// def PUSH_S_r : F16_SP_OPS_uconst<0b110,
-//   (outs), (ins GPR32Reduced:$b3), "push_s">;
-// def POP_S_r : F16_SP_OPS_uconst<0b111,
-//   (outs GPR32Reduced:$b3), (ins), "pop_s">;
+def PUSH_S_r : F16_SP_OPS_uconst<0b110,
+  (outs), (ins GPR32Reduced:$b3), "push_s">;
+def POP_S_r : F16_SP_OPS_uconst<0b111,
+  (outs GPR32Reduced:$b3), (ins), "pop_s">;
 
-// def SP_SUB_SP_S : F16_SP_OPS_bconst<0b001, "sub_s">;
-// def SP_ADD_SP_S : F16_SP_OPS_bconst<0b000, "add_s">;
-// def SP_ADD_S : F16_SP_OPS_u7_aligned<0b100,
-//                 (outs GPR32Reduced:$b3), (ins immU<7>:$u7),
-//                 "add_s\t$b3, %sp, $u7">;
+def SP_SUB_SP_S : F16_SP_OPS_bconst<0b001, "sub_s">;
+def SP_ADD_SP_S : F16_SP_OPS_bconst<0b000, "add_s">;
+def SP_ADD_S : F16_SP_OPS_u7_aligned<0b100,
+                (outs GPR32Reduced:$b3), (ins immU<7>:$u7),
+                "add_s\t$b3, %sp, $u7">;
 
-// def SP_LD_S : F16_SP_LD<0b000, "ld_s">;
-// def SP_LDB_S : F16_SP_LD<0b001, "ldb_s">;
-// def SP_ST_S : F16_SP_ST<0b010, "st_s">;
-// def SP_STB_S : F16_SP_ST<0b011, "stb_s">;
+def SP_LD_S : F16_SP_LD<0b000, "ld_s">;
+def SP_LDB_S : F16_SP_LD<0b001, "ldb_s">;
+def SP_ST_S : F16_SP_ST<0b010, "st_s">;
+def SP_STB_S : F16_SP_ST<0b011, "stb_s">;
 
-// def LEAVE_S : F16_SP_OPS<0b110,
-//   (outs), (ins immU<7>:$u7), "leave_s\t$u7"> {
+def LEAVE_S : F16_SP_OPS<0b110,
+  (outs), (ins immU<7>:$u7), "leave_s\t$u7"> {
 
-//   bits<7> u7;
+  bits<7> u7;
 
-//   let fieldB = u7{6-4};
-//   let fieldU{4-1} = u7{3-0};
-//   let fieldU{0} = 0b0;
-// }
+  let fieldB = u7{6-4};
+  let fieldU{4-1} = u7{3-0};
+  let fieldU{0} = 0b0;
+}
 
-// def ENTER_S : F16_SP_OPS<0b111,
-//   (outs), (ins immU<6>:$u6), "enter_s\t$u6"> {
+def ENTER_S : F16_SP_OPS<0b111,
+  (outs), (ins immU<6>:$u6), "enter_s\t$u6"> {
 
-//   bits<6> u6;
+  bits<6> u6;
 
-//   let fieldB{2} = 0;
-//   let fieldB{1-0} = u6{5-4};
-//   let fieldU{4-1} = u6{3-0};
-//   let fieldU{0} = 0b0;
-// }
+  let fieldB{2} = 0;
+  let fieldB{1-0} = u6{5-4};
+  let fieldU{4-1} = u6{3-0};
+  let fieldU{0} = 0b0;
+}
 
-// //----------------------------------------------------------------------------
-// // Compact Move/Load instructions.
-// //----------------------------------------------------------------------------
-// class COMPACT_MOV_S :
-//   F16_COMPACT<0b0, (outs GPR32:$g), (ins GPR32:$h),
-//           "mov_s\t$g, $h"> {
-//   let DecoderMethod = "DecodeMoveHRegInstruction";
-// }
+//----------------------------------------------------------------------------
+// Compact Move/Load instructions.
+//----------------------------------------------------------------------------
+class COMPACT_MOV_S :
+  F16_COMPACT<0b0, (outs GPR32:$g), (ins GPR32:$h),
+          "mov_s\t$g, $h"> {
+  let DecoderMethod = "DecodeMoveHRegInstruction";
+}
 
-// def COMPACT_MOV_S_limm : COMPACT_MOV_S {
-//   bits<32> LImm;
-//   let Inst{47-16} = LImm;
+def COMPACT_MOV_S_limm : COMPACT_MOV_S {
+  bits<32> LImm;
+  let Inst{47-16} = LImm;
 
-//   bits<5> LImmReg = 0b11110;
-//   let Inst{7-5} = LImmReg{2-0};
-//   let Inst{1-0} = LImmReg{4-3};
+  bits<5> LImmReg = 0b11110;
+  let Inst{7-5} = LImmReg{2-0};
+  let Inst{1-0} = LImmReg{4-3};
 
-//   let Size = 6;
-// }
+  let Size = 6;
+}
 
-// def COMPACT_MOV_S_hreg : COMPACT_MOV_S;
+def COMPACT_MOV_S_hreg : COMPACT_MOV_S;
 
-// def COMPACT_LD_S :
-//   F16_COMPACT<0b1, (outs GPR32:$r), (ins GPR32:$h, immU<5>:$u5),
-//           "ld_s\t$r, [$h, $u5]"> {
-//   bits<5> u5;
-//   bits<2> r;
+def COMPACT_LD_S :
+  F16_COMPACT<0b1, (outs GPR32:$r), (ins GPR32:$h, immU<5>:$u5),
+          "ld_s\t$r, [$h, $u5]"> {
+  bits<5> u5;
+  bits<2> r;
 
-//   let Inst{10} = u5{4};
-//   let Inst{9-8} = r;
-//   let Inst{4-3} = u5{3-2};
-//   let u5{1-0} = 0b00;
-// }
+  let Inst{10} = u5{4};
+  let Inst{9-8} = r;
+  let Inst{4-3} = u5{3-2};
+  let u5{1-0} = 0b00;
+}
 
-// //----------------------------------------------------------------------------
-// // Compact Load/Add/Sub.
-// //----------------------------------------------------------------------------
-// def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
-// def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
-// def ADD_S_rru6 : F16_ADD;
+//----------------------------------------------------------------------------
+// Compact Load/Add/Sub.
+//----------------------------------------------------------------------------
+def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
+def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
+def ADD_S_rru6 : F16_ADD;
 
-// //----------------------------------------------------------------------------
-// // Compact Load/Store.
-// //----------------------------------------------------------------------------
-// def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
-// def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
-// def LDI_S_u7 : F16_LDI_u7;
+//----------------------------------------------------------------------------
+// Compact Load/Store.
+//----------------------------------------------------------------------------
+def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
+def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
+def LDI_S_u7 : F16_LDI_u7;
 
-// //----------------------------------------------------------------------------
-// // Indexed Jump or Execute.
-// //----------------------------------------------------------------------------
-// def JLI_S : F16_JLI_EI<0, "jli_s">;
-// def EI_S : F16_JLI_EI<1, "ei_s">;
+//----------------------------------------------------------------------------
+// Indexed Jump or Execute.
+//----------------------------------------------------------------------------
+def JLI_S : F16_JLI_EI<0, "jli_s">;
+def EI_S : F16_JLI_EI<1, "ei_s">;
 
-// //----------------------------------------------------------------------------
-// // Load/Add Register-Register.
-// //----------------------------------------------------------------------------
-// def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
-// def LDB_S_rrr : F16_LD_ADD_RR<0b01, "ldb_s\t$a, [$b, $c]">;
-// def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
-// def ADD_S_rrr : F16_LD_ADD_RR<0b11, "add_s\t$a, $b, $c">;
+//----------------------------------------------------------------------------
+// Load/Add Register-Register.
+//----------------------------------------------------------------------------
+def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
+def LDB_S_rrr : F16_LD_ADD_RR<0b01, "ldb_s\t$a, [$b, $c]">;
+def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
+def ADD_S_rrr : F16_LD_ADD_RR<0b11, "add_s\t$a, $b, $c">;
 
-// //----------------------------------------------------------------------------
-// // Load/Add GP-Relative.
-// //----------------------------------------------------------------------------
-// def GP_LD_S : F16_GP_LD_ADD<0b00, (ins immS<11>:$s),
-//   "ld_s\t%r0, [%gp, $s]"> {
+//----------------------------------------------------------------------------
+// Load/Add GP-Relative.
+//----------------------------------------------------------------------------
+def GP_LD_S : F16_GP_LD_ADD<0b00, (ins immS<11>:$s),
+  "ld_s\t%r0, [%gp, $s]"> {
 
-//   bits<11> s;
-//   let Inst{8-0} = s{10-2};
-//   let s{1-0} = 0b00;
-// }
+  bits<11> s;
+  let Inst{8-0} = s{10-2};
+  let s{1-0} = 0b00;
+}
 
-// def GP_LDB_S : F16_GP_LD_ADD<0b01, (ins immS<9>:$s),
-//   "ldb_s\t%r0, [%gp, $s]"> {
+def GP_LDB_S : F16_GP_LD_ADD<0b01, (ins immS<9>:$s),
+  "ldb_s\t%r0, [%gp, $s]"> {
 
-//   bits<9> s;
-//   let Inst{8-0} = s{8-0};
-// }
+  bits<9> s;
+  let Inst{8-0} = s{8-0};
+}
 
-// def GP_LDH_S : F16_GP_LD_ADD<0b10, (ins immS<10>:$s),
-//   "ldh_s\t%r0, [%gp, $s]"> {
+def GP_LDH_S : F16_GP_LD_ADD<0b10, (ins immS<10>:$s),
+  "ldh_s\t%r0, [%gp, $s]"> {
 
-//   bits<10> s;
-//   let Inst{8-0} = s{9-1};
-//   let s{0} = 0b0;
-// }
+  bits<10> s;
+  let Inst{8-0} = s{9-1};
+  let s{0} = 0b0;
+}
 
-// def GP_ADD_S : F16_GP_LD_ADD<0b11, (ins immS<11>:$s),
-//   "add_s\t%r0, %gp, $s"> {
+def GP_ADD_S : F16_GP_LD_ADD<0b11, (ins immS<11>:$s),
+  "add_s\t%r0, %gp, $s"> {
 
-//   bits<11> s;
-//   let Inst{8-0} = s{10-2};
-//   let s{1-0} = 0b00;
-// }
+  bits<11> s;
+  let Inst{8-0} = s{10-2};
+  let s{1-0} = 0b00;
+}
 
-// //----------------------------------------------------------------------------
-// // Load PCL-Relative.
-// //----------------------------------------------------------------------------
-// def PCL_LD : InstMBLAZE<2, (outs GPR32:$b), (ins immU<10>:$u10),
-//  "ld_s\t$b, [%pcl, $u10]", []> {
+//----------------------------------------------------------------------------
+// Load PCL-Relative.
+//----------------------------------------------------------------------------
+def PCL_LD : InstMBLAZE<2, (outs GPR32:$b), (ins immU<10>:$u10),
+ "ld_s\t$b, [%pcl, $u10]", []> {
 
-//   bits<3> b;
-//   bits<10> u10;
+  bits<3> b;
+  bits<10> u10;
 
-//   let Inst{15-11} = 0b11010;
-//   let Inst{10-8} = b;
-//   let Inst{7-0} = u10{9-2};
-//   let u10{1-0} = 0b00;
-// }
+  let Inst{15-11} = 0b11010;
+  let Inst{10-8} = b;
+  let Inst{7-0} = u10{9-2};
+  let u10{1-0} = 0b00;
+}
 
-// let isBranch = 1 in {
-//   //----------------------------------------------------------------------------
-//   // Branch on Compare Register with Zero.
-//   //----------------------------------------------------------------------------
-//   def BREQ_S : F16_BCC_REG<0b0, "breq_s">;
-//   def BRNE_S : F16_BCC_REG<0b1, "brne_s">;
+let isBranch = 1 in {
+  //----------------------------------------------------------------------------
+  // Branch on Compare Register with Zero.
+  //----------------------------------------------------------------------------
+  def BREQ_S : F16_BCC_REG<0b0, "breq_s">;
+  def BRNE_S : F16_BCC_REG<0b1, "brne_s">;
 
-//   //----------------------------------------------------------------------------
-//   // Branch Conditionally.
-//   //----------------------------------------------------------------------------
-//   let isBarrier = 1 in
-//   def B_S : F16_BCC_s10<0b00, "b_s">;
+  //----------------------------------------------------------------------------
+  // Branch Conditionally.
+  //----------------------------------------------------------------------------
+  let isBarrier = 1 in
+  def B_S : F16_BCC_s10<0b00, "b_s">;
 
-//   def BEQ_S : F16_BCC_s10<0b01, "beq_s">;
-//   def BNE_S : F16_BCC_s10<0b10, "bne_s">;
-//   def BGT_S : F16_BCC_s7<0b000, "bgt_s">;
-//   def BGE_S : F16_BCC_s7<0b001, "bge_s">;
-//   def BLT_S : F16_BCC_s7<0b010, "blt_s">;
-//   def BLE_S : F16_BCC_s7<0b011, "ble_s">;
-//   def BHI_S : F16_BCC_s7<0b100, "bhi_s">;
-//   def BHS_S : F16_BCC_s7<0b101, "bhs_s">;
-//   def BLO_S : F16_BCC_s7<0b110, "blo_s">;
-//   def BLS_S : F16_BCC_s7<0b111, "bls_s">;
-// } // let isBranch
+  def BEQ_S : F16_BCC_s10<0b01, "beq_s">;
+  def BNE_S : F16_BCC_s10<0b10, "bne_s">;
+  def BGT_S : F16_BCC_s7<0b000, "bgt_s">;
+  def BGE_S : F16_BCC_s7<0b001, "bge_s">;
+  def BLT_S : F16_BCC_s7<0b010, "blt_s">;
+  def BLE_S : F16_BCC_s7<0b011, "ble_s">;
+  def BHI_S : F16_BCC_s7<0b100, "bhi_s">;
+  def BHS_S : F16_BCC_s7<0b101, "bhs_s">;
+  def BLO_S : F16_BCC_s7<0b110, "blo_s">;
+  def BLS_S : F16_BCC_s7<0b111, "bls_s">;
+} // let isBranch
 
-// def BL_S :
-//   InstMBLAZE<2, (outs), (ins btargetS13:$s13), "bl_s\t$s13", []> {
+def BL_S :
+  InstMBLAZE<2, (outs), (ins btargetS13:$s13), "bl_s\t$s13", []> {
 
-//   let Inst{15-11} = 0b11111;
+  let Inst{15-11} = 0b11111;
 
-//   bits<13> s13;
-//   let Inst{10-0} = s13{12-2};
-//   let s13{1-0} = 0b00;
+  bits<13> s13;
+  let Inst{10-0} = s13{12-2};
+  let s13{1-0} = 0b00;
 
-//   let isCall = 1;
-//   let isBarrier = 1;
-// }
+  let isCall = 1;
+  let isBarrier = 1;
+}
 
-// //----------------------------------------------------------------------------
-// // Add/Sub/Shift Register-Immediate.
-// //----------------------------------------------------------------------------
-// def ADD_S_ru3 : F16_ADD_IMM<0b00,"add_s">;
-// def SUB_S_ru3 : F16_ADD_IMM<0b01,"sub_s">;
-// def ASL_S_ru3 : F16_ADD_IMM<0b10,"asl_s">;
-// def ASR_S_ru3 : F16_ADD_IMM<0b11,"asr_s">;
+//----------------------------------------------------------------------------
+// Add/Sub/Shift Register-Immediate.
+//----------------------------------------------------------------------------
+def ADD_S_ru3 : F16_ADD_IMM<0b00,"add_s">;
+def SUB_S_ru3 : F16_ADD_IMM<0b01,"sub_s">;
+def ASL_S_ru3 : F16_ADD_IMM<0b10,"asl_s">;
+def ASR_S_ru3 : F16_ADD_IMM<0b11,"asr_s">;
 
-// //----------------------------------------------------------------------------
-// // Shift/Subtract/Bit Immediate.
-// //----------------------------------------------------------------------------
-// def ASL_S_ru5 : F16_SH_SUB_BIT_DST<0b000,"asl_s">;
-// def LSR_S_ru5 : F16_SH_SUB_BIT_DST<0b001,"lsr_s">;
-// def ASR_S_ru5 : F16_SH_SUB_BIT_DST<0b010,"asr_s">;
-// def SUB_S_ru5 : F16_SH_SUB_BIT_DST<0b011,"sub_s">;
-// def BSET_S_ru5 : F16_SH_SUB_BIT_DST<0b100,"bset_s">;
-// def BCLR_S_ru5 : F16_SH_SUB_BIT_DST<0b101,"bclr_s">;
-// def BMSK_S_ru5 : F16_SH_SUB_BIT_DST<0b110,"bmsk_s">;
-// def BTST_S_ru5 : F16_SH_SUB_BIT<0b111, "btst_s\t$b, $u5">;
+//----------------------------------------------------------------------------
+// Shift/Subtract/Bit Immediate.
+//----------------------------------------------------------------------------
+def ASL_S_ru5 : F16_SH_SUB_BIT_DST<0b000,"asl_s">;
+def LSR_S_ru5 : F16_SH_SUB_BIT_DST<0b001,"lsr_s">;
+def ASR_S_ru5 : F16_SH_SUB_BIT_DST<0b010,"asr_s">;
+def SUB_S_ru5 : F16_SH_SUB_BIT_DST<0b011,"sub_s">;
+def BSET_S_ru5 : F16_SH_SUB_BIT_DST<0b100,"bset_s">;
+def BCLR_S_ru5 : F16_SH_SUB_BIT_DST<0b101,"bclr_s">;
+def BMSK_S_ru5 : F16_SH_SUB_BIT_DST<0b110,"bmsk_s">;
+def BTST_S_ru5 : F16_SH_SUB_BIT<0b111, "btst_s\t$b, $u5">;
 
-// //----------------------------------------------------------------------------
-// // Dual Register Operations.
-// //----------------------------------------------------------------------------
-// def ADD_S_rlimm :
-//   F16_OP_HREG_LIMM<0b000, (outs GPR32:$b_s3), (ins i32imm:$LImm),
-//           !strconcat("add_s", "\t$b_s3, $b_s3, $LImm")>;
+//----------------------------------------------------------------------------
+// Dual Register Operations.
+//----------------------------------------------------------------------------
+def ADD_S_rlimm :
+  F16_OP_HREG_LIMM<0b000, (outs GPR32:$b_s3), (ins i32imm:$LImm),
+          !strconcat("add_s", "\t$b_s3, $b_s3, $LImm")>;
 
-// def ADD_S_rr :
-//   F16_OP_HREG<0b000, (outs GPR32:$b_s3), (ins GPR32:$h),
-//           !strconcat("add_s", "\t$b_s3, $b_s3, $h")>;
+def ADD_S_rr :
+  F16_OP_HREG<0b000, (outs GPR32:$b_s3), (ins GPR32:$h),
+          !strconcat("add_s", "\t$b_s3, $b_s3, $h")>;
 
-// def ADD_S_rs3 :
-//   F16_OP_HREG<0b001, (outs GPR32:$h), (ins immC<3>:$b_s3),
-//           !strconcat("add_s", "\t$h, $h, $b_s3")>;
+def ADD_S_rs3 :
+  F16_OP_HREG<0b001, (outs GPR32:$h), (ins immC<3>:$b_s3),
+          !strconcat("add_s", "\t$h, $h, $b_s3")>;
 
-// def ADD_S_limms3 :
-//   F16_OP_HREG_LIMM<0b001, (outs), (ins immC<3>:$b_s3, i32imm:$LImm),
-//           !strconcat("add_s", "\t0, $LImm, $b_s3")>;
+def ADD_S_limms3 :
+  F16_OP_HREG_LIMM<0b001, (outs), (ins immC<3>:$b_s3, i32imm:$LImm),
+          !strconcat("add_s", "\t0, $LImm, $b_s3")>;
 
-// def MOV_S_NE_rlimm :
-//   F16_OP_HREG_LIMM<0b111, (outs GPR32:$b_s3), (ins i32imm:$LImm),
-//           !strconcat("mov_s.ne", "\t$b_s3, $LImm")>;
+def MOV_S_NE_rlimm :
+  F16_OP_HREG_LIMM<0b111, (outs GPR32:$b_s3), (ins i32imm:$LImm),
+          !strconcat("mov_s.ne", "\t$b_s3, $LImm")>;
 
-// def MOV_S_NE_rr :
-//   F16_OP_HREG<0b111,(outs GPR32:$b_s3), (ins GPR32:$h),
-//           !strconcat("mov_s.ne", "\t$b_s3, $h")>;
+def MOV_S_NE_rr :
+  F16_OP_HREG<0b111,(outs GPR32:$b_s3), (ins GPR32:$h),
+          !strconcat("mov_s.ne", "\t$b_s3, $h")>;
 
-// def MOV_S_rs3 :
-//   F16_OP_HREG<0b011, (outs GPR32:$h), (ins immC<3>:$b_s3),
-//           !strconcat("mov_s", "\t$h, $b_s3")>;
+def MOV_S_rs3 :
+  F16_OP_HREG<0b011, (outs GPR32:$h), (ins immC<3>:$b_s3),
+          !strconcat("mov_s", "\t$h, $b_s3")>;
 
-// def MOV_S_s3 :
-//   F16_OP_HREG30<0b011, (outs), (ins immC<3>:$b_s3),
-//           !strconcat("mov_s", "\t0, $b_s3")>;
+def MOV_S_s3 :
+  F16_OP_HREG30<0b011, (outs), (ins immC<3>:$b_s3),
+          !strconcat("mov_s", "\t0, $b_s3")>;
 
-// def CMP_S_rlimm :
-//   F16_OP_HREG_LIMM<0b100, (outs GPR32:$b_s3), (ins i32imm:$LImm),
-//           !strconcat("cmp_s", "\t$b_s3, $LImm")>;
+def CMP_S_rlimm :
+  F16_OP_HREG_LIMM<0b100, (outs GPR32:$b_s3), (ins i32imm:$LImm),
+          !strconcat("cmp_s", "\t$b_s3, $LImm")>;
 
-// def CMP_S_rr :
-//   F16_OP_HREG<0b100, (outs GPR32:$b_s3), (ins GPR32:$h),
-//           !strconcat("cmp_s", "\t$b_s3, $h")>;
+def CMP_S_rr :
+  F16_OP_HREG<0b100, (outs GPR32:$b_s3), (ins GPR32:$h),
+          !strconcat("cmp_s", "\t$b_s3, $h")>;
 
-// def CMP_S_rs3 :
-//   F16_OP_HREG<0b101, (outs GPR32:$h), (ins immC<3>:$b_s3),
-//           !strconcat("cmp_s", "\t$h, $b_s3")>;
+def CMP_S_rs3 :
+  F16_OP_HREG<0b101, (outs GPR32:$h), (ins immC<3>:$b_s3),
+          !strconcat("cmp_s", "\t$h, $b_s3")>;
 
-// def CMP_S_limms3 :
-//   F16_OP_HREG_LIMM<0b101, (outs), (ins immC<3>:$b_s3, i32imm:$LImm),
-//           !strconcat("cmp_s", "\t$LImm, $b_s3")>;
+def CMP_S_limms3 :
+  F16_OP_HREG_LIMM<0b101, (outs), (ins immC<3>:$b_s3, i32imm:$LImm),
+          !strconcat("cmp_s", "\t$LImm, $b_s3")>;
 
-// //----------------------------------------------------------------------------
-// // Compact MOV/ADD/CMP Immediate instructions.
-// //----------------------------------------------------------------------------
-// def MOV_S_u8 :
-//   F16_OP_IMM<0b11011, (outs GPR32:$b), (ins immU<8>:$u8),
-//           !strconcat("mov_s", "\t$b, $u8")> {
-//   bits<8> u8;
-//   let Inst{7-0} = u8;
-// }
+//----------------------------------------------------------------------------
+// Compact MOV/ADD/CMP Immediate instructions.
+//----------------------------------------------------------------------------
+def MOV_S_u8 :
+  F16_OP_IMM<0b11011, (outs GPR32:$b), (ins immU<8>:$u8),
+          !strconcat("mov_s", "\t$b, $u8")> {
+  bits<8> u8;
+  let Inst{7-0} = u8;
+}
 
 def ADD_S_u7 :
   F16_OP_U7<0b0, !strconcat("add_s", "\t$b, $b, $u7")>;
 
-// def CMP_S_u7 :
-//   F16_OP_U7<0b1, !strconcat("cmp_s", "\t$b, $u7")>;
+def CMP_S_u7 :
+  F16_OP_U7<0b1, !strconcat("cmp_s", "\t$b, $u7")>;
 
-// //----------------------------------------------------------------------------
-// // Compact Load/Store instructions with offset.
-// //----------------------------------------------------------------------------
-// def LD_S_OFF :
-//   F16_LD_ST_WORD_OFF<0x10, (outs GPR32:$c), (ins GPR32:$b, immU<7>:$off),
-//   "ld_s">;
+//----------------------------------------------------------------------------
+// Compact Load/Store instructions with offset.
+//----------------------------------------------------------------------------
+def LD_S_OFF :
+  F16_LD_ST_WORD_OFF<0x10, (outs GPR32:$c), (ins GPR32:$b, immU<7>:$off),
+  "ld_s">;
 
-// def LDB_S_OFF :
-//   F16_LD_ST_BYTE_OFF<0x11, (outs GPR32:$c), (ins GPR32:$b, immU<5>:$off),
-//   "ldb_s">;
+def LDB_S_OFF :
+  F16_LD_ST_BYTE_OFF<0x11, (outs GPR32:$c), (ins GPR32:$b, immU<5>:$off),
+  "ldb_s">;
 
-// class F16_LDH_OFF<bits<5> opc, string asmstr> :
-//   F16_LD_ST_HALF_OFF<opc, (outs GPR32:$c), (ins GPR32:$b, immU<6>:$off),
-//   asmstr>;
+class F16_LDH_OFF<bits<5> opc, string asmstr> :
+  F16_LD_ST_HALF_OFF<opc, (outs GPR32:$c), (ins GPR32:$b, immU<6>:$off),
+  asmstr>;
 
-// def LDH_S_OFF : F16_LDH_OFF<0x12, "ldh_s">;
-// def LDH_S_X_OFF : F16_LDH_OFF<0x13, "ldh_s.x">;
+def LDH_S_OFF : F16_LDH_OFF<0x12, "ldh_s">;
+def LDH_S_X_OFF : F16_LDH_OFF<0x13, "ldh_s.x">;
 
-// def ST_S_OFF :
-//   F16_LD_ST_WORD_OFF<0x14, (outs), (ins GPR32:$c, GPR32:$b, immU<7>:$off),
-//   "st_s">;
+def ST_S_OFF :
+  F16_LD_ST_WORD_OFF<0x14, (outs), (ins GPR32:$c, GPR32:$b, immU<7>:$off),
+  "st_s">;
 
-// def STB_S_OFF :
-//   F16_LD_ST_BYTE_OFF<0x15, (outs), (ins GPR32:$c, GPR32:$b, immU<5>:$off),
-//   "stb_s">;
+def STB_S_OFF :
+  F16_LD_ST_BYTE_OFF<0x15, (outs), (ins GPR32:$c, GPR32:$b, immU<5>:$off),
+  "stb_s">;
 
-// def STH_S_OFF :
-//   F16_LD_ST_HALF_OFF<0x16, (outs), (ins GPR32:$c, GPR32:$b, immU<6>:$off),
-//   "sth_s">;
+def STH_S_OFF :
+  F16_LD_ST_HALF_OFF<0x16, (outs), (ins GPR32:$c, GPR32:$b, immU<6>:$off),
+  "sth_s">;
 
-// //----------------------------------------------------------------------------
-// // General compact instructions.
-// //----------------------------------------------------------------------------
-// def GEN_SUB_S : F16_GEN_DOP<0x02, "sub_s">;
-// def GEN_AND_S : F16_GEN_DOP<0x04, "and_s">;
-// def GEN_OR_S : F16_GEN_DOP<0x05, "or_s">;
-// def GEN_BIC_S : F16_GEN_DOP<0x06, "bic_s">;
-// def GEN_XOR_S : F16_GEN_DOP<0x07, "xor_s">;
-// def GEN_MPYW_S : F16_GEN_DOP<0x09, "mpyw_s">;
-// def GEN_MPYUW_S : F16_GEN_DOP<0x0a, "mpyuw_s">;
-// def GEN_TST_S : F16_GEN_DOP_NODST<0x0b, "tst_s">;
-// def GEN_MPY_S : F16_GEN_DOP<0x0c, "mpy_s">;
-// def GEN_SEXB_S : F16_GEN_DOP_SINGLESRC<0x0d, "sexb_s">;
-// def GEN_SEXH_S : F16_GEN_DOP_SINGLESRC<0x0e, "sexh_s">;
-// def GEN_EXTB_S : F16_GEN_DOP_SINGLESRC<0x0f, "extb_s">;
-// def GEN_EXTH_S : F16_GEN_DOP_SINGLESRC<0x10, "exth_s">;
-// def GEN_ABS_S : F16_GEN_DOP_SINGLESRC<0x11, "abs_s">;
-// def GEN_NOT_S : F16_GEN_DOP_SINGLESRC<0x12, "not_s">;
-// def GEN_NEG_S : F16_GEN_DOP_SINGLESRC<0x13, "neg_s">;
-// def GEN_ADD1_S : F16_GEN_DOP<0x14, "add1_s">;
-// def GEN_ADD2_S : F16_GEN_DOP<0x15, "add2_s">;
-// def GEN_ADD3_S : F16_GEN_DOP<0x16, "add3_s">;
-// def GEN_ASL_S : F16_GEN_DOP<0x18, "asl_s">;
-// def GEN_LSR_S : F16_GEN_DOP<0x19, "lsr_s">;
-// def GEN_ASR_S : F16_GEN_DOP<0x1a, "asr_s">;
-// def GEN_AS1L_S : F16_GEN_DOP_SINGLESRC<0x1b, "asl_s">;
-// def GEN_AS1R_S : F16_GEN_DOP_SINGLESRC<0x1c, "asr_s">;
-// def GEN_LS1R_S : F16_GEN_DOP_SINGLESRC<0x1d, "lsr_s">;
-// def GEN_TRAP_S : F16_GEN_DOP_BASE<0x1e, (outs), (ins immU6:$u6),
-//   "trap_s\t$u6"> {
+//----------------------------------------------------------------------------
+// General compact instructions.
+//----------------------------------------------------------------------------
+def GEN_SUB_S : F16_GEN_DOP<0x02, "sub_s">;
+def GEN_AND_S : F16_GEN_DOP<0x04, "and_s">;
+def GEN_OR_S : F16_GEN_DOP<0x05, "or_s">;
+def GEN_BIC_S : F16_GEN_DOP<0x06, "bic_s">;
+def GEN_XOR_S : F16_GEN_DOP<0x07, "xor_s">;
+def GEN_MPYW_S : F16_GEN_DOP<0x09, "mpyw_s">;
+def GEN_MPYUW_S : F16_GEN_DOP<0x0a, "mpyuw_s">;
+def GEN_TST_S : F16_GEN_DOP_NODST<0x0b, "tst_s">;
+def GEN_MPY_S : F16_GEN_DOP<0x0c, "mpy_s">;
+def GEN_SEXB_S : F16_GEN_DOP_SINGLESRC<0x0d, "sexb_s">;
+def GEN_SEXH_S : F16_GEN_DOP_SINGLESRC<0x0e, "sexh_s">;
+def GEN_EXTB_S : F16_GEN_DOP_SINGLESRC<0x0f, "extb_s">;
+def GEN_EXTH_S : F16_GEN_DOP_SINGLESRC<0x10, "exth_s">;
+def GEN_ABS_S : F16_GEN_DOP_SINGLESRC<0x11, "abs_s">;
+def GEN_NOT_S : F16_GEN_DOP_SINGLESRC<0x12, "not_s">;
+def GEN_NEG_S : F16_GEN_DOP_SINGLESRC<0x13, "neg_s">;
+def GEN_ADD1_S : F16_GEN_DOP<0x14, "add1_s">;
+def GEN_ADD2_S : F16_GEN_DOP<0x15, "add2_s">;
+def GEN_ADD3_S : F16_GEN_DOP<0x16, "add3_s">;
+def GEN_ASL_S : F16_GEN_DOP<0x18, "asl_s">;
+def GEN_LSR_S : F16_GEN_DOP<0x19, "lsr_s">;
+def GEN_ASR_S : F16_GEN_DOP<0x1a, "asr_s">;
+def GEN_AS1L_S : F16_GEN_DOP_SINGLESRC<0x1b, "asl_s">;
+def GEN_AS1R_S : F16_GEN_DOP_SINGLESRC<0x1c, "asr_s">;
+def GEN_LS1R_S : F16_GEN_DOP_SINGLESRC<0x1d, "lsr_s">;
+def GEN_TRAP_S : F16_GEN_DOP_BASE<0x1e, (outs), (ins immU6:$u6),
+  "trap_s\t$u6"> {
 
-//   bits<6> u6;
-//   let b = u6{5-3};
-//   let c = u6{2-0};
-// }
+  bits<6> u6;
+  let b = u6{5-3};
+  let c = u6{2-0};
+}
 
-// def GEN_BRK_S : F16_GEN_DOP_BASE<0x1f, (outs), (ins),
-//   "brk_s"> {
+def GEN_BRK_S : F16_GEN_DOP_BASE<0x1f, (outs), (ins),
+  "brk_s"> {
 
-//   let b = 0b111;
-//   let c = 0b111;
-// }
+  let b = 0b111;
+  let c = 0b111;
+}
 
-// let isBarrier = 1 in {
-//   let isBranch = 1 in {
-//     def GEN_J_S : F16_GEN_SOP<0x0, "j_s\t[$b]">;
-//     def GEN_J_S_D : F16_GEN_SOP<0x1, "j_s.d\t[$b]">;
-//   } // let isBranch
+let isBarrier = 1 in {
+  let isBranch = 1 in {
+    def GEN_J_S : F16_GEN_SOP<0x0, "j_s\t[$b]">;
+    def GEN_J_S_D : F16_GEN_SOP<0x1, "j_s.d\t[$b]">;
+  } // let isBranch
 
-//   let isCall = 1 in {
-//     def GEN_JL_S : F16_GEN_SOP<0x2, "jl_s\t[$b]">;
-//     def GEN_JL_S_D : F16_GEN_SOP<0x3, "jl_s.d\t[$b]">;
-//   } // let isCall
-// } // let isBarrier
+  let isCall = 1 in {
+    def GEN_JL_S : F16_GEN_SOP<0x2, "jl_s\t[$b]">;
+    def GEN_JL_S_D : F16_GEN_SOP<0x3, "jl_s.d\t[$b]">;
+  } // let isCall
+} // let isBarrier
 
-// def GEN_SUB_S_NE : F16_GEN_SOP<0x6, "sub_s.ne\t$b, $b, $b">;
+def GEN_SUB_S_NE : F16_GEN_SOP<0x6, "sub_s.ne\t$b, $b, $b">;
 
-// def GEN_NOP_S : F16_GEN_ZOP<0x0, "nop_s">;
-// def GEN_UNIMP_S : F16_GEN_ZOP<0x1, "unimp_s">;
-// def GEN_SWI_S : F16_GEN_ZOP<0x2, "swi_s">;
+def GEN_NOP_S : F16_GEN_ZOP<0x0, "nop_s">;
+def GEN_UNIMP_S : F16_GEN_ZOP<0x1, "unimp_s">;
+def GEN_SWI_S : F16_GEN_ZOP<0x2, "swi_s">;
 
-// let isReturn = 1, isTerminator = 1 in {
-//   def GEN_JEQ_S : F16_GEN_ZOP<0x4, "jeq_s\t[%blink]">;
-//   def GEN_JNE_S : F16_GEN_ZOP<0x5, "jne_s\t[%blink]">;
-//   let isBarrier = 1 in {
-//     //def GEN_J_S_BLINK : F16_GEN_ZOP<0x6, "j_s\t[%blink]">;
-//     def GEN_J_S_D_BLINK : F16_GEN_ZOP<0x7, "j_s.d\t[%blink]">;
-//   } // let isBarrier
-// } // let isReturn, isTerminator
+let isReturn = 1, isTerminator = 1 in {
+  def GEN_JEQ_S : F16_GEN_ZOP<0x4, "jeq_s\t[%blink]">;
+  def GEN_JNE_S : F16_GEN_ZOP<0x5, "jne_s\t[%blink]">;
+  let isBarrier = 1 in {
+    //def GEN_J_S_BLINK : F16_GEN_ZOP<0x6, "j_s\t[%blink]">;
+    def GEN_J_S_D_BLINK : F16_GEN_ZOP<0x7, "j_s.d\t[%blink]">;
+  } // let isBarrier
+} // let isReturn, isTerminator
 
-// //----------------------------------------------------------------------------
-// // Load/Store instructions.
-// //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+// Load/Store instructions.
+//----------------------------------------------------------------------------
 
 // Filter  class for load/store mappings
 class MBLAZELdStRel;
