@@ -10,6 +10,8 @@
 // Instruction format superclass
 //===----------------------------------------------------------------------===//
 
+
+
 class Encoding64 {
   field bits<64> Inst;
   field bits<64> SoftFail = 0;
@@ -164,6 +166,22 @@ class TA<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
   let Inst{16-20} = rb;
   let Inst{21-31} = flags;
 }
+
+class TAR<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+          list<dag> pattern> :
+          TA<op, flags, outs, ins, asmstr, pattern>
+{
+  bits<5> rrd;
+  bits<5> rrb;
+  bits<5> rra;
+
+  // let Form = FRRRR;
+
+  let rd = rrd;
+  let ra = rra;
+  let rb = rrb;
+}
+
 
 class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern> 
   : InstMBLAZE<4, outs, ins, asmstr, pattern>{
