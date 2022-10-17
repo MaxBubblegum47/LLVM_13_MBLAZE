@@ -244,8 +244,10 @@ multiclass MBLAZEUnaryGEN4Inst<bits<6> mincode, string opasm> :
 multiclass MBLAZEUnaryEXT5Inst<bits<6> mincode, string opasm> :
   MBLAZEUnaryInst<0b00101, mincode, opasm>;
 
+//===----------------------------------------------------------------------===//
+// MBLAZE multiclass
+//===----------------------------------------------------------------------===//
 
-// TYPE A format reference
 multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
                        string opasm, bit Commutable> {
   def _rrr : TA<op, flag, (outs GPR32:$A),
@@ -295,6 +297,10 @@ multiclass MBLAZEBinaryInstSub<bits<6> op, bits<11> flag,
                         []>;                        
 
 }
+
+//===----------------------------------------------------------------------===//
+// End mblaze multiclass
+//===----------------------------------------------------------------------===//
 
 // // Pattern generation for different instruction variants.
 multiclass MultiPat<SDPatternOperator InFrag,
@@ -438,13 +444,34 @@ def : Pat<(MBLAZEGAWrapper tjumptable:$addr),
 // Control flow instructions (branch, return, calls, etc).
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Branch Operation MBLAZE
+// ---------------------------------------------------------------------------
+
+// MBLAZE Branch
+class Branch<bits<6> op, bits<5> br, bits<11> flags, string instr_asm> :
+             TA<op, flags, (outs), (ins GPR32:$target),
+                !strconcat(instr_asm, "   $target"),
+                []> {
+  let rd = 0x0;
+  let ra = br;
+}
+
+
+class BranchC<bits<6> op, bits<5> br, bits<11> flags, string instr_asm> :
+             TA<op, flags, (outs),
+                (ins GPR32:$a, GPR32:$b),
+                !strconcat(instr_asm, "   $a, $b"),
+                []> {
+ let rd = br;
+}
+
 // Branch instructions
 let isBranch = 1, isTerminator = 1 in {
 
   // Unconditional branch.
   let isBarrier = 1 in
-  def BR : F32_BR0_UCOND_FAR<(outs), (ins btargetS25:$S25),
-                             "b\t$S25", [(br bb:$S25)]>;
+  def BR     :   Branch<0x26, 0x00, 0x000, "br     ">;
 
   let Uses=[STATUS32] in
   // Conditional branch.
@@ -571,6 +598,80 @@ def ENTER_S : F16_SP_OPS<0b111,
 //----------------------------------------------------------------------------
 // Compact Move/Load instructions.
 //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+// MBLAZE Memory Acces Instructions
+//----------------------------------------------------------------------------
+def MBLAZEMemAsmOperand : AsmOperandClass {
+  let Name = "Mem";
+  let SuperClasses = [];
+}
+
+def MBLAZEFslAsmOperand : AsmOperandClass {
+  let Name = "Fsl";
+  let SuperClasses = [];
+}
+
+// Instruction operand types
+def brtarget    : Operand<OtherVT>;
+def calltarget  : Operand<i32>;
+def simm16      : Operand<i32>;
+def uimm5       : Operand<i32>;
+def uimm15      : Operand<i32>;
+def fimm        : Operand<f32>;
+
+// Unsigned Operand
+def uimm16      : Operand<i32> {
+  let PrintMethod = "printUnsignedImm";
+}
+
+// FSL Operand
+def fslimm      : Operand<i32> {
+  let PrintMethod = "printFSLImm";
+  let ParserMatchClass = MBLAZEFslAsmOperand;
+}
+
+// Address operand
+def memri : Operand<i32> {
+  let PrintMethod = "printMemOperand";
+  let MIOperandInfo = (ops GPR32, simm16);
+  let ParserMatchClass = MBLAZEMemAsmOperand;
+}
+
+def memrr : Operand<i32> {
+  let PrintMethod = "printMemOperand";
+  let MIOperandInfo = (ops GPR32, GPR32);
+  let ParserMatchClass = MBLAZEMemAsmOperand;
+}
+
+def iaddr : ComplexPattern<i32, 2, "SelectAddrRegImm", [frameindex], []>;
+def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
+
+class LoadM<bits<6> op, bits<11> flags, string instr_asm> :
+            TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+               !strconcat(instr_asm, "   $dst, $addr"),
+               []>;
+
+class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+             TB<op, (outs GPR32:$dst), (ins memri:$addr),
+                !strconcat(instr_asm, "   $dst, $addr"),
+                [(set (i32 GPR32:$dst), (OpNode iaddr:$addr))]>;
+
+
+class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
+             TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
+                !strconcat(instr_asm, "   $dst, $addr"),
+                []>;
+
+class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+              TB<op, (outs), (ins GPR32:$dst, memri:$addr),
+                 !strconcat(instr_asm, "   $dst, $addr"),
+                 [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>;
+
+//----------------------------------------------------------------------------
+// MBLAZE Memory Acces Instructions
+//----------------------------------------------------------------------------
+
+
 class COMPACT_MOV_S :
   F16_COMPACT<0b0, (outs GPR32:$g), (ins GPR32:$h),
           "mov_s\t$g, $h"> {
@@ -625,10 +726,28 @@ def EI_S : F16_JLI_EI<1, "ei_s">;
 //----------------------------------------------------------------------------
 // Load/Add Register-Register.
 //----------------------------------------------------------------------------
-def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
+// def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
 def LDB_S_rrr : F16_LD_ADD_RR<0b01, "ldb_s\t$a, [$b, $c]">;
-def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
+// def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
 def ADD_S_rrr : F16_LD_ADD_RR<0b11, "add_s\t$a, $b, $c">;
+
+
+def LD_S_rrr  :  LoadM<0x30, 0x000, "lbu    ">; // old LBU
+def LBUR :  LoadM<0x30, 0x200, "lbur   ">;
+def LDH_S_rrr  :  LoadM<0x31, 0x000, "lhu    ">; // old LHU
+def LHUR :  LoadM<0x31, 0x200, "lhur   ">;
+def LW   :  LoadM<0x32, 0x000, "lw     ">;
+def LWR  :  LoadM<0x32, 0x200, "lwr    ">;
+
+def SB  :  StoreM<0x34, 0x000, "sb     ">;
+def SBR :  StoreM<0x34, 0x200, "sbr    ">;
+
+def SH  :  StoreM<0x35, 0x000, "sh     ">;
+def SHR :  StoreM<0x35, 0x200, "shr    ">;
+
+def SW  :  StoreM<0x36, 0x000, "sw     ">;
+def SWR :  StoreM<0x36, 0x200, "swr    ">;
+
 
 //----------------------------------------------------------------------------
 // Load/Add GP-Relative.
@@ -689,15 +808,21 @@ let isBranch = 1 in {
   //----------------------------------------------------------------------------
   // Branch Conditionally.
   //----------------------------------------------------------------------------
+
+  def BGE    :  BranchC<0x27, 0x05, 0x000, "bge    ">;
+
   let isBarrier = 1 in
   def B_S : F16_BCC_s10<0b00, "b_s">;
 
-  def BEQ_S : F16_BCC_s10<0b01, "beq_s">;
-  def BNE_S : F16_BCC_s10<0b10, "bne_s">;
-  def BGT_S : F16_BCC_s7<0b000, "bgt_s">;
-  def BGE_S : F16_BCC_s7<0b001, "bge_s">;
-  def BLT_S : F16_BCC_s7<0b010, "blt_s">;
-  def BLE_S : F16_BCC_s7<0b011, "ble_s">;
+  // mblaze
+  def BEQ_S : BranchC<0x27, 0x00, 0x000, "beq_s">;
+  def BNE_S : BranchC<0x27, 0x01, 0x000, "bne_s">;
+  def BGT_S : BranchC<0x27, 0x04, 0x000, "bgt_s">;
+  def BGE_S : BranchC<0x27, 0x05, 0x000, "bge_s">;
+  def BLT_S : BranchC<0x27, 0x02, 0x000, "blt_s">;
+  def BLE_S : BranchC<0x27, 0x03, 0x000, "ble_s">;
+
+  // arch
   def BHI_S : F16_BCC_s7<0b100, "bhi_s">;
   def BHS_S : F16_BCC_s7<0b101, "bhs_s">;
   def BLO_S : F16_BCC_s7<0b110, "blo_s">;
@@ -911,12 +1036,6 @@ let isReturn = 1, isTerminator = 1 in {
 // Filter  class for load/store mappings
 class MBLAZELdStRel;
 
-// Load instruction variants:
-// Control bits: x, aa, di, zz
-// x - sign extend.
-// aa - incrementing mode. (N/A for LIMM).
-// di - uncached.
-// zz - data size.
 multiclass MBLAZELdInst<DataSizeMode zz, ExtMode x, CacheMode di, string asmop> {
   let mayLoad = 1, ZZ = zz, X = x, DI = di in {
     def _rs9: F32_LD_ADDR<x.Value, NoAM.Value, di.Value, zz.Value,
@@ -949,6 +1068,7 @@ foreach di = [NoCC, UncachedCC] in {
     }
   }
 }
+
 
 // Load instruction patterns.
 // 32-bit loads.
