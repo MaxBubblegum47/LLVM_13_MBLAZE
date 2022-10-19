@@ -1036,38 +1036,79 @@ let isReturn = 1, isTerminator = 1 in {
 // Filter  class for load/store mappings
 class MBLAZELdStRel;
 
-multiclass MBLAZELdInst<DataSizeMode zz, ExtMode x, CacheMode di, string asmop> {
-  let mayLoad = 1, ZZ = zz, X = x, DI = di in {
-    def _rs9: F32_LD_ADDR<x.Value, NoAM.Value, di.Value, zz.Value,
-			   (outs GPR32:$A), (ins MEMrs9:$addr),
-			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
 
-    def _limm: F32_LD_LIMM<x.Value, di.Value, zz.Value,
-			   (outs GPR32:$A), (ins MEMii:$addr),
-			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
+      def _rs9: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+               !strconcat(asmop, "   $dst, $addr"),
+               []>, MBLAZELdStRel;
 
-    def _rlimm: F32_LD_RLIMM<x.Value, NoAM.Value, di.Value, zz.Value,
-			     (outs GPR32:$A), (ins MEMrlimm:$addr),
-			     !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+      def _limm: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+               !strconcat(asmop, "   $dst, $addr"),
+               []>, MBLAZELdStRel;
+ 
+      def _rlimm: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+               !strconcat(asmop, "   $dst, $addr"),
+               []>, MBLAZELdStRel;
 
-    foreach aa = [PreIncAM, PostIncAM] in {
-      def aa.InstSuffix#_rs9: F32_LD_RS9<x.Value, aa.Value, di.Value, zz.Value,
-					  (outs GPR32:$A, GPR32:$addrout),
-					  (ins GPR32:$B, immS<9>:$S9),
-					  asmop#aa.AsmSuffix#"\t$A, [$B,$S9]", []>, MBLAZELdStRel
-			       { let Constraints = "$addrout = $B"; let AA = aa; }
-    }
-  }
+      // foreach aa = [PreIncAM, PostIncAM] in {
+      //   def aa.InstSuffix#_rs9: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+      //          !strconcat(asmop, "   $dst, $addr"),
+      //          []>, MBLAZELdStRel 
+      //           { let Constraints = "$addrout = $B"; let AA = aa; }
+      // }
 }
 
-foreach di = [NoCC, UncachedCC] in {
-  defm LD#di.InstSuffix : MBLAZELdInst<WordSM, NoEM, di, "ld"#di.AsmSuffix>;
-  foreach zz = [ByteSM, HalfSM] in {
-    foreach x = [NoEM, SignedEM] in {
-      defm LD#zz.InstSuffix#x.InstSuffix#di.InstSuffix : MBLAZELdInst<zz, x, di, "ld"#zz.AsmSuffix#x.AsmSuffix#di.AsmSuffix>;
-    }
-  }
-}
+
+
+// multiclass MBLAZELdInst_Iter<DataSizeMode zz, ExtMode x, CacheMode di, string asmop> {
+//   let mayLoad = 1, ZZ = zz, X = x, DI = di in {
+//     def _rs9: F32_LD_ADDR<x.Value, NoAM.Value, di.Value, zz.Value,
+// 			   (outs GPR32:$A), (ins MEMrs9:$addr),
+// 			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+
+//     def _limm: F32_LD_LIMM<x.Value, di.Value, zz.Value,
+// 			   (outs GPR32:$A), (ins MEMii:$addr),
+// 			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+
+//     def _rlimm: F32_LD_RLIMM<x.Value, NoAM.Value, di.Value, zz.Value,
+// 			     (outs GPR32:$A), (ins MEMrlimm:$addr),
+// 			     !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+
+//     foreach aa = [PreIncAM, PostIncAM] in {
+//       def aa.InstSuffix#_rs9: F32_LD_RS9<x.Value, aa.Value, di.Value, zz.Value,
+// 					  (outs GPR32:$A, GPR32:$addrout),
+// 					  (ins GPR32:$B, immS<9>:$S9),
+// 					  asmop#aa.AsmSuffix#"\t$A, [$B,$S9]", []>, MBLAZELdStRel
+// 			       { let Constraints = "$addrout = $B"; let AA = aa; }
+//     }
+//   }
+// }
+
+// foreach di = [NoCC, UncachedCC] in {
+//   defm LD#di.InstSuffix : MBLAZELdInst_Iter<WordSM, NoEM, di, "ld"#di.AsmSuffix>;
+//   foreach zz = [ByteSM, HalfSM] in {
+//     foreach x = [NoEM, SignedEM] in {
+//       defm LD#zz.InstSuffix#x.InstSuffix#di.InstSuffix : MBLAZELdInst<0x30, 0x000, "ld"#zz.AsmSuffix#x.AsmSuffix#di.AsmSuffix>;
+//     }
+//   }
+// }
+
+// Example
+// defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
+
+defm LD : MBLAZELdInst<0x30, 0x000, "ld" >;
+defm LD_limm : MBLAZELdInst<0x30, 0x000, "ld" >;
+
+defm LDH : MBLAZELdInst<0x30, 0x000, "ld" >;
+defm LDH_X : MBLAZELdInst<0x30, 0x000, "ld" >;
+
+defm LDB : MBLAZELdInst<0x30, 0x000, "ld" >;
+defm LDB_X : MBLAZELdInst<0x30, 0x000, "ld" >;
+
+defm LD_AB : MBLAZELdInst<0x30, 0x000, "ld" >;
+
+
+
 
 
 // Load instruction patterns.
