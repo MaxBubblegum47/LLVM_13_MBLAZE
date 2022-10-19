@@ -471,7 +471,10 @@ let isBranch = 1, isTerminator = 1 in {
 
   // Unconditional branch.
   let isBarrier = 1 in
-  def BR     :   Branch<0x26, 0x00, 0x000, "br     ">;
+  // def BR     :   Branch<0x26, 0x00, 0x000, "br     ">;
+
+  def BR : F32_BR0_UCOND_FAR<(outs), (ins btargetS25:$S25),
+                             "b\t$S25", [(br bb:$S25)]>;
 
   let Uses=[STATUS32] in
   // Conditional branch.
@@ -814,7 +817,7 @@ let isBranch = 1 in {
   let isBarrier = 1 in
   def B_S : F16_BCC_s10<0b00, "b_s">;
 
-  // mblaze
+  // new mblaze-branch cond
   def BEQ_S : BranchC<0x27, 0x00, 0x000, "beq_s">;
   def BNE_S : BranchC<0x27, 0x01, 0x000, "bne_s">;
   def BGT_S : BranchC<0x27, 0x04, 0x000, "bgt_s">;
@@ -822,11 +825,19 @@ let isBranch = 1 in {
   def BLT_S : BranchC<0x27, 0x02, 0x000, "blt_s">;
   def BLE_S : BranchC<0x27, 0x03, 0x000, "ble_s">;
 
-  // arch
+  // old arch-branch cond
+  // def BEQ_S : F16_BCC_s10<0b01, "beq_s">;
+  // def BNE_S : F16_BCC_s10<0b10, "bne_s">;
+  // def BGT_S : F16_BCC_s7<0b000, "bgt_s">;
+  // def BGE_S : F16_BCC_s7<0b001, "bge_s">;
+  // def BLT_S : F16_BCC_s7<0b010, "blt_s">;
+  // def BLE_S : F16_BCC_s7<0b011, "ble_s">;
+
   def BHI_S : F16_BCC_s7<0b100, "bhi_s">;
   def BHS_S : F16_BCC_s7<0b101, "bhs_s">;
   def BLO_S : F16_BCC_s7<0b110, "blo_s">;
   def BLS_S : F16_BCC_s7<0b111, "bls_s">;
+
 } // let isBranch
 
 def BL_S :
