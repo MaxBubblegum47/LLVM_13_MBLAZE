@@ -649,26 +649,26 @@ def memrr : Operand<i32> {
 def iaddr : ComplexPattern<i32, 2, "SelectAddrRegImm", [frameindex], []>;
 def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
 
-class LoadM<bits<6> op, bits<11> flags, string instr_asm> :
-            TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-               !strconcat(instr_asm, "   $dst, $addr"),
-               []>;
+// class LoadM<bits<6> op, bits<11> flags, string instr_asm> :
+//             TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
+//                !strconcat(instr_asm, "   $dst, $addr"),
+//                []>;
 
-class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-             TB<op, (outs GPR32:$dst), (ins memri:$addr),
-                !strconcat(instr_asm, "   $dst, $addr"),
-                [(set (i32 GPR32:$dst), (OpNode iaddr:$addr))]>;
+// class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+//              TB<op, (outs GPR32:$dst), (ins memri:$addr),
+//                 !strconcat(instr_asm, "   $dst, $addr"),
+//                 [(set (i32 GPR32:$dst), (OpNode iaddr:$addr))]>;
 
 
-class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
-             TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
-                !strconcat(instr_asm, "   $dst, $addr"),
-                []>;
+// class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
+//              TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
+//                 !strconcat(instr_asm, "   $dst, $addr"),
+//                 []>;
 
-class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-              TB<op, (outs), (ins GPR32:$dst, memri:$addr),
-                 !strconcat(instr_asm, "   $dst, $addr"),
-                 [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>;
+// class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
+//               TB<op, (outs), (ins GPR32:$dst, memri:$addr),
+//                  !strconcat(instr_asm, "   $dst, $addr"),
+//                  [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>;
 
 //----------------------------------------------------------------------------
 // MBLAZE Memory Acces Instructions
@@ -735,21 +735,21 @@ def LDB_S_rrr : F16_LD_ADD_RR<0b01, "ldb_s\t$a, [$b, $c]">;
 def ADD_S_rrr : F16_LD_ADD_RR<0b11, "add_s\t$a, $b, $c">;
 
 
-def LD_S_rrr  :  LoadM<0x30, 0x000, "lbu    ">; // old LBU
-def LBUR :  LoadM<0x30, 0x200, "lbur   ">;
-def LDH_S_rrr  :  LoadM<0x31, 0x000, "lhu    ">; // old LHU
-def LHUR :  LoadM<0x31, 0x200, "lhur   ">;
-def LW   :  LoadM<0x32, 0x000, "lw     ">;
-def LWR  :  LoadM<0x32, 0x200, "lwr    ">;
+// def LD_S_rrr  :  LoadM<0x30, 0x000, "lbu    ">; // old LBU
+// def LBUR :  LoadM<0x30, 0x200, "lbur   ">;
+// def LDH_S_rrr  :  LoadM<0x31, 0x000, "lhu    ">; // old LHU
+// def LHUR :  LoadM<0x31, 0x200, "lhur   ">;
+// def LW   :  LoadM<0x32, 0x000, "lw     ">;
+// def LWR  :  LoadM<0x32, 0x200, "lwr    ">;
 
-def SB  :  StoreM<0x34, 0x000, "sb     ">;
-def SBR :  StoreM<0x34, 0x200, "sbr    ">;
+// def SB  :  StoreM<0x34, 0x000, "sb     ">;
+// def SBR :  StoreM<0x34, 0x200, "sbr    ">;
 
-def SH  :  StoreM<0x35, 0x000, "sh     ">;
-def SHR :  StoreM<0x35, 0x200, "shr    ">;
+// def SH  :  StoreM<0x35, 0x000, "sh     ">;
+// def SHR :  StoreM<0x35, 0x200, "shr    ">;
 
-def SW  :  StoreM<0x36, 0x000, "sw     ">;
-def SWR :  StoreM<0x36, 0x200, "swr    ">;
+// def SW  :  StoreM<0x36, 0x000, "sw     ">;
+// def SWR :  StoreM<0x36, 0x200, "swr    ">;
 
 
 //----------------------------------------------------------------------------
@@ -1053,13 +1053,13 @@ multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
                !strconcat(asmop, "   $dst, $addr"),
                []>, MBLAZELdStRel;
 
-      def _limm: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-               !strconcat(asmop, "   $dst, $addr"),
-               []>, MBLAZELdStRel;
+      def _limm: TB<op, (outs GPR32:$dst), (ins memri:$addr),
+                !strconcat(asmop, "   $dst, $addr"),
+                []>, MBLAZELdStRel;
  
-      def _rlimm: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-               !strconcat(asmop, "   $dst, $addr"),
-               []>, MBLAZELdStRel;
+      def _rlimm: TB<op, (outs GPR32:$dst), (ins memri:$addr),
+                !strconcat(asmop, "   $dst, $addr"),
+                []>, MBLAZELdStRel;
 
       // foreach aa = [PreIncAM, PostIncAM] in {
       //   def aa.InstSuffix#_rs9: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
@@ -1104,23 +1104,17 @@ multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
 //   }
 // }
 
-// Example
-// defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
+// MBLAZE Load Word defined to all the variants
+defm LD : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LD_limm : MBLAZELdInst<0x32, 0x000, "ld" >;
 
-defm LD : MBLAZELdInst<0x30, 0x000, "ld" >;
-defm LD_limm : MBLAZELdInst<0x30, 0x000, "ld" >;
+defm LDH : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LDH_X : MBLAZELdInst<0x32, 0x000, "ld" >;
 
-defm LDH : MBLAZELdInst<0x30, 0x000, "ld" >;
-defm LDH_X : MBLAZELdInst<0x30, 0x000, "ld" >;
+defm LDB : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LDB_X : MBLAZELdInst<0x32, 0x000, "ld" >;
 
-defm LDB : MBLAZELdInst<0x30, 0x000, "ld" >;
-defm LDB_X : MBLAZELdInst<0x30, 0x000, "ld" >;
-
-defm LD_AB : MBLAZELdInst<0x30, 0x000, "ld" >;
-
-
-
-
+defm LD_AB : MBLAZELdInst<0x32, 0x000, "ld" >;
 
 // Load instruction patterns.
 // 32-bit loads.
@@ -1162,32 +1156,70 @@ def : Pat<(sextloadi8 AddrModeS9:$addr),(LDB_X_rs9 AddrModeS9:$addr)>;
 // aa - incrementing mode. (N/A for LIMM).
 // di - uncached.
 // zz - data size.
-multiclass MBLAZEStInst<DataSizeMode zz, CacheMode di, string asmop> {
-  let mayStore = 1, ZZ = zz, DI = di in {
-    def _rs9: F32_ST_ADDR<NoAM.Value, di.Value, zz.Value,
-			   (outs), (ins GPR32:$C, MEMrs9:$addr),
-			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
+// multiclass MBLAZEStInst<bits<6> op, bits<11> flags, string asmop, PatFrag OpNode> {
+//     def _rs9: TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
+//                 !strconcat(asmop, "   $dst, $addr"),
+//                 []>, MBLAZELdStRel;
 
-    def _limm: F32_ST_LIMM<di.Value, zz.Value,
-			   (outs), (ins GPR32:$C, MEMii:$addr),
-			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
+//     def _limm: TB<op, (outs), (ins GPR32:$dst, memri:$addr),
+//                  !strconcat(asmop, "   $dst, $addr"),
+//                  [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>, MBLAZELdStRel;
+  
+// }
 
 
-    foreach aa = [PreIncAM, PostIncAM] in {
-      def aa.InstSuffix#_rs9: F32_ST_RS9<aa.Value, di.Value, zz.Value,
-					  (outs GPR32:$addrout),
-					  (ins GPR32:$C, GPR32:$B, immS<9>:$S9),
-					  asmop#aa.AsmSuffix#"\t$C, [$B,$S9]", []>, MBLAZELdStRel
-			       { let Constraints = "$addrout = $B"; let AA = aa; }
-    }
+let mayStore = 1 in {
+multiclass Store<bits<6> op, bits<11> flags, string instr_asm> {
+  def _rs9 : TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
+                !strconcat(instr_asm, "   $dst, $addr"),
+                []>, MBLAZELdStRel;
+
+  def _limm : TB<op, (outs), (ins GPR32:$dst, memri:$addr),
+                 !strconcat(instr_asm, "   $dst, $addr"),
+                 []>, MBLAZELdStRel;
+
   }
-}
+}             
 
-foreach di = [NoCC, UncachedCC] in {
-  foreach zz = [ByteSM, HalfSM, WordSM] in {
-      defm ST#zz.InstSuffix#di.InstSuffix : MBLAZEStInst<zz, di, "st"#zz.AsmSuffix#di.AsmSuffix>;
-  }
-}
+                       
+// multiclass MBLAZEStInst<DataSizeMode zz, CacheMode di, string asmop> {
+//   let mayStore = 1, ZZ = zz, DI = di in {
+//     def _rs9: F32_ST_ADDR<NoAM.Value, di.Value, zz.Value,
+// 			   (outs), (ins GPR32:$C, MEMrs9:$addr),
+// 			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
+
+//     def _limm: F32_ST_LIMM<di.Value, zz.Value,
+// 			   (outs), (ins GPR32:$C, MEMii:$addr),
+// 			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
+
+
+//     foreach aa = [PreIncAM, PostIncAM] in {
+//       def aa.InstSuffix#_rs9: F32_ST_RS9<aa.Value, di.Value, zz.Value,
+// 					  (outs GPR32:$addrout),
+// 					  (ins GPR32:$C, GPR32:$B, immS<9>:$S9),
+// 					  asmop#aa.AsmSuffix#"\t$C, [$B,$S9]", []>, MBLAZELdStRel
+// 			       { let Constraints = "$addrout = $B"; let AA = aa; }
+//     }
+//   }
+// }
+
+// foreach di = [NoCC, UncachedCC] in {
+//   foreach zz = [ByteSM, HalfSM, WordSM] in {
+//       defm ST#zz.InstSuffix#di.InstSuffix : MBLAZEStInst<zz, di, "st"#zz.AsmSuffix#di.AsmSuffix>;
+//   }
+// }
+
+defm ST : Store<0x36, 0x000, "sw">;
+//defm ST : StoreMI<0x3E, "swi    ", store>;
+
+defm STH : Store<0x36, 0x000, "sw">;
+//defm STH : StoreMI<0x3E, "swi    ", store>;
+
+defm STB : Store<0x36, 0x000, "sw">;
+//defm STB : StoreMI<0x3E, "swi    ", store>;
+
+defm ST_AW : Store<0x36, 0x000, "sw">;
+
 
 // Store instruction patterns.
 // 32-bit stores
