@@ -709,16 +709,16 @@ def COMPACT_LD_S :
 //----------------------------------------------------------------------------
 // Compact Load/Add/Sub.
 //----------------------------------------------------------------------------
-def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
-def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
-def ADD_S_rru6 : F16_ADD;
+// def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
+// def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
+// def ADD_S_rru6 : F16_ADD;
 
 //----------------------------------------------------------------------------
 // Compact Load/Store.
 //----------------------------------------------------------------------------
-def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
-def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
-def LDI_S_u7 : F16_LDI_u7;
+// def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
+// def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
+// def LDI_S_u7 : F16_LDI_u7;
 
 //----------------------------------------------------------------------------
 // Indexed Jump or Execute.
