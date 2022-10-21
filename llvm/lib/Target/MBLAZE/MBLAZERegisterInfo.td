@@ -11,11 +11,11 @@
 //===----------------------------------------------------------------------===//
 
 class MBLAZEReg<string n, list<string> altNames> : Register<n, altNames> {
-  field bits<6> HwEncoding;
+  field bits<5> HwEncoding;
   let Namespace = "MBLAZE";
 }
 
-// Registers are identified with 6-bit ID numbers.
+// Registers are identified with 5-bit ID numbers.
 // Core - 32-bit core registers
 class Core<int num, string n, list<string>altNames=[]> : MBLAZEReg<n, altNames> {
   let HWEncoding = num;
