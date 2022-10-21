@@ -48,10 +48,8 @@ enum NodeType : unsigned {
   // Global Address Wrapper
   GAWRAPPER,
 
-  // return, (rtsd)
-  RET,
-
-  IRET
+  // return, (j_s [blink])
+  RET
 };
 
 } // end namespace MBLAZEISD

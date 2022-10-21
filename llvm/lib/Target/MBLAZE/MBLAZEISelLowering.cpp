@@ -28,7 +28,7 @@
 #include "llvm/Support/Debug.h"
 #include <algorithm>
 
-#define DEBUG_TYPE "arc-lower"
+#define DEBUG_TYPE "MBLAZE-lower"
 
 using namespace llvm;
 
@@ -149,8 +149,6 @@ const char *MBLAZETargetLowering::getTargetNodeName(unsigned Opcode) const {
     return "MBLAZEISD::BRcc";
   case MBLAZEISD::RET:
     return "MBLAZEISD::RET";
-  case MBLAZEISD::IRET:
-    return "MBLAZEISD::IRET";
   case MBLAZEISD::GAWRAPPER:
     return "MBLAZEISD::GAWRAPPER";
   }
@@ -168,11 +166,11 @@ SDValue MBLAZETargetLowering::LowerSELECT_CC(SDValue Op, SelectionDAG &DAG) cons
   SDValue TVal = Op.getOperand(2);
   SDValue FVal = Op.getOperand(3);
   SDLoc dl(Op);
-  MBLAZECC::CondCode ArcCC = ISDCCtoMBLAZECC(CC);
+  MBLAZECC::CondCode MBLAZECC = ISDCCtoMBLAZECC(CC);
   assert(LHS.getValueType() == MVT::i32 && "Only know how to SELECT_CC i32");
   SDValue Cmp = DAG.getNode(MBLAZEISD::CMP, dl, MVT::Glue, LHS, RHS);
   return DAG.getNode(MBLAZEISD::CMOV, dl, TVal.getValueType(), TVal, FVal,
-                     DAG.getConstant(ArcCC, dl, MVT::i32), Cmp);
+                     DAG.getConstant(MBLAZECC, dl, MVT::i32), Cmp);
 }
 
 SDValue MBLAZETargetLowering::LowerSIGN_EXTEND_INREG(SDValue Op,
@@ -202,10 +200,10 @@ SDValue MBLAZETargetLowering::LowerBR_CC(SDValue Op, SelectionDAG &DAG) const {
   SDValue RHS = Op.getOperand(3);
   SDValue Dest = Op.getOperand(4);
   SDLoc dl(Op);
-  MBLAZECC::CondCode arcCC = ISDCCtoMBLAZECC(CC);
+  MBLAZECC::CondCode MBLAZECC = ISDCCtoMBLAZECC(CC);
   assert(LHS.getValueType() == MVT::i32 && "Only know how to BR_CC i32");
   return DAG.getNode(MBLAZEISD::BRcc, dl, MVT::Other, Chain, Dest, LHS, RHS,
-                     DAG.getConstant(arcCC, dl, MVT::i32));
+                     DAG.getConstant(MBLAZECC, dl, MVT::i32));
 }
 
 SDValue MBLAZETargetLowering::LowerJumpTable(SDValue Op, SelectionDAG &DAG) const {
@@ -519,7 +517,7 @@ SDValue MBLAZETargetLowering::LowerCallArguments(
   // 1b. CopyFromReg vararg registers.
   if (IsVarArg) {
     // Argument registers
-    static const MCPhysReg ArgRegs[] = {MBLAZE::R0, MBLAZE::SP, MBLAZE::R2, MBLAZE::R3,
+    static const MCPhysReg ArgRegs[] = {MBLAZE::R0, MBLAZE::R8, MBLAZE::R2, MBLAZE::R3,
                                         MBLAZE::R4, MBLAZE::R5, MBLAZE::R6, MBLAZE::R7};
     auto *AFI = MF.getInfo<MBLAZEFunctionInfo>();
     unsigned FirstVAReg = CCInfo.getFirstUnallocated(ArgRegs);
@@ -709,34 +707,18 @@ bool MBLAZETargetLowering::mayBeEmittedAsTailCall(const CallInst *CI) const {
   return false;
 }
 
-// FIX ME
 SDValue MBLAZETargetLowering::LowerFRAMEADDR(SDValue Op, SelectionDAG &DAG) const {
+  const MBLAZERegisterInfo &ARI = *Subtarget.getRegisterInfo();
+  MachineFunction &MF = DAG.getMachineFunction();
+  MachineFrameInfo &MFI = MF.getFrameInfo();
+  MFI.setFrameAddressIsTaken(true);
 
-  // const MBLAZERegisterInfo &ARI = *Subtarget.getRegisterInfo(); 
-
-
-
-// ERROR
-// error: invalid initialization of reference of type ‘const llvm::MBLAZERegisterInfo&’
-// from expression of type ‘const llvm::TargetRegisterInfo’
-//  711 |   const MBLAZERegisterInfo &ARI = *Subtarget.getRegisterInfo();
-//      |                                   
-
-
-
-  // MachineFunction &MF = DAG.getMachineFunction();
-  // MachineFrameInfo &MFI = MF.getFrameInfo();
-  // MFI.setFrameAddressIsTaken(true);
-
-  // EVT VT = Op.getValueType();
-  // SDLoc dl(Op);
-  // assert(cast<ConstantSDNode>(Op.getOperand(0))->getZExtValue() == 0 &&
-  //        "Only support lowering frame addr of current frame.");
-  // Register FrameReg = ARI.getFrameRegister(MF);
-  // return DAG.getCopyFromReg(DAG.getEntryNode(), dl, FrameReg, VT);
-  SDValue a;
-
-  return a;
+  EVT VT = Op.getValueType();
+  SDLoc dl(Op);
+  assert(cast<ConstantSDNode>(Op.getOperand(0))->getZExtValue() == 0 &&
+         "Only support lowering frame addr of current frame.");
+  Register FrameReg = ARI.getFrameRegister(MF);
+  return DAG.getCopyFromReg(DAG.getEntryNode(), dl, FrameReg, VT);
 }
 
 SDValue MBLAZETargetLowering::LowerGlobalAddress(SDValue Op,
