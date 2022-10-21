@@ -17,5 +17,5 @@ Target &llvm::getTheMBLAZETarget() {
 }
 
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMBLAZETargetInfo() {
-    RegisterTarget<Triple::mblaze> X(getTheMBLAZETarget(), "mblaze", "mblaze (32-bit big endian)", "MBLAZE");
+    RegisterTarget<Triple::mblaze> X(getTheMBLAZETarget(), "mblaze", "mblaze 32 bit", "MBLAZE");
 }
