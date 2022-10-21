@@ -157,8 +157,8 @@ class TAR<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
 
 
 class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern> 
-  : InstMBLAZE<4, outs, ins, asmstr, pattern>{
-
+  : InstMBLAZE<4, outs, ins, asmstr, pattern>
+{
   bits<5>  rd;
   bits<5>  ra;
   bits<16> imm16;
@@ -167,7 +167,6 @@ class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern>
   let Inst{6-10}  = rd;
   let Inst{11-15} = ra;
   let Inst{16-31} = imm16;
-
 }
 
 
