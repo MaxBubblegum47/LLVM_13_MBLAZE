@@ -37,7 +37,6 @@ class MBLAZESubtarget : public MBLAZEGenSubtargetInfo {
   MBLAZETargetLowering TLInfo;
   SelectionDAGTargetInfo TSInfo;
 
-
 public:
   /// This constructor initializes the data members to match that
   /// of the specified triple.
@@ -52,15 +51,12 @@ public:
   const MBLAZEFrameLowering *getFrameLowering() const override {
     return &FrameLowering;
   }
-
   const MBLAZETargetLowering *getTargetLowering() const override {
     return &TLInfo;
   }
-
   const MBLAZERegisterInfo *getRegisterInfo() const override {
     return &InstrInfo.getRegisterInfo();
   }
-
   const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
     return &TSInfo;
   }
