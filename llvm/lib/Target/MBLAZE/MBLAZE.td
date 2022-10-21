@@ -1,51 +1,36 @@
-//===-- MBLAZEOther.td - Describe the MBLAZE Target Machine ----*- tablegen -*-===//
+//===- MBLAZE.td - Describe the MBLAZE Target Machine ------------*- tablegen -*-===//
 //
-//
-//              The LLVM Compiler Infrastructure
-//
-// This file is distributed under the University of Illinois Open Source
-// License. See LICENSE.TXT for details.
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
 //===----------------------------------------------------------------------===//
-// This is the top level entry point for the MBLAZE target.
-//===----------------------------------------------------------------------===//
-//===----------------------------------------------------------------------===//
-// Target-independent interfaces
-//===----------------------------------------------------------------------===//
+
 include "llvm/Target/Target.td"
+
 //===----------------------------------------------------------------------===//
-// Target-dependent interfaces
+// MBLAZE Subtarget features
 //===----------------------------------------------------------------------===//
 
-// This is a holy orders, if someone change anything the project
-// will be broken
-include "MBLAZESchedule.td"
+def FeatureNORM
+    : SubtargetFeature<"norm", "Xnorm", "true",
+                       "Enable support for norm instruction.">;
+
+//===----------------------------------------------------------------------===//
+// Registers, calling conventions, instruction descriptions
+//===----------------------------------------------------------------------===//
+
 include "MBLAZERegisterInfo.td"
-include "MBLAZECallingConv.td"
 include "MBLAZEInstrInfo.td"
-
-//===----------------------------------------------------------------------===//
-// MBLAZE processors supported.
-//===----------------------------------------------------------------------===//
-
-def : Processor<"MBLAZE",  NoItineraries, []>;
-
-//===----------------------------------------------------------------------===//
-// Instruction Descriptions
-//===----------------------------------------------------------------------===//
-
-def MBLAZEAsmWriter : AsmWriter {
-  string AsmWriterClassName  = "InstPrinter";
-  bit isMCAsmWriter = 1;
-}
+include "MBLAZECallingConv.td"
 
 def MBLAZEInstrInfo : InstrInfo;
 
-//===----------------------------------------------------------------------===//
-// Target Declaration
-//===----------------------------------------------------------------------===//
+class Proc<string Name, list<SubtargetFeature> Features>
+ : Processor<Name, NoItineraries, Features>;
+
+def : Proc<"generic", []>;
 
 def MBLAZE : Target {
   let InstructionSet = MBLAZEInstrInfo;
-  let AssemblyWriters = [MBLAZEAsmWriter];
 }
