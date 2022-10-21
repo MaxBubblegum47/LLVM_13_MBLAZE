@@ -10,8 +10,6 @@
 // Instruction format superclass
 //===----------------------------------------------------------------------===//
 
-
-
 class Encoding64 {
   field bits<64> Inst;
   field bits<64> SoftFail = 0;
@@ -43,13 +41,13 @@ def MEMii : Operand<i32> {
 
 def MEMrs9 : Operand<iAny> {
   let MIOperandInfo = (ops GPR32:$B, immS<9>:$S9);
-  let PrintMethod = "printMemOperand";
+  let PrintMethod = "printMemOperandRI";
   let DecoderMethod = "DecodeMEMrs9";
 }
 
 def MEMrlimm : Operand<iAny> {
   let MIOperandInfo = (ops GPR32:$B, i32imm:$LImm);
-  let PrintMethod = "printMemOperand";
+  let PrintMethod = "printMemOperandRI";
   let DecoderMethod = "DecodeMEMrlimm";
 }
 
@@ -127,31 +125,6 @@ class PseudoInstMBLAZE<dag outs, dag ins, string asmstr, list<dag> pattern>
 //===----------------------------------------------------------------------===//
 // Instruction formats
 //===----------------------------------------------------------------------===//
-
-// All 32-bit MBLAZE instructions have a 5-bit "major" opcode class designator
-// in bits 27-31.
-//
-// Some general naming conventions:
-// N  - Delay Slot bit.  MBLAZE v2 branch instructions have an optional delay slot
-//      which is encoded with this bit.  When set, a delay slot exists.
-// cc - Condition code.
-// SX - Signed X-bit immediate.
-// UX - Unsigned X-bit immediate.
-//
-// [ABC] - 32-bit register operand.  These are 6-bit fields.  This encodes the
-//         standard 32 general purpose registers, and allows use of additional
-//         (extension) registers.  This also encodes an instruction that uses
-//         a 32-bit Long Immediate (LImm), using 0x3e==62 as the field value.
-//         This makes 32-bit format instructions with Long Immediates
-//         64-bit instructions, with the Long Immediate in bits 32-63.
-// A - Inst[5-0] = A[5-0], when the format has A.  A is always a register.
-// B - Inst[14-12] = B[5-3], Inst[26-24] = B[2-0], when the format has B.
-//     B is always a register.
-// C - Inst[11-6] = C[5-0], when the format has C.  C can either be a register,
-//     or a 6-bit unsigned immediate (immU6), depending on the format.
-// F - Many instructions specify a flag bit. When set, the result of these
-//     instructions will set the ZNCV flags of the STATUS32 register
-//     (Zero/Negative/Carry/oVerflow).
 class TA<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
          list<dag> pattern> :
          InstMBLAZE<4, outs, ins, asmstr, pattern>
@@ -183,7 +156,6 @@ class TAR<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
 }
 
 
-
 class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern> 
   : InstMBLAZE<4, outs, ins, asmstr, pattern>{
 
@@ -198,6 +170,31 @@ class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern>
 
 }
 
+
+// All 32-bit MBLAZE instructions have a 5-bit "major" opcode class designator
+// in bits 27-31.
+//
+// Some general naming conventions:
+// N  - Delay Slot bit.  MBLAZE v2 branch instructions have an optional delay slot
+//      which is encoded with this bit.  When set, a delay slot exists.
+// cc - Condition code.
+// SX - Signed X-bit immediate.
+// UX - Unsigned X-bit immediate.
+//
+// [ABC] - 32-bit register operand.  These are 6-bit fields.  This encodes the
+//         standard 32 general purpose registers, and allows use of additional
+//         (extension) registers.  This also encodes an instruction that uses
+//         a 32-bit Long Immediate (LImm), using 0x3e==62 as the field value.
+//         This makes 32-bit format instructions with Long Immediates
+//         64-bit instructions, with the Long Immediate in bits 32-63.
+// A - Inst[5-0] = A[5-0], when the format has A.  A is always a register.
+// B - Inst[14-12] = B[5-3], Inst[26-24] = B[2-0], when the format has B.
+//     B is always a register.
+// C - Inst[11-6] = C[5-0], when the format has C.  C can either be a register,
+//     or a 6-bit unsigned immediate (immU6), depending on the format.
+// F - Many instructions specify a flag bit. When set, the result of these
+//     instructions will set the ZNCV flags of the STATUS32 register
+//     (Zero/Negative/Carry/oVerflow).
 
 // Branch Instructions.
 class F32_BR<bits<5> major, dag outs, dag ins, bit b16, string asmstr,
@@ -506,6 +503,23 @@ class F32_LD_RS9<bit x, bits<2> aa, bit di, bits<2> zz, dag outs, dag ins,
   let BaseOpcode = "ld_rs9";
 }
 
+// fake
+class F32_LD_RS9F<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+      list<dag> pattern> :
+  InstMBLAZE<4, outs, ins, asmstr, pattern> {
+  bits<5> rd; 
+  bits<5> ra;
+  bits<5> rb;
+
+  let Inst{0-5} = op;
+  let Inst{6-10}  = rd;
+  let Inst{11-15} = ra;
+  let Inst{16-20} = rb;
+  let Inst{21-31} = flags;
+
+
+  let BaseOpcode = "ld_rs9";
+}
 
 
 class F32_LD_ADDR<bit x, bits<2> aa, bit di, bits<2> zz, dag outs, dag ins,
@@ -545,6 +559,24 @@ class F32_LD_LIMM<bit x, bit di, bits<2> zz, dag outs, dag ins,
   let BaseOpcode = "ld_limm";
 }
 
+
+// fake
+class F32_LD_LIMMF<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+      list<dag> pattern> :
+  InstMBLAZE<4, outs, ins, asmstr, pattern> {
+  bits<5>  rd;
+  bits<5>  ra;
+  bits<16> imm16;
+
+  let Inst{0-5} = op;
+  let Inst{6-10}  = rd;
+  let Inst{11-15} = ra;
+  let Inst{16-31} = imm16;
+  let DecoderMethod = "DecodeLdLImmInstruction";
+
+  let BaseOpcode = "ld_limm";
+}
+
 // Register + LImm load.  The 32-bit immediate address is in Inst[63-32].
 // |26|25|24|23|22|21|20|19|18|17|16|15|14|13|12|11|10|9|8|7|6|5|4|3|2|1|0|
 // |B[2-0]  |aa   | 1| 1| 0|zz   | x|di|B[5-3]  | 1| 1|1|1|1|0|A          |
@@ -575,6 +607,24 @@ class F32_LD_RLIMM<bit x, bits<2> aa, bit di, bits<2> zz, dag outs, dag ins,
   let BaseOpcode = "ld_rlimm";
 }
 
+
+// fake 
+class F32_LD_RLIMMF<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+      list<dag> pattern> :
+  InstMBLAZE<4, outs, ins, asmstr, pattern> {
+  bits<5>  rd;
+  bits<5>  ra;
+  bits<16> imm16;
+
+  let Inst{0-5} = op;
+  let Inst{6-10}  = rd;
+  let Inst{11-15} = ra;
+  let Inst{16-31} = imm16;
+  let DecoderMethod = "DecodeLdRLImmInstruction";
+
+  let BaseOpcode = "ld_rlimm";
+}
+
 // Register + S9 Store. (B + S9)
 // |26|25|24|23|22|21|20|19|18|17|16|15   |14|13|12|11|10|9|8|7|6|5 |4|3|2|1|0|
 // |B[2-0]  |S9[7-0]                |S9[8]|B[5-3]  |C            |di|aa |zz |0|
@@ -595,6 +645,24 @@ class F32_ST_RS9<bits<2> aa, bit di, bits<2> zz, dag outs, dag ins,
   let Inst{4-3} = aa;
   let Inst{2-1} = zz;
   let Inst{0} = 0;
+
+  let BaseOpcode = "st_rs9";
+}
+
+// fake
+class F32_ST_RS9F<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+      list<dag> pattern> :
+  InstMBLAZE<4, outs, ins, asmstr, pattern> {
+  bits<5> rd; 
+  bits<5> ra;
+  bits<5> rb;
+
+  let Inst{0-5} = op;
+  let Inst{6-10}  = rd;
+  let Inst{11-15} = ra;
+  let Inst{16-20} = rb;
+  let Inst{21-31} = flags;
+
 
   let BaseOpcode = "st_rs9";
 }
@@ -634,6 +702,24 @@ class F32_ST_LIMM<bit di, bits<2> zz, dag outs, dag ins,
 
   let BaseOpcode = "st_limm";
 }
+
+// fake
+class F32_ST_LIMMF<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+      list<dag> pattern> :
+  InstMBLAZE<4, outs, ins, asmstr, pattern> {
+  bits<5>  rd;
+  bits<5>  ra;
+  bits<16> imm16;
+
+  let Inst{0-5} = op;
+  let Inst{6-10}  = rd;
+  let Inst{11-15} = ra;
+  let Inst{16-31} = imm16;
+  let DecoderMethod = "DecodeLdLImmInstruction";
+
+  let BaseOpcode = "st_limm";
+}
+
 
 // Compact Move/Load.
 // |10|9|8|7|6|5|4|3|2|1|0|
