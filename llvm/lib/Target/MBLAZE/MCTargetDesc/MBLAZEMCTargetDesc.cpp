@@ -42,7 +42,7 @@ static MCInstrInfo *createMBLAZEMCInstrInfo() {
 
 static MCRegisterInfo *createMBLAZEMCRegisterInfo(const Triple &TT) {
   auto *X = new MCRegisterInfo();
-  InitMBLAZEMCRegisterInfo(X, MBLAZE::R15);
+  InitMBLAZEMCRegisterInfo(X, MBLAZE::BLINK);
   return X;
 }
 
