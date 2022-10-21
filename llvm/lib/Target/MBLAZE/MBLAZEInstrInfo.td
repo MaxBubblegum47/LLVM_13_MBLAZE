@@ -133,6 +133,58 @@ def STB_FAR : PseudoInstMBLAZE<(outs), (ins GPR32:$dst, MEMrlimm:$addr),
 // Generate many variants of a single instruction with a single defining
 // multiclass.  These classes do not contain Selection DAG patterns.
 //===----------------------------------------------------------------------===//
+
+multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
+                       string opasm, bit Commutable> {
+  def _rrr : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>
+  { let isCommutable = Commutable; }
+
+  def _rru6 : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, immU6:$U6),
+                        !strconcat(opasm, "\t$A, $B, $U6"),
+                        []>;
+  
+  def _rrlimm : TA<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, i32imm:$LImm),
+                        !strconcat(opasm, "\t$A, $B, $LImm"),
+                        []>;
+
+  def _rrs12 : TA<op, flag, (outs GPR32:$B),
+                        (ins GPR32:$in, immS<12>:$S12),
+                        !strconcat(opasm, "\t$B, $in, $S12"),
+                        []>;                        
+
+}
+
+multiclass MBLAZEBinaryInstSub<bits<6> op, bits<11> flag,
+                       string opasm> {
+  def _rrr : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, GPR32:$C),
+                        !strconcat(opasm, "\t$A, $B, $C"),
+                        []>;
+  
+
+  def _rru6 : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, immU6:$U6),
+                        !strconcat(opasm, "\t$A, $B, $U6"),
+                        []>;
+  
+  def _rrlimm : TAR<op, flag, (outs GPR32:$A),
+                        (ins GPR32:$B, i32imm:$LImm),
+                        !strconcat(opasm, "\t$A, $B, $LImm"),
+                        []>;
+
+  def _rrs12 : TAR<op, flag, (outs GPR32:$B),
+                        (ins GPR32:$in, immS<12>:$S12),
+                        !strconcat(opasm, "\t$B, $in, $S12"),
+                        []>;                        
+
+}
+
+
 // Generic 3 operand binary instructions (i.e., add r0, r1, r2).
 multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
                        string opasm, bit Commutable> {
@@ -142,7 +194,6 @@ multiclass MBLAZEBinaryInst<bits<5> major, bits<6> mincode,
                         !strconcat(opasm, "\t$A, $B, $C"),
                         []>
   { let isCommutable = Commutable; }
-
   def _f_rrr : F32_DOP_RR<major, mincode, 1, (outs GPR32:$A),
                           (ins GPR32:$B, GPR32:$C),
                           !strconcat(opasm, ".f\t$A, $B, $C"),
@@ -235,7 +286,7 @@ multiclass MBLAZEUnaryInst<bits<5> major, bits<6> subop,
 
 
 multiclass MBLAZEBinaryGEN4Inst<bits<6> mincode, string opasm, bit Commutable = 0> :
-  MBLAZEBinaryInst<0b00100, mincode, opasm, Commutable>; 
+  MBLAZEBinaryInst<0b00100, mincode, opasm, Commutable>;
 multiclass MBLAZEBinaryEXT5Inst<bits<6> mincode, string opasm> :
   MBLAZEBinaryInst<0b00101, mincode, opasm, 0>;
 
@@ -244,65 +295,7 @@ multiclass MBLAZEUnaryGEN4Inst<bits<6> mincode, string opasm> :
 multiclass MBLAZEUnaryEXT5Inst<bits<6> mincode, string opasm> :
   MBLAZEUnaryInst<0b00101, mincode, opasm>;
 
-//===----------------------------------------------------------------------===//
-// MBLAZE multiclass
-//===----------------------------------------------------------------------===//
-
-multiclass MBLAZEBinaryInstAdd<bits<6> op, bits<11> flag,
-                       string opasm, bit Commutable> {
-  def _rrr : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, GPR32:$C),
-                        !strconcat(opasm, "\t$A, $B, $C"),
-                        []>
-  { let isCommutable = Commutable; }
-
-  def _rru6 : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, immU6:$U6),
-                        !strconcat(opasm, "\t$A, $B, $U6"),
-                        []>;
-  
-  def _rrlimm : TA<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, i32imm:$LImm),
-                        !strconcat(opasm, "\t$A, $B, $LImm"),
-                        []>;
-
-  def _rrs12 : TA<op, flag, (outs GPR32:$B),
-                        (ins GPR32:$in, immS<12>:$S12),
-                        !strconcat(opasm, "\t$B, $in, $S12"),
-                        []>;                        
-
-}
-
-multiclass MBLAZEBinaryInstSub<bits<6> op, bits<11> flag,
-                       string opasm> {
-  def _rrr : TAR<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, GPR32:$C),
-                        !strconcat(opasm, "\t$A, $B, $C"),
-                        []>;
-  
-
-  def _rru6 : TAR<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, immU6:$U6),
-                        !strconcat(opasm, "\t$A, $B, $U6"),
-                        []>;
-  
-  def _rrlimm : TAR<op, flag, (outs GPR32:$A),
-                        (ins GPR32:$B, i32imm:$LImm),
-                        !strconcat(opasm, "\t$A, $B, $LImm"),
-                        []>;
-
-  def _rrs12 : TAR<op, flag, (outs GPR32:$B),
-                        (ins GPR32:$in, immS<12>:$S12),
-                        !strconcat(opasm, "\t$B, $in, $S12"),
-                        []>;                        
-
-}
-
-//===----------------------------------------------------------------------===//
-// End mblaze multiclass
-//===----------------------------------------------------------------------===//
-
-// // Pattern generation for different instruction variants.
+// Pattern generation for different instruction variants.
 multiclass MultiPat<SDPatternOperator InFrag,
                Instruction RRR, Instruction RRU6, Instruction RRLImm> {
   def _rrr : Pat<(InFrag i32:$B, i32:$C), (RRR i32:$B, i32:$C)>;
@@ -310,19 +303,10 @@ multiclass MultiPat<SDPatternOperator InFrag,
   def _rrlimm : Pat<(InFrag i32:$B, imm32:$LImm), (RRLImm i32:$B, imm32:$LImm)>;
 }
 
-// // ---------------------------------------------------------------------------
-// // Instruction definitions and patterns for 3 operand binary instructions.
-// // ---------------------------------------------------------------------------
-// Definitions for 3 operand binary instructions.
-
-// The instruction codification is:
-// |31|30|29|28|27|26|25|24|23|22|21|20|19|18|17|16|15|14|13|12|11|10|9|8|7|6|5|4|3|2|1|0   |
-// |-----------FLAGS----------------|-----RB-------|-------RA-----|-----RD---|0CK000|
-// C add with carry
-// K add and keep carry
-// KC add with carry and keep carry 
-
-// implemented with mblaze
+// ---------------------------------------------------------------------------
+// Instruction definitions and patterns for 3 operand binary instructions.
+// ---------------------------------------------------------------------------
+// mblaze variants
 defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
 defm SUB : MBLAZEBinaryInstSub<000001, 00000000000, "sub">;
 defm OR  : MBLAZEBinaryInstAdd<100000, 00000000000,"or",1>; // the same codec as the add with 2 registers as arguments
@@ -330,16 +314,16 @@ defm AND : MBLAZEBinaryInstAdd<100001, 00000000000,"and",1>; // the same codec a
 defm XOR : MBLAZEBinaryInstAdd<100010, 00000000000,"xor",1>;
 
 
-// implemented in arc
-// idk how to handle, I need to do some test and understand where and how they are used for
+// Definitions for 3 operand binary instructions.
+// defm ADD : MBLAZEBinaryGEN4Inst<0b000000, "add",1>;
+// defm SUB : MBLAZEBinaryGEN4Inst<0b000010, "sub">;
 defm SUB1 : MBLAZEBinaryGEN4Inst<0b010111, "sub1">;
 defm SUB2 : MBLAZEBinaryGEN4Inst<0b011000, "sub2">;
 defm SUB3 : MBLAZEBinaryGEN4Inst<0b011001, "sub3">;
-defm RSUB : MBLAZEBinaryGEN4Inst<0b001110, "rsub">; // this is equivalent to mblaze sub (that's called rsub in doc)
-
-
-
-// this dik wtf is that, seems some sort of shortcut(?) I'm thinking about MAX/MIN for example
+defm RSUB : MBLAZEBinaryGEN4Inst<0b001110, "rsub">;
+// defm OR  : MBLAZEBinaryGEN4Inst<0b000101, "or",1>;
+// defm AND : MBLAZEBinaryGEN4Inst<0b000100, "and",1>;
+// defm XOR : MBLAZEBinaryGEN4Inst<0b000111, "xor",1>;
 defm MAX : MBLAZEBinaryGEN4Inst<0b001000, "max",1>;
 defm MIN : MBLAZEBinaryGEN4Inst<0b001001, "min",1>;
 defm ASL : MBLAZEBinaryEXT5Inst<0b000000, "asl">;
@@ -351,8 +335,7 @@ defm MPYM : MBLAZEBinaryGEN4Inst<0b011011, "mpym",1>;
 defm MPYMU : MBLAZEBinaryGEN4Inst<0b011100, "mpymu",1>;
 defm SETEQ : MBLAZEBinaryGEN4Inst<0b111000, "seteq",1>;
 
-// // Patterns for 3 operand binary instructions.
-//defm : MultiPat<dummy, DUMMY_dummy>;
+// Patterns for 3 operand binary instructions.
 defm : MultiPat<add, ADD_rrr, ADD_rru6, ADD_rrlimm>;
 defm : MultiPat<sub, SUB_rrr, SUB_rru6, SUB_rrlimm>;
 defm : MultiPat<or, OR_rrr, OR_rru6, OR_rrlimm>;
@@ -390,9 +373,9 @@ defm CMP : MBLAZESpecialDOPInst<0b001100, "cmp", 1>;
 def cmp : PatFrag<(ops node:$op1, node:$op2), (MBLAZEcmp $op1, $op2)>;
 defm : MultiPat<cmp, CMP_rr, CMP_ru6, CMP_rlimm>;
 
-// // ---------------------------------------------------------------------------
-// // MOV instruction and variants (conditional mov).
-// // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// MOV instruction and variants (conditional mov).
+// ---------------------------------------------------------------------------
 let isReMaterializable = 1, isAsCheapAsAMove = 1, isMoveImm = 1 in {
 def MOV_rs12 : F32_DOP_RS12<0b00100, 0b001010, 0,
                  (outs GPR32:$B), (ins immS<12>:$S12),
@@ -443,11 +426,6 @@ def : Pat<(MBLAZEGAWrapper tjumptable:$addr),
 // ---------------------------------------------------------------------------
 // Control flow instructions (branch, return, calls, etc).
 // ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Branch Operation MBLAZE
-// ---------------------------------------------------------------------------
-
 // MBLAZE Branch
 class Branch<bits<6> op, bits<5> br, bits<11> flags, string instr_asm> :
              TA<op, flags, (outs), (ins GPR32:$target),
@@ -471,8 +449,6 @@ let isBranch = 1, isTerminator = 1 in {
 
   // Unconditional branch.
   let isBarrier = 1 in
-  // def BR     :   Branch<0x26, 0x00, 0x000, "br     ">;
-
   def BR : F32_BR0_UCOND_FAR<(outs), (ins btargetS25:$S25),
                              "b\t$S25", [(br bb:$S25)]>;
 
@@ -543,8 +519,8 @@ def : Pat<(MBLAZEBranchLink texternalsym:$dst), (BL texternalsym:$dst)>;
 let isReturn = 1, isTerminator = 1, isBarrier = 1  in
 // This is a specialized 2-byte instruction that doesn't generalize
 // to any larger 2-byte class, so go ahead and define it here.
-def RTSD : TB<4, (outs), (ins), "rtsd\t[%r0]", [(ret)]> {
-  let Inst{0-11} = 10110110000;
+def J_S_BLINK : InstMBLAZE<2, (outs), (ins), "j_s\t[%blink]", [(ret)]> {
+  let Inst{15-0} = 0b0111111011100000;
 }
 
 //----------------------------------------------------------------------------
@@ -601,80 +577,6 @@ def ENTER_S : F16_SP_OPS<0b111,
 //----------------------------------------------------------------------------
 // Compact Move/Load instructions.
 //----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
-// MBLAZE Memory Acces Instructions
-//----------------------------------------------------------------------------
-def MBLAZEMemAsmOperand : AsmOperandClass {
-  let Name = "Mem";
-  let SuperClasses = [];
-}
-
-def MBLAZEFslAsmOperand : AsmOperandClass {
-  let Name = "Fsl";
-  let SuperClasses = [];
-}
-
-// Instruction operand types
-def brtarget    : Operand<OtherVT>;
-def calltarget  : Operand<i32>;
-def simm16      : Operand<i32>;
-def uimm5       : Operand<i32>;
-def uimm15      : Operand<i32>;
-def fimm        : Operand<f32>;
-
-// Unsigned Operand
-def uimm16      : Operand<i32> {
-  let PrintMethod = "printUnsignedImm";
-}
-
-// FSL Operand
-def fslimm      : Operand<i32> {
-  let PrintMethod = "printFSLImm";
-  let ParserMatchClass = MBLAZEFslAsmOperand;
-}
-
-// Address operand
-def memri : Operand<i32> {
-  let PrintMethod = "printMemOperand";
-  let MIOperandInfo = (ops GPR32, simm16);
-  let ParserMatchClass = MBLAZEMemAsmOperand;
-}
-
-def memrr : Operand<i32> {
-  let PrintMethod = "printMemOperand";
-  let MIOperandInfo = (ops GPR32, GPR32);
-  let ParserMatchClass = MBLAZEMemAsmOperand;
-}
-
-def iaddr : ComplexPattern<i32, 2, "SelectAddrRegImm", [frameindex], []>;
-def xaddr : ComplexPattern<i32, 2, "SelectAddrRegReg", [], []>;
-
-// class LoadM<bits<6> op, bits<11> flags, string instr_asm> :
-//             TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-//                !strconcat(instr_asm, "   $dst, $addr"),
-//                []>;
-
-// class LoadMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-//              TB<op, (outs GPR32:$dst), (ins memri:$addr),
-//                 !strconcat(instr_asm, "   $dst, $addr"),
-//                 [(set (i32 GPR32:$dst), (OpNode iaddr:$addr))]>;
-
-
-// class StoreM<bits<6> op, bits<11> flags, string instr_asm> :
-//              TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
-//                 !strconcat(instr_asm, "   $dst, $addr"),
-//                 []>;
-
-// class StoreMI<bits<6> op, string instr_asm, PatFrag OpNode> :
-//               TB<op, (outs), (ins GPR32:$dst, memri:$addr),
-//                  !strconcat(instr_asm, "   $dst, $addr"),
-//                  [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>;
-
-//----------------------------------------------------------------------------
-// MBLAZE Memory Acces Instructions
-//----------------------------------------------------------------------------
-
-
 class COMPACT_MOV_S :
   F16_COMPACT<0b0, (outs GPR32:$g), (ins GPR32:$h),
           "mov_s\t$g, $h"> {
@@ -709,16 +611,16 @@ def COMPACT_LD_S :
 //----------------------------------------------------------------------------
 // Compact Load/Add/Sub.
 //----------------------------------------------------------------------------
-// def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
-// def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
-// def ADD_S_rru6 : F16_ADD;
+def LD_S_AS_rrr : F16_LD_SUB<0b0, "ld_s.as\t$a, [$b, $c]">;
+def SUB_S_rrr : F16_LD_SUB<0b1, "sub_s\t$a, $b, $c">;
+def ADD_S_rru6 : F16_ADD;
 
 //----------------------------------------------------------------------------
 // Compact Load/Store.
 //----------------------------------------------------------------------------
-// def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
-// def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
-// def LDI_S_u7 : F16_LDI_u7;
+def LD_S_s11 : F16_LD_ST_s11<0b0, "ld_s\t%r1, [%gp, $s11]">;
+def ST_S_s11 : F16_LD_ST_s11<0b1, "st_s\t%r0, [%gp, $s11]">;
+def LDI_S_u7 : F16_LDI_u7;
 
 //----------------------------------------------------------------------------
 // Indexed Jump or Execute.
@@ -729,28 +631,10 @@ def EI_S : F16_JLI_EI<1, "ei_s">;
 //----------------------------------------------------------------------------
 // Load/Add Register-Register.
 //----------------------------------------------------------------------------
-// def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
+def LD_S_rrr : F16_LD_ADD_RR<0b00, "ld_s\t$a, [$b, $c]">;
 def LDB_S_rrr : F16_LD_ADD_RR<0b01, "ldb_s\t$a, [$b, $c]">;
-// def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
+def LDH_S_rrr : F16_LD_ADD_RR<0b10, "ldh_s\t$a, [$b, $c]">;
 def ADD_S_rrr : F16_LD_ADD_RR<0b11, "add_s\t$a, $b, $c">;
-
-
-// def LD_S_rrr  :  LoadM<0x30, 0x000, "lbu    ">; // old LBU
-// def LBUR :  LoadM<0x30, 0x200, "lbur   ">;
-// def LDH_S_rrr  :  LoadM<0x31, 0x000, "lhu    ">; // old LHU
-// def LHUR :  LoadM<0x31, 0x200, "lhur   ">;
-// def LW   :  LoadM<0x32, 0x000, "lw     ">;
-// def LWR  :  LoadM<0x32, 0x200, "lwr    ">;
-
-// def SB  :  StoreM<0x34, 0x000, "sb     ">;
-// def SBR :  StoreM<0x34, 0x200, "sbr    ">;
-
-// def SH  :  StoreM<0x35, 0x000, "sh     ">;
-// def SHR :  StoreM<0x35, 0x200, "shr    ">;
-
-// def SW  :  StoreM<0x36, 0x000, "sw     ">;
-// def SWR :  StoreM<0x36, 0x200, "swr    ">;
-
 
 //----------------------------------------------------------------------------
 // Load/Add GP-Relative.
@@ -811,13 +695,10 @@ let isBranch = 1 in {
   //----------------------------------------------------------------------------
   // Branch Conditionally.
   //----------------------------------------------------------------------------
-
-  def BGE    :  BranchC<0x27, 0x05, 0x000, "bge    ">;
-
   let isBarrier = 1 in
   def B_S : F16_BCC_s10<0b00, "b_s">;
 
-  // new mblaze-branch cond
+  def BGE    :  BranchC<0x27, 0x05, 0x000, "bge    ">; 
   def BEQ_S : BranchC<0x27, 0x00, 0x000, "beq_s">;
   def BNE_S : BranchC<0x27, 0x01, 0x000, "bne_s">;
   def BGT_S : BranchC<0x27, 0x04, 0x000, "bgt_s">;
@@ -825,19 +706,16 @@ let isBranch = 1 in {
   def BLT_S : BranchC<0x27, 0x02, 0x000, "blt_s">;
   def BLE_S : BranchC<0x27, 0x03, 0x000, "ble_s">;
 
-  // old arch-branch cond
   // def BEQ_S : F16_BCC_s10<0b01, "beq_s">;
   // def BNE_S : F16_BCC_s10<0b10, "bne_s">;
   // def BGT_S : F16_BCC_s7<0b000, "bgt_s">;
   // def BGE_S : F16_BCC_s7<0b001, "bge_s">;
   // def BLT_S : F16_BCC_s7<0b010, "blt_s">;
   // def BLE_S : F16_BCC_s7<0b011, "ble_s">;
-
   def BHI_S : F16_BCC_s7<0b100, "bhi_s">;
   def BHS_S : F16_BCC_s7<0b101, "bhs_s">;
   def BLO_S : F16_BCC_s7<0b110, "blo_s">;
   def BLS_S : F16_BCC_s7<0b111, "bls_s">;
-
 } // let isBranch
 
 def BL_S :
@@ -1047,31 +925,78 @@ let isReturn = 1, isTerminator = 1 in {
 // Filter  class for load/store mappings
 class MBLAZELdStRel;
 
+// def simm16      : Operand<i32>;
+
+// def MBLAZEMemAsmOperand : AsmOperandClass {
+//   let Name = "Mem";
+//   let SuperClasses = [];
+// }
+
+// def MEMrs9 : Operand<iAny> {
+//   let MIOperandInfo = (ops GPR32:$B, immS<9>:$S9);
+//   let PrintMethod = "printMemOperandRI";
+//   let DecoderMethod = "DecodeMEMrs9";
+// }
+
+// def MEMrlimm : Operand<iAny> {
+//   let MIOperandInfo = (ops GPR32:$B, i32imm:$LImm);
+//   let PrintMethod = "printMemOperandRI";
+//   let DecoderMethod = "DecodeMEMrlimm";
+// }
+
+// // Address operand
+// def memri : Operand<i32> {
+//   let PrintMethod = "printMemOperandRI";
+//   let MIOperandInfo = (ops GPR32, simm16);
+//   let ParserMatchClass = MBLAZEMemAsmOperand;
+// }
+
+// def memrr : Operand<i32> {
+//   let PrintMethod = "printMemOperandRI";
+//   let MIOperandInfo = (ops GPR32, GPR32);
+//   let ParserMatchClass = MBLAZEMemAsmOperand;
+// }
+
+// multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
+//       def _rs9: TA<op, flags, (outs GPR32:$dst), (ins MEMrs9:$addr),
+//                !strconcat(asmop, "   $dst, $addr"),
+//                []>, MBLAZELdStRel;
+
+//       def _limm: TB<op, (outs GPR32:$dst), (ins MEMrlimm:$addr),
+//                 !strconcat(asmop, "   $dst, $addr"),
+//                 []>, MBLAZELdStRel;
+ 
+//       def _rlimm: TB<op, (outs GPR32:$dst), (ins MEMrlimm:$addr),
+//                 !strconcat(asmop, "   $dst, $addr"),
+//                 []>, MBLAZELdStRel;
+// }
+
+
+// Load instruction variants:
+// Control bits: x, aa, di, zz
+// x - sign extend.
+// aa - incrementing mode. (N/A for LIMM).
+// di - uncached.
+// zz - data size.
 
 multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
-      def _rs9: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-               !strconcat(asmop, "   $dst, $addr"),
-               []>, MBLAZELdStRel;
+  let mayLoad = 1 in {
+    def _rs9: F32_LD_RS9F<op, flags,
+			   (outs GPR32:$A), (ins MEMrs9:$addr),
+			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
 
-      def _limm: TB<op, (outs GPR32:$dst), (ins memri:$addr),
-                !strconcat(asmop, "   $dst, $addr"),
-                []>, MBLAZELdStRel;
- 
-      def _rlimm: TB<op, (outs GPR32:$dst), (ins memri:$addr),
-                !strconcat(asmop, "   $dst, $addr"),
-                []>, MBLAZELdStRel;
+    def _limm: F32_LD_LIMMF<op, flags,
+			   (outs GPR32:$A), (ins MEMii:$addr),
+			   !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
 
-      // foreach aa = [PreIncAM, PostIncAM] in {
-      //   def aa.InstSuffix#_rs9: TA<op, flags, (outs GPR32:$dst), (ins memrr:$addr),
-      //          !strconcat(asmop, "   $dst, $addr"),
-      //          []>, MBLAZELdStRel 
-      //           { let Constraints = "$addrout = $B"; let AA = aa; }
-      // }
+    def _rlimm: F32_LD_RLIMMF<op, flags,
+			     (outs GPR32:$A), (ins MEMrlimm:$addr),
+			     !strconcat(asmop, "\t$A, [$addr]"), []>, MBLAZELdStRel;
+  }
 }
 
 
-
-// multiclass MBLAZELdInst_Iter<DataSizeMode zz, ExtMode x, CacheMode di, string asmop> {
+// multiclass MBLAZELdInst<DataSizeMode zz, ExtMode x, CacheMode di, string asmop> {
 //   let mayLoad = 1, ZZ = zz, X = x, DI = di in {
 //     def _rs9: F32_LD_ADDR<x.Value, NoAM.Value, di.Value, zz.Value,
 // 			   (outs GPR32:$A), (ins MEMrs9:$addr),
@@ -1095,26 +1020,36 @@ multiclass MBLAZELdInst<bits<6> op, bits<11> flags, string asmop> {
 //   }
 // }
 
+
 // foreach di = [NoCC, UncachedCC] in {
-//   defm LD#di.InstSuffix : MBLAZELdInst_Iter<WordSM, NoEM, di, "ld"#di.AsmSuffix>;
+//   defm LD#di.InstSuffix : MBLAZELdInst<WordSM, NoEM, di, "lw"#di.AsmSuffix>;
 //   foreach zz = [ByteSM, HalfSM] in {
 //     foreach x = [NoEM, SignedEM] in {
-//       defm LD#zz.InstSuffix#x.InstSuffix#di.InstSuffix : MBLAZELdInst<0x30, 0x000, "ld"#zz.AsmSuffix#x.AsmSuffix#di.AsmSuffix>;
+//       defm LD#zz.InstSuffix#x.InstSuffix#di.InstSuffix : MBLAZELdInst<0x32, 0x000, "lw"#zz.AsmSuffix#x.AsmSuffix#di.AsmSuffix>;
 //     }
 //   }
 // }
 
 // MBLAZE Load Word defined to all the variants
-defm LD : MBLAZELdInst<0x32, 0x000, "ld" >;
-defm LD_limm : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LD : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDH : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LD_X : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDB : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDH_X : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDB_X : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LD_AB : MBLAZELdInst<0x32, 0x000, "lw" >;
 
-defm LDH : MBLAZELdInst<0x32, 0x000, "ld" >;
-defm LDH_X : MBLAZELdInst<0x32, 0x000, "ld" >;
 
-defm LDB : MBLAZELdInst<0x32, 0x000, "ld" >;
-defm LDB_X : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LD_rs9 : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LD_limm : MBLAZELdInst<0x32, 0x000, "lw" >;
 
-defm LD_AB : MBLAZELdInst<0x32, 0x000, "ld" >;
+defm LDH_rs9 : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDH_limm : MBLAZELdInst<0x32, 0x000, "lw" >;
+
+defm LDH_rlimm : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDH_X_limm : MBLAZELdInst<0x32, 0x000, "lw" >;
+defm LDH_X_rs9 : MBLAZELdInst<0x32, 0x000, "lw" >;
+
 
 // Load instruction patterns.
 // 32-bit loads.
@@ -1156,52 +1091,27 @@ def : Pat<(sextloadi8 AddrModeS9:$addr),(LDB_X_rs9 AddrModeS9:$addr)>;
 // aa - incrementing mode. (N/A for LIMM).
 // di - uncached.
 // zz - data size.
-// multiclass MBLAZEStInst<bits<6> op, bits<11> flags, string asmop, PatFrag OpNode> {
-//     def _rs9: TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
-//                 !strconcat(asmop, "   $dst, $addr"),
-//                 []>, MBLAZELdStRel;
 
-//     def _limm: TB<op, (outs), (ins GPR32:$dst, memri:$addr),
-//                  !strconcat(asmop, "   $dst, $addr"),
-//                  [(OpNode (i32 GPR32:$dst), iaddr:$addr)]>, MBLAZELdStRel;
-  
-// }
+multiclass MBLAZEStInst<bits<6> op, bits<11> flags, string asmop> {
+  let mayLoad = 1 in {
+    def _rs9:  F32_ST_RS9F<op, flags,
+			   (outs), (ins GPR32:$C, MEMrs9:$addr),
+			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
+
+    def _limm: F32_ST_LIMMF<op, flags,
+			   (outs), (ins GPR32:$C, MEMii:$addr),
+			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
 
 
-let mayStore = 1 in {
-multiclass Store<bits<6> op, bits<11> flags, string instr_asm> {
-  def _rs9 : TA<op, flags, (outs), (ins GPR32:$dst, memrr:$addr),
-                !strconcat(instr_asm, "   $dst, $addr"),
-                []>, MBLAZELdStRel;
-
-  def _limm : TB<op, (outs), (ins GPR32:$dst, memri:$addr),
-                 !strconcat(instr_asm, "   $dst, $addr"),
-                 []>, MBLAZELdStRel;
-
+    // foreach aa = [PreIncAM, PostIncAM] in {
+    //   def aa.InstSuffix#_rs9: F32_ST_RS9<aa.Value, di.Value, zz.Value,
+		// 			  (outs GPR32:$addrout),
+		// 			  (ins GPR32:$C, GPR32:$B, immS<9>:$S9),
+		// 			  asmop#aa.AsmSuffix#"\t$C, [$B,$S9]", []>, MBLAZELdStRel
+		// 	       { let Constraints = "$addrout = $B"; let AA = aa; }
+    // }
   }
-}             
-
-                       
-// multiclass MBLAZEStInst<DataSizeMode zz, CacheMode di, string asmop> {
-//   let mayStore = 1, ZZ = zz, DI = di in {
-//     def _rs9: F32_ST_ADDR<NoAM.Value, di.Value, zz.Value,
-// 			   (outs), (ins GPR32:$C, MEMrs9:$addr),
-// 			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
-
-//     def _limm: F32_ST_LIMM<di.Value, zz.Value,
-// 			   (outs), (ins GPR32:$C, MEMii:$addr),
-// 			   !strconcat(asmop, "\t$C, [$addr]"), []>, MBLAZELdStRel;
-
-
-//     foreach aa = [PreIncAM, PostIncAM] in {
-//       def aa.InstSuffix#_rs9: F32_ST_RS9<aa.Value, di.Value, zz.Value,
-// 					  (outs GPR32:$addrout),
-// 					  (ins GPR32:$C, GPR32:$B, immS<9>:$S9),
-// 					  asmop#aa.AsmSuffix#"\t$C, [$B,$S9]", []>, MBLAZELdStRel
-// 			       { let Constraints = "$addrout = $B"; let AA = aa; }
-//     }
-//   }
-// }
+}
 
 // foreach di = [NoCC, UncachedCC] in {
 //   foreach zz = [ByteSM, HalfSM, WordSM] in {
@@ -1209,16 +1119,17 @@ multiclass Store<bits<6> op, bits<11> flags, string instr_asm> {
 //   }
 // }
 
-defm ST : Store<0x36, 0x000, "sw">;
-//defm ST : StoreMI<0x3E, "swi    ", store>;
+defm ST : MBLAZEStInst<0x36, 0x000, "sw">;
+defm STH: MBLAZEStInst<0x36, 0x000, "sw">;
+defm STB : MBLAZEStInst<0x36, 0x000, "sw">;
 
-defm STH : Store<0x36, 0x000, "sw">;
-//defm STH : StoreMI<0x3E, "swi    ", store>;
-
-defm STB : Store<0x36, 0x000, "sw">;
-//defm STB : StoreMI<0x3E, "swi    ", store>;
-
-defm ST_AW : Store<0x36, 0x000, "sw">;
+defm ST_rs9 : MBLAZEStInst<0x36, 0x000, "sw">;
+defm ST_limm : MBLAZEStInst<0x36, 0x000, "sw">;
+defm STH_rs9 : MBLAZEStInst<0x36, 0x000, "sw">;
+defm STH_limm : MBLAZEStInst<0x36, 0x000, "sw">;
+defm STB_rs9 : MBLAZEStInst<0x36, 0x000, "sw">;
+defm STB_limm : MBLAZEStInst<0x36, 0x000, "sw">;
+defm ST_AW : MBLAZEStInst<0x36, 0x000, "sw">;
 
 
 // Store instruction patterns.
