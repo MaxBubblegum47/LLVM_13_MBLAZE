@@ -169,6 +169,18 @@ class TB<bits<6> op, dag outs, dag ins,string asmstr, list<dag> pattern>
   let Inst{16-31} = imm16;
 }
 
+class TBR<bits<6> op, dag outs, dag ins, string asmstr, list<dag> pattern> 
+  : TB<op, outs, ins, asmstr, pattern> {
+  bits<5>  rrd;
+  bits<16> rimm16;
+  bits<5>  rra;
+
+//  let Form = FRIR;
+
+  let rd = rrd;
+  let ra = rra;
+  let imm16 = rimm16;
+}
 
 // All 32-bit MBLAZE instructions have a 5-bit "major" opcode class designator
 // in bits 27-31.
