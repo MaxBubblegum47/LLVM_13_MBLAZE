@@ -13,7 +13,7 @@
 //===----------------------------------------------------------------------===//
 def RetCC_MBLAZE : CallingConv<[
   // i32 are returned in registers R0, R4, R2, R3
-  CCIfType<[i32, i64], CCAssignToReg<[R0, R4, R2, R3]>>,
+  CCIfType<[i32, i64], CCAssignToReg<[R3, R4]>>,
 
   // Integer values get stored in stack slots that are 4 bytes in
   // size and 4-byte aligned.
@@ -37,4 +37,4 @@ def CC_MBLAZE : CallingConv<[
   CCIfType<[i32], CCAssignToStack<4, 4>>
 ]>;
 
-def CSR_MBLAZE : CalleeSavedRegs<(add (sequence "R%u", 21, 26), GP, FP)>;
+def CSR_MBLAZE : CalleeSavedRegs<(add (sequence "R%u", 2, 13), GP, FP)>;
