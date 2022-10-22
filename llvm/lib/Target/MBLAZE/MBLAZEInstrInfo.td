@@ -16,6 +16,8 @@ include "MBLAZEInstrFormats.td"
 // Operand Pattern Stuff.
 //===----------------------------------------------------------------------===//
 
+def simm16      : Operand<i32>;
+
 // Operand for printing out a condition code.
 let PrintMethod = "printCCOperand" in
   def CCOp : PredicateOperand<i32, (ops i32imm), (ops)>;
@@ -306,12 +308,68 @@ multiclass MultiPat<SDPatternOperator InFrag,
 // ---------------------------------------------------------------------------
 // Instruction definitions and patterns for 3 operand binary instructions.
 // ---------------------------------------------------------------------------
+
+def uimm16      : Operand<i32>;
+
+class Logic<bits<6> op, bits<11> flags, string instr_asm> :
+            TA<op, flags, (outs GPR32:$dst), (ins GPR32:$b, GPR32:$c),
+               !strconcat(instr_asm, "   $dst, $b, $c"),
+               []>;
+
+class LogicI<bits<6> op, string instr_asm> :
+             TB<op, (outs GPR32:$dst), (ins GPR32:$b, uimm16:$c),
+                !strconcat(instr_asm, "   $dst, $b, $c"),
+                []>;
+
+class Arith<bits<6> op, bits<11> flags, string instr_asm> :
+            TA<op, flags, (outs GPR32:$dst), (ins GPR32:$b, GPR32:$c),
+               !strconcat(instr_asm, "   $dst, $b, $c"),
+               []>;
+
+class ArithI<bits<6> op, string instr_asm> :
+             TB<op, (outs GPR32:$dst), (ins GPR32:$b, i32imm:$c),
+                !strconcat(instr_asm, "   $dst, $b, $c"),
+                []>;
+
+class ArithR<bits<6> op, bits<11> flags, string instr_asm> :
+            TAR<op, flags, (outs GPR32:$dst), (ins GPR32:$b, GPR32:$c),
+                !strconcat(instr_asm, "   $dst, $c, $b"),
+                []>;
+
+class ArithRI<bits<6> op, string instr_asm> :
+             TBR<op, (outs GPR32:$dst), (ins i32imm:$b, GPR32:$c),
+                 !strconcat(instr_asm, "   $dst, $c, $b"),
+                 []>;
+
 // mblaze variants
-defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
-defm SUB : MBLAZEBinaryInstSub<000001, 00000000000, "sub">;
-defm OR  : MBLAZEBinaryInstAdd<100000, 00000000000,"or",1>; // the same codec as the add with 2 registers as arguments
-defm AND : MBLAZEBinaryInstAdd<100001, 00000000000,"and",1>; // the same codec as the add with 2 registers as arguments
-defm XOR : MBLAZEBinaryInstAdd<100010, 00000000000,"xor",1>;
+// defm ADD : MBLAZEBinaryInstAdd<000000, 00000000000, "add", 1>;
+// defm SUB : MBLAZEBinaryInstSub<000001, 00000000000, "sub">;
+// defm OR  : MBLAZEBinaryInstAdd<100000, 00000000000,"or",1>; // the same codec as the add with 2 registers as arguments
+//defm AND : MBLAZEBinaryInstAdd<100001, 00000000000,"and",1>; // the same codec as the add with 2 registers as arguments
+//defm XOR : MBLAZEBinaryInstAdd<100010, 00000000000,"xor",1>;
+
+def ADD_rrr : Arith<0x00, 0x000, "add">;
+def ADD_rrs12 : Arith<0x00, 0x000, "add">;
+def ADD_rru6 : Arith<0x00, 0x000, "add">;
+def ADD_rrlimm : ArithI<0x08, "addi">;
+
+def SUB_rrr : ArithR<0x05, 0x000, "rsubk">;
+def SUB_rrlimm : ArithRI<0x09, "rsubi">;
+def SUB_rru6 : ArithR<0x05, 0x000, "rsubk">;
+def SUB_rrs12 : ArithR<0x05, 0x000, "rsubk">;
+
+def OR_rrr : Logic<0x20, 0x000, "or">;
+def OR_rrlimm : LogicI<0x28, "ori">;
+def OR_rru6 : Logic<0x20, 0x000, "or">;
+
+def AND_rrr : Logic<0x21, 0x000, "and">;
+def AND_rrlimm : LogicI<0x29, "andi   ">;
+def AND_rru6 : Logic<0x21, 0x000, "and">;
+
+def XOR_rrr : Logic<0x22, 0x000, "xor">;
+def XOR_rrlimm : LogicI<0x2A, "xori">;
+def XOR_rru6 : Logic<0x22, 0x000, "xor">;
+
 
 
 // Definitions for 3 operand binary instructions.
@@ -516,12 +574,17 @@ let isCall = 1, isBarrier = 1, Defs = [BLINK], Uses = [SP] in {
 def : Pat<(MBLAZEBranchLink texternalsym:$dst), (BL texternalsym:$dst)>;
 
 // Return from call.
-let isReturn = 1, isTerminator = 1, isBarrier = 1  in
+// let isReturn = 1, isTerminator = 1, isBarrier = 1  in
 // This is a specialized 2-byte instruction that doesn't generalize
 // to any larger 2-byte class, so go ahead and define it here.
-def J_S_BLINK : InstMBLAZE<2, (outs), (ins), "j_s\t[%blink]", [(ret)]> {
-  let Inst{15-0} = 0b0111111011100000;
+// def J_S_BLINK : InstMBLAZE<2, (outs), (ins), "j_s\t[%blink]", [(ret)]> {
+//   let Inst{15-0} = 0b0111111011100000;
+// }
+let isReturn = 1, isTerminator = 1, isBarrier = 1  in
+def RTSD : TB<0x2D, (outs), (ins), "rtsd\t[%blink]", [(ret)]> {
+  let Inst{15-0} = 00001101101;
 }
+
 
 //----------------------------------------------------------------------------
 // Compact stack-based operations.
@@ -940,7 +1003,7 @@ class MBLAZELdStRel;
 
 // // Address operand
 
-def simm16      : Operand<i32>;
+
 
 def MBLAZEMemAsmOperand : AsmOperandClass {
   let Name = "Mem";
