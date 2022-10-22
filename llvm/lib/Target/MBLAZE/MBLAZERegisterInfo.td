@@ -49,13 +49,14 @@ def R16 : Core<16, "%r16">, DwarfRegNum<[16]>;
 def R17 : Core<17, "%r17">, DwarfRegNum<[17]>;
 def R18 : Core<18, "%r18">, DwarfRegNum<[18]>;
 def R19 : Core<19, "%r19">, DwarfRegNum<[19]>;
-def R26 : Core<26, "%r26">, DwarfRegNum<[26]>;
+def GP : Core<20, "%gp",["%r20"]>, DwarfRegNum<[20]>;
+
 def R21 : Core<21, "%r21">, DwarfRegNum<[21]>;
 def R22 : Core<22, "%r22">, DwarfRegNum<[22]>;
 def R23 : Core<23, "%r23">, DwarfRegNum<[23]>;
 def R24 : Core<24, "%r24">, DwarfRegNum<[24]>;
 def R25 : Core<25, "%r25">, DwarfRegNum<[25]>;
-def GP : Core<20, "%gp",["%r20"]>, DwarfRegNum<[20]>;
+def R26 : Core<26, "%r26">, DwarfRegNum<[26]>;
 def FP : Core<27, "%fp", ["%r27"]>, DwarfRegNum<[27]>;
 def SP : Core<1, "%sp", ["%r1"]>, DwarfRegNum<[1]>;
 def ILINK : Core<29, "%ilink">, DwarfRegNum<[29]>;
