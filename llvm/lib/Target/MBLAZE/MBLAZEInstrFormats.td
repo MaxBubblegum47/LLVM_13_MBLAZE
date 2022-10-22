@@ -560,7 +560,7 @@ class F32_LD_LIMM<bit x, bit di, bits<2> zz, dag outs, dag ins,
 
 
 // fake
-class F32_LD_LIMMF<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+class F32_LD_LIMMF<bits<6> op, dag outs, dag ins, string asmstr,
       list<dag> pattern> :
   InstMBLAZE<4, outs, ins, asmstr, pattern> {
   bits<5>  rd;
@@ -608,7 +608,7 @@ class F32_LD_RLIMM<bit x, bits<2> aa, bit di, bits<2> zz, dag outs, dag ins,
 
 
 // fake 
-class F32_LD_RLIMMF<bits<6> op, bits<11> flags, dag outs, dag ins, string asmstr,
+class F32_LD_RLIMMF<bits<6> op, dag outs, dag ins, string asmstr,
       list<dag> pattern> :
   InstMBLAZE<4, outs, ins, asmstr, pattern> {
   bits<5>  rd;
