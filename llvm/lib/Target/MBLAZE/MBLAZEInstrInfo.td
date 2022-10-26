@@ -1149,11 +1149,11 @@ class StoreMI<bits<6> op, string instr_asm> :
 def ST_rs9 : StoreM<0x36, 0x000, "sw">;
 def ST_limm : StoreMI<0x3E, "swi">;
 
-def STH_rs9 : StoreM<0x36, 0x000, "sw">;
-def STH_limm : StoreMI<0x3E, "swi">;
+def STH_rs9 : StoreM<0x35, 0x000, "sh">;
+def STH_limm : StoreMI<0x3D, "shi">;
 
-def STB_rs9 : StoreM<0x36, 0x000, "sw">;
-def STB_limm : StoreMI<0x3E, "swi">;
+def STB_rs9 : StoreM<0x34, 0x000, "sb">;
+def STB_limm : StoreMI<0x3C, "sbi">;
 
 defm ST_AW : MBLAZEStInst<0x36, 0x000, "sw">;
 
