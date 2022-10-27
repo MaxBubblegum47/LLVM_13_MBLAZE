@@ -517,8 +517,8 @@ SDValue MBLAZETargetLowering::LowerCallArguments(
   // 1b. CopyFromReg vararg registers.
   if (IsVarArg) {
     // Argument registers
-    static const MCPhysReg ArgRegs[] = {MBLAZE::R0, MBLAZE::R8, MBLAZE::R2, MBLAZE::R3,
-                                        MBLAZE::R4, MBLAZE::R5, MBLAZE::R6, MBLAZE::R7};
+    static const MCPhysReg ArgRegs[] = {MBLAZE::R3, MBLAZE::R4, MBLAZE::R5, MBLAZE::R6,
+                                        MBLAZE::R7, MBLAZE::R8, MBLAZE::R9, MBLAZE::R10};
     auto *AFI = MF.getInfo<MBLAZEFunctionInfo>();
     unsigned FirstVAReg = CCInfo.getFirstUnallocated(ArgRegs);
     if (FirstVAReg < array_lengthof(ArgRegs)) {
